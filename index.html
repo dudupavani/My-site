@@ -34,20 +34,11 @@
   <!-- HERO SECTION -->
   <section
     class="relative h-dvh md:h-screen min-h-[700px] bg-zinc-900 text-white flex flex-col items-center justify-start md:justify-center overflow-hidden">
-    <!-- Social Icons Top Right -->
-    <div class="absolute right-auto top-[32%] md:top-12 md:right-16 flex gap-8 z-50 text-white">
-      <a href="#" class="hover:opacity-70 transition-opacity">
-        <img src="images/Whatsapp.svg" alt="WhatsApp" class="w-6 h-6" />
-      </a>
-      <a href="https://www.linkedin.com/in/eduardopavani/" class="hover:opacity-70 transition-opacity">
-        <img src="images/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
-      </a>
-    </div>
 
     <div class="absolute inset-0 z-0">
       <img src="images/hero-bg.png" alt="" class="w-full h-full object-cover opacity-60" />
     </div>
-    <!-- Symbol behind profile -->
+
 
     <img src="images/symbol.svg" class="absolute h-[80%] w-auto object-contain filter opacity-20 left-[20%]" alt="" />
 
@@ -64,61 +55,75 @@
         class="absolute inset-0 z-30 top-[400px] left-[40%] h-[70%] w-auto object-contain !blur-3xl !fill-blue-600 !mix-blend-hard-light" />
 
       <img src="images/img-profile-2.webp" alt="Eduardo Pavani"
-        class="h-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-[100%] w-auto object-contain object-bottom" />
+        class="h-full max-w-[115%] sm:max-w-lg md:max-w-xl lg:max-w-[100%] w-auto object-contain object-bottom" />
     </div>
 
     <!-- Logo and Hero Text -->
-    <div class="relative z-20 flex flex-col items-center text-center px-6 mt-20 md:mt-44">
-      <div class="flex items-center gap-3 mb-8">
-        <img src="images/logo.svg" alt="eduardopavani" class="h-12 sm:h-20 md:h-28 w-auto" />
+    <div class="relative z-20 flex flex-col items-center text-center px-6 mt-12 md:mt-44">
+      <div class="flex items-center mb-8 md:mb-6">
+        <img src="images/logo.svg" alt="eduardopavani" class="h-10 md:h-20 lg:h-28 w-auto" />
       </div>
-      <h1 class="text-xl sm:text-2xl md:text-4xl max-w-3xl !leading-relaxed font-extralight">
+      <h1 class="text-lg sm:text-xl md:text-2xl md:text-4xl max-w-3xl !leading-relaxed font-extralight">
         Estratégia, clareza e execução na construção de produtos digitais.
       </h1>
+      <!-- Linkedin and Whatsapp -->
+      <div class="flex items-center gap-8 mt-6 sm:mt-8 md:mt-12 text-white">
+        <a href="https://wa.me/5548991587232" target="_blank" rel="noopener noreferrer"
+          class="hover:opacity-70 transition-opacity">
+          <img src="images/Whatsapp.svg" alt="WhatsApp" class="w-6 h-6 md:w-8 md:h-8" />
+        </a>
+        <a href="https://www.linkedin.com/in/eduardopavani/" class="hover:opacity-70 transition-opacity">
+          <img src="images/linkedin.svg" alt="LinkedIn" class="w-6 h-6 md:w-8 md:h-8" />
+        </a>
+      </div>
+
     </div>
   </section>
 
   <!-- THINKING SECTION (BLUE) -->
   <section class="bg-blue-700 text-white">
-    <div class="max-w-6xl mx-auto text-left md:text-center max-w-5xl py-12 sm:py-20 px-6">
-      <p class="text-sm sm:text-base md:text-lg text-zinc-800 uppercase tracking-[0.24em] font-bold mb-10">
+    <div class="max-w-6xl mx-auto text-left md:text-center max-w-5xl py-16 sm:py-20 sm:pb-16 px-6">
+      <p
+        class="text-sm sm:text-base md:text-lg text-zinc-900 uppercase tracking-[0.2em]  md:tracking-[0.24em] font-bold mb-6 sm:mb-10">
         Como eu penso produto
       </p>
-      <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold leading-relaxed mb-6 mx-auto">
-        Produto, para mim, não começa no "o que vamos construir".<br class="hidden md:block" />
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold !leading-relaxed mb-6 mx-auto">
+        Produto, para mim, não começa por "o que vamos construir".<br class="hidden md:block" />
         Começa no porquê. Só depois avança para decisões de execução.
       </h2>
       <p class="text-blue-200 text-xl mx-auto font-regular !leading-[1.7]">
         Antes de discutir soluções e funcionalidades, busco o que realmente
-        sustenta o produto: objetivos e clareza estratégica.
+        sustenta o produto.
       </p>
     </div>
 
+
     <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+
       <div
         class="flex flex-col gap-6 sm:gap-8 md:gap-12 px-6 py-8 md:px-12 md:py-12 border border-blue-700 bg-blue-800">
-        <i data-lucide="telescope" class="w-12 h-12 text-blue-600"></i>
-        <p class="text-base sm:text-lg md:text-xl leading-relaxed">Onde a empresa quer chegar</p>
+        <i data-lucide="telescope" class="h-8 w-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-blue-600"></i>
+        <p class="text-base sm:text-lg md:text-xl !leading-relaxed">Clareza sobre onde a empresa quer chegar</p>
       </div>
       <div
         class="flex flex-col gap-6 sm:gap-8 md:gap-12 px-6 py-8 md:px-12 md:py-12 border border-blue-700 bg-blue-800">
-        <i data-lucide="circle-dollar-sign" class="w-12 h-12 text-blue-600"></i>
-        <p class="text-base sm:text-lg md:text-xl leading-relaxed">
-          Como o produto gera receita e quais os potenciais retornos
+        <i data-lucide="circle-dollar-sign" class="h-8 w-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-blue-600"></i>
+        <p class="text-base sm:text-lg md:text-xl !leading-relaxed">
+          Compreensão de como o produto gera valor e receita
         </p>
       </div>
       <div
         class="flex flex-col gap-6 sm:gap-8 md:gap-12 px-6 py-8 md:px-12 md:py-12 border border-blue-700 bg-blue-800">
-        <i data-lucide="circle-user-round" class="w-12 h-12 text-blue-600"></i>
-        <p class="text-base sm:text-lg md:text-xl leading-relaxed">
-          Quem é de fato o seu cliente ideal e seu contexto real
+        <i data-lucide="circle-user-round" class="h-8 w-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-blue-600"></i>
+        <p class="text-base sm:text-lg md:text-xl !leading-relaxed">
+          Entendimento profundo de quem é o cliente real, sem viés ou achismos
         </p>
       </div>
       <div
         class="flex flex-col gap-6 sm:gap-8 md:gap-12 px-6 py-8 md:px-12 md:py-12 border border-blue-700 bg-blue-800">
-        <i data-lucide="history" class="w-12 h-12 text-blue-600"></i>
-        <p class="text-base sm:text-lg md:text-xl leading-relaxed">
-          O contexto do produto, de onde ele veio e por que é preciso mudar
+        <i data-lucide="history" class="h-8 w-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-blue-600"></i>
+        <p class="text-base sm:text-lg md:text-xl !leading-relaxed">
+          Decisões guiadas por evidências, não por opinião
         </p>
       </div>
     </div>
@@ -126,65 +131,45 @@
 
   <!-- DECISION SECTION (WHITE) -->
   <section class="bg-zinc-50">
-    <div class="flex flex-col md:flw-row max-w-[1440px] mx-auto">
+    <div class="flex flex-col md:flex-row max-w-[1440px] mx-auto">
       <!-- Left Side - Title & List -->
       <div
-        class="flex-1 flex-col justify-center items-start space-y-8 border-r border-zinc-300 pt-16 pb-0 sm:py-20 md:py-24 px-6 sm:px-12 md:px-20">
-        <h2 class="text-sm sm:text-base font-bold uppercase text-blue-600 tracking-[0.24em]">
+        class="flex-1 flex-col justify-center items-start space-y-3 border-r border-zinc-300 pt-16 pb-0 sm:py-20 md:py-24 px-6 sm:px-12 md:px-20">
+        <h3 class="text-4xl font-extrabold -tracking-[0.02em] text-zinc-800 !tracking-tighter">
           Como decido e priorizo
-        </h2>
-
-        <div class="space-y-6">
-          <p class="text-3xl font-bold text-zinc-800">
-            Minhas decisões são guiadas por:
-          </p>
-          <div class="space-y-5">
-            <div class="flex items-start gap-3 sm:gap-4">
-              <span class="text-blue-600 mt-1">
-                <i data-lucide="chevron-right" class="w-6 h-6"></i>
-              </span>
-              <p class="text-xl leading-relaxed text-gray-700">
-                Alinhamento com o objetivo estratégico
-              </p>
-            </div>
-            <div class="flex items-start gap-3 sm:gap-4">
-              <span class="text-blue-600 mt-1">
-                <i data-lucide="chevron-right" class="w-6 h-6"></i>
-              </span>
-              <p class="text-xl leading-relaxed text-gray-700">
-                Impacto real no negócio
-              </p>
-            </div>
-            <div class="flex items-start gap-3 sm:gap-4">
-              <span class="text-blue-600 mt-1">
-                <i data-lucide="chevron-right" class="w-6 h-6"></i>
-              </span>
-              <p class="text-xl leading-relaxed text-gray-700">
-                Benefício real no dia a dia do cliente
-              </p>
-            </div>
-            <div class="flex items-start gap-3 sm:gap-4">
-              <span class="text-blue-600 mt-1">
-                <i data-lucide="chevron-right" class="w-6 h-6"></i>
-              </span>
-              <p class="text-xl leading-relaxed text-gray-700">
-                Relação entre custo e retorno
-              </p>
-            </div>
-          </div>
-        </div>
+        </h3>
+        <p class="text-xl md:text-2xl !leading-relaxed text-zinc-500 font-regular md:font-light">
+          Priorização é o plano tático da estratégia
+        </p>
       </div>
 
       <!-- Right Side - Closing Statement -->
-      <div class="flex-1 flex-col justify-center space-y-8 pt-16 pb-24 sm:py-20 md:py-24 px-6 sm:px-12 md:px-20">
-        <div class="space-y-6">
-          <p class="text-xl text-gray-600 leading-relaxed max-w-lg italic text-center md:text-left">
-            "Ideias que não contribuem diretamente para o caminho definido —
-            mesmo sendo boas — ficam fora."
-          </p>
-          <p class="text-2xl font-bold text-blue-700 text-center md:text-left">
-            Foco é o que permite que o produto avance.
-          </p>
+      <div class="flex-1 flex-col justify-center space-y-8 pt-16 pb-20 sm:py-20 md:py-24 px-6 sm:px-12 md:px-20">
+        <div class="space-y-5 font-regular text-gray-900 text-xl !leading-relaxed">
+          <div class="flex items-start gap-3 sm:gap-4">
+            <span class="text-blue-600 mt-1">
+              <i data-lucide="check" class="w-6 h-6"></i>
+            </span>
+            <p>
+              Alinhamento com o objetivo estratégico
+            </p>
+          </div>
+          <div class="flex items-start gap-3 sm:gap-4">
+            <span class="text-blue-600 mt-1">
+              <i data-lucide="check" class="w-6 h-6"></i>
+            </span>
+            <p>
+              Impacto real no negócio e no dia a dia do cliente
+            </p>
+          </div>
+          <div class="flex items-start gap-3 sm:gap-4">
+            <span class="text-blue-600 mt-1">
+              <i data-lucide="check" class="w-6 h-6"></i>
+            </span>
+            <p>
+              Relação entre impacto e esforço
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -198,45 +183,43 @@
     </div>
 
     <div class="relative flex flex-col gap-12 items-center z-10">
-      <div class="space-y-4 max-w-5xl text-left sm:text-center px-4 sm:px-0">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold leading-tight !leading-[1.5]">
+      <div class="space-y-4 max-w-4xl text-left sm:text-center px-4 sm:px-0">
+        <h2 class="text-4xl lg:text-5xl font-bold leading-tight !leading-[1.3]">
           Experiência estratégica e responsabilidade real
         </h2>
-        <p class="text-gray-300 text-lg sm:text-xl md:text-2xl !leading-[2] font-extralight">
+        <p class="text-gray-300 text-lg sm:text-xl md:text-2xl !leading-[1.8] font-regular lg:font-extralight">
           Ao longo da minha trajetória, atuei em contextos onde decisões de
           produto precisavam ser tomadas com clareza, responsabilidade e visão
           de longo prazo.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-4 md:gap-8">
-        <div class="flex flex-col items-start gap-4 rounded-xl p-6 sm:p-8 bg-zinc-900/60">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-8">
+        <div class="flex flex-col items-start gap-4 rounded-xl p-6 sm:p-8 bg-zinc-800 sm:bg-zinc-900">
           <span class="text-blue-500 mt-1">
             <i data-lucide="check" class="w-8 h-8"></i>
           </span>
-          <p class="text-lg !leading-[1.7] text-gray-300 font-light">
-            Participei diretamente de comitês de produto, trabalhando junto
-            com fundadores, e C-levels para definir direcionamento
-            estratégico, prioridades e roadmap.
+          <p class="text-lg !leading-[2] text-gray-300 font-light">
+            Atuação direta em comitês de produto com fundadores e C-levels.
           </p>
         </div>
-        <div class="flex flex-col items-start gap-4 rounded-xl p-6 sm:p-8 bg-zinc-900/60">
+        <div class="flex flex-col items-start gap-4 rounded-xl p-6 sm:p-8 bg-zinc-800 sm:bg-zinc-900/60">
           <span class="text-blue-500 mt-1">
             <i data-lucide="check" class="w-8 h-8"></i>
           </span>
-          <p class="text-lg !leading-[1.7] text-gray-300 font-light">
-            Fui lider de produto em uma startup Edtech Alemã assumindo visão
-            completa, estruturando estratégia, execução e posicionamento de
+          <p class="text-lg !leading-[2] text-gray-300 font-light">
+            Fui lider de produto em uma startup Edtech Alemã assumindo visão de produto, estruturando estratégia,
+            execução e posicionamento de
             mercado.
           </p>
         </div>
-        <div class="flex flex-col items-start gap-4 rounded-xl p-6 sm:p-8 bg-zinc-900/60">
+        <div class="flex flex-col items-start gap-4 rounded-xl p-6 sm:p-8 bg-zinc-800/80 sm:bg-zinc-900/60">
           <span class="text-blue-500 mt-1">
             <i data-lucide="check" class="w-8 h-8"></i>
           </span>
-          <p class="text-lg !leading-[1.7] text-gray-300 font-light">
-            Essas experiências consolidaram minha atuação como alguém
-            responsável por transformar visão em direção concreta.
+          <p class="text-lg !leading-[2] text-gray-300 font-light">
+            Concepção de produtos digitais que impactam empresas como Burger King, CNA Idiomas,
+            Subway, Bob’s, entre outras.
           </p>
         </div>
       </div>
@@ -246,68 +229,38 @@
   <!-- TODAY SECTION (BLUE SPLIT) -->
   <section class="flex flex-col md:flex-row min-h-[450px]">
     <div
-      class="flex-1 bg-blue-700 sm:bg-blue-600 text-white px-6 py-12 sm:p-12 md:p-16 lg:p-24 flex flex-col justify-center">
-      <h2 class="text-3xl sm:text-4xl font-bold mb-6 sm:mb-10">
-        O que faço hoje
-      </h2>
-      <div class="space-y-6 text-base sm:text-xl !leading-[1.9] text-blue-200">
-        <p>
-          Atuo como Product Manager Estratégico, trabalhando próximo à
+      class="flex-1 gap-16 bg-blue-700 text-white px-6 pt-16 pb-10 sm:p-12 md:p-16 lg:p-32 flex flex-col justify-center">
+      <div class="flex flex-col max-w-2xl items-start gap-4">
+        <p
+          class="text-sm sm:text-base md:text-lg text-blue-950 uppercase tracking-[0.2em] md:tracking-[0.3em] font-extrabold">
+          O que faço hoje
+        </p>
+        <p class="text-4xl !leading-[1.7] font-bold">Meu papel é conectar a visão do produto à realidade</p>
+      </div>
+      <div class="flex gap-20 text-lg !leading-[1.9] text-blue-100">
+        <p class="flex-1">
+          Transformar decisões estratégicas em conceitos de produto claros, desdobrar essas decisões em planos
+          possíveis, comunicar e negociar prioridades com o time técnico e sustentar o foco necessário para que o
+          produto avance.
+        </p>
+        <p class="flex-1">
+          Atuo como Product Manager Estratégico e responsável por Design, trabalhando próximo à
           liderança para definir objetivos, estruturar roadmap e garantir
           clareza na execução.
         </p>
-        <p>
-          Meu papel é conectar visão e realidade: transformar decisões
-          estratégicas em planos possíveis, comunicar prioridades ao time
-          técnico e sustentar o foco necessário para que o produto avance.
-        </p>
       </div>
     </div>
-    <div
-      class="flex-1 bg-blue-700 sm:bg-blue-800 text-white px-4 pt-0 pb-16 sm:p-12 md:p-16 lg:p-24 flex flex-col justify-center space-y-8">
-      <div class="flex items-start gap-4">
-        <span class="text-blue-500 mt-1">
-          <i data-lucide="chevron-right" class="w-5 h-5"></i>
-        </span>
-        <p class="text-base sm:text-lg leading-relaxed text-gray-300">
-          Gerenciamento de roadmap estratégico e priorização
-        </p>
-      </div>
-      <div class="flex items-start gap-4">
-        <span class="text-blue-500 mt-1">
-          <i data-lucide="chevron-right" class="w-5 h-5"></i>
-        </span>
-        <p class="text-base sm:text-lg leading-relaxed text-gray-300">
-          Definição de objetivos de produto alinhados ao negócio
-        </p>
-      </div>
-      <div class="flex items-start gap-4">
-        <span class="text-blue-500 mt-1">
-          <i data-lucide="chevron-right" class="w-5 h-5"></i>
-        </span>
-        <p class="text-base sm:text-lg leading-relaxed text-gray-300">
-          Conexão entre os times de engenharia, design e stakeholders
-        </p>
-      </div>
-      <div class="flex items-start gap-4">
-        <span class="text-blue-500 mt-1">
-          <i data-lucide="chevron-right" class="w-5 h-5"></i>
-        </span>
-        <p class="text-base sm:text-lg leading-relaxed text-gray-300">
-          Garantia de foco e clareza para que as entregas aconteçam
-        </p>
-      </div>
-    </div>
+
   </section>
 
   <!-- BASE SECTION (WHITE) -->
   <section class="bg-white pt-16 pb-24 md:py-24 px-6 md:px-24">
     <div class="flex flex-col items-center">
-      <div class="max-w-5xl mb-16 text-left sm:text-center">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 sm:mb-2 !leading-[1.5]">
+      <div class="max-w-5xl mb-10 md:mb-16 text-left sm:text-center">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 sm:mb-2 -tracking-[0.02em] !leading-[1.5]">
           Base que sustenta minha atuação
         </h2>
-        <p class="text-xl leading-relaxed text-gray-700">
+        <p class="text-xl leading-relaxed text-gray-700 text-regular md:text-light">
           Minha trajetória começou no design, com foco em aplicações digitais,
           ainda antes da consolidação dos produtos digitais como conhecemos
           hoje.
@@ -315,34 +268,34 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl">
-        <div class="space-y-10">
-          <div class="flex items-start gap-4">
+        <div class="space-y-6 md:space-y-10 text-base !leading-[1.8] text-gray-700 text-regular md:text-light">
+          <div class="flex items-start gap-2 sm:gap-4">
             <span class="text-blue-600 mt-1">
               <i data-lucide="chevron-right" class="w-6 h-6"></i>
             </span>
-            <p class="text-base !leading-[1.8] text-gray-800">
+            <p>
               Sou formado em Desenho Industrial - Programação Visual e possuo
               pós-graduação em Design de Hipermídia, uma das primeiras
               formações voltadas ao design interativo, software e experiências
               digitais no Brasil.
             </p>
           </div>
-          <div class="flex items-start gap-4">
+          <div class="flex items-start gap-2 sm:gap-4">
             <span class="text-blue-600 mt-1">
               <i data-lucide="chevron-right" class="w-6 h-6"></i>
             </span>
-            <p class="text-base !leading-[1.8] text-gray-800">
+            <p>
               Fui Co-fundador e diretor de criação de uma agência de
               publicidade, onde desenvolvi forte vivência em negócio,
               relacionamento com clientes e entendimento profundo de dores
               reais.
             </p>
           </div>
-          <div class="flex items-start gap-4">
+          <div class="flex items-start gap-2 sm:gap-4">
             <span class="text-blue-600 mt-1">
               <i data-lucide="chevron-right" class="w-6 h-6"></i>
             </span>
-            <p class="text-base !leading-[1.8] text-gray-800">
+            <p>
               Com o tempo, minha atuação naturalmente evoluiu para o universo
               de produtos digitais e software. Passei por funções de UX
               Designer, Product Designer e Product Manager, unindo formação,
@@ -360,7 +313,8 @@
           <!-- Dark Overlay -->
           <div class="absolute inset-0 bg-black/20"></div>
           <!-- Text Content -->
-          <h3 class="relative z-10 text-2xl md:text-3xl font-extralight text-white !leading-[1.7] text-center px-8">
+          <h3
+            class="relative z-10 text-2xl md:text-3xl font-regular md:font-light lg:font-extralight text-white !leading-[1.7] text-center">
             Hoje, essa trajetória se reflete em uma visão ampla, que integra
             estratégia, negócio, design e tecnologia.
           </h3>
@@ -370,72 +324,70 @@
   </section>
 
   <!-- FORMATION SECTION (DARK) -->
-  <section class="bg-zinc-900 text-white">
-    <div class="flex flex-col md:flex-row items-stretch">
-      <div class="flex justify-center items-center px-4 py-8 md:px-32">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold">Formação</h2>
+  <section class="bg-zinc-800 text-white">
+    <div class="flex flex-col items-stretch">
+      <div class="flex justify-start md:justify-center items-center px-6 py-8">
+        <h2 class="text-lg font-bold uppercase !tracking-[0.7em] text-zinc-600">Formação</h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 flex-1">
-        <div class="px-6 py-6 md:py-12 md:px-12 border-b border-zinc-800 border-l border-zinc-800">
-          <h4 class="text-base sm:text-lg md:text-xl font-medium mb-2">
+      <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 flex-1">
+        <div class="px-6 py-6 md:py-10 md:px-10 border border-zinc-700 flex flex-col justify-between">
+          <h4 class="text-base sm:text-lg font-medium mb-2 text-zinc-300">
             Bacharel em Desenho Industrial - Programação Visual
           </h4>
-          <p class="text-zinc-500 text-sm sm:text-base md:text-lg">
-            Universidade Positivo - Curitiba-PR
-          </p>
+          <div class="mt-6 md:mt-8 opacity-70">
+            <img src="images/logos-form/univ%20positivo%20white.webp" alt="Universidade Positivo"
+              class="max-w-[120px] max-h-[50px] object-contain" />
+          </div>
         </div>
-        <div class="px-6 py-6 md:py-12 md:px-12 border-b border-zinc-800 border-l border-zinc-800">
-          <h4 class="text-base sm:text-lg md:text-xl font-medium mb-2">
+        <div class="px-6 py-6 md:py-10 md:px-10 border border-zinc-700 flex flex-col justify-between">
+          <h4 class="text-base sm:text-lg font-medium mb-2 text-zinc-300">
             Pós-graduação em Design de Hipermídia
           </h4>
-          <p class="text-zinc-500 text-sm sm:text-base md:text-lg">
-            Universidade Anhembi Morumbi - São Paulo-SP
-          </p>
+          <div class="mt-6 md:mt-8 opacity-70">
+            <img src="images/logos-form/anhembi%20white.webp" alt="Anhembi Morumbi"
+              class="max-w-[130px] max-h-[50px] object-contain" />
+          </div>
         </div>
-        <div class="px-6 py-6 md:py-12 md:px-12 border-b border-zinc-800 border-l border-zinc-800">
-          <h4 class="text-base sm:text-lg md:text-xl font-medium mb-2">
+        <div class="px-6 py-6 md:py-10 md:px-10 border border-zinc-700 flex flex-col justify-between">
+          <h4 class="text-base sm:text-lg font-medium mb-2 text-zinc-300">
             Digital Product Leadership - Product Manager
           </h4>
-          <p class="text-zinc-500 text-sm sm:text-base md:text-lg">Tera</p>
+          <div class="mt-6 md:mt-8 opacity-70">
+            <img src="images/logos-form/tera%20white.webp" alt="Tera"
+              class="max-w-[120px] max-h-[26px] object-contain" />
+          </div>
         </div>
-        <div class="px-6 py-6 md:py-12 md:px-12 border-b border-zinc-800 border-l border-zinc-800">
-          <h4 class="text-base sm:text-lg md:text-xl font-medium mb-2">
+        <div class="px-6 py-6 md:py-10 md:px-10 border border-zinc-700 flex flex-col justify-between">
+          <h4 class="text-base sm:text-lg font-medium mb-2 text-zinc-300">
             Marketing Digital - Nanodegree
           </h4>
-          <p class="text-zinc-500 text-sm sm:text-base md:text-lg">Udacity</p>
+          <div class="mt-6 md:mt-8 opacity-70">
+            <img src="images/logos-form/udacity%20white.webp" alt="Udacity"
+              class="max-w-[120px] max-h-[50px] object-contain" />
+          </div>
         </div>
-        <div class="px-6 py-6 md:py-12 md:px-12 border-b border-zinc-800 border-l border-zinc-800">
-          <h4 class="text-base sm:text-lg md:text-xl font-medium mb-2">
+        <div class="px-6 py-6 md:py-10 md:px-10 border border-zinc-700 flex flex-col justify-between">
+          <h4 class="text-base sm:text-lg font-medium mb-2 text-zinc-300">
             Estratégias Digitais de Marketing
           </h4>
-          <p class="text-zinc-500 text-sm sm:text-base md:text-lg">
-            Escola Superior de Propaganda e Marketing - São Paulo-SP
-          </p>
+          <div class="mt-6 md:mt-8 opacity-70">
+            <img src="images/logos-form/espm%20vazada%20white.webp" alt="ESPM"
+              class="max-w-[120px] max-h-[24px] object-contain" />
+          </div>
         </div>
-        <div class="px-6 py-6 md:py-12 md:px-12 border-b border-zinc-800 border-l border-zinc-800">
-          <h4 class="text-base sm:text-lg md:text-xl font-medium mb-2">
+        <div class="px-6 py-6 md:py-10 md:px-10 border border-zinc-700 flex flex-col justify-between">
+          <h4 class="text-base sm:text-lg font-medium mb-2 text-zinc-300">
             Atendimento em Agências de Comunicação
           </h4>
-          <p class="text-zinc-500 text-sm sm:text-base md:text-lg">
-            Escola Superior de Propaganda e Marketing - São Paulo-SP
-          </p>
+          <div class="mt-6 md:mt-8 opacity-70">
+            <img src="images/logos-form/espm%20vazada%20white.webp" alt="ESPM"
+              class="max-w-[120px] max-h-[24px] object-contain" />
+          </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-zinc-900 py-16 px-6 border-t border-gray-700">
-    <div class="max-w-7xl mx-auto flex justify-center gap-8">
-      <a href="#" class="hover:opacity-70 transition-opacity">
-        <img src="images/Whatsapp.svg" alt="WhatsApp" class="w-8 h-8" />
-      </a>
-      <a href="https://www.linkedin.com/in/eduardopavani/" class="hover:opacity-70 transition-opacity">
-        <img src="images/linkedin.svg" alt="LinkedIn" class="w-8 h-8" />
-      </a>
-    </div>
-  </footer>
 
   <!-- Initialize Lucide Icons -->
   <script>
