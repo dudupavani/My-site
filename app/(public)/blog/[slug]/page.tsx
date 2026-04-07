@@ -1,10 +1,15 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { getPublishedPostBySlug } from "@/src/modules/blog/server/queries";
+import { getPublishedPostBySlug, listPublishedPostSlugs } from "@/src/modules/blog/server/queries";
 import { BlogPostPage } from "@/src/modules/blog/ui/BlogPostPage";
 
 export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const slugs = await listPublishedPostSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
 
 type PageProps = {
   params: Promise<{ slug: string }>;

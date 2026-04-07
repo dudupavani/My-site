@@ -36,9 +36,9 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
                 {post.title}
               </h1>
               {post.publishedAt ? (
-                <p className="mt-3 text-sm text-zinc-500">
+                <time dateTime={post.publishedAt} className="mt-3 text-sm text-zinc-500">
                   Publicado em {formatDate(post.publishedAt)}
-                </p>
+                </time>
               ) : null}
             </header>
 

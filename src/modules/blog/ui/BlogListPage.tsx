@@ -69,9 +69,9 @@ function PostCard({ post }: { post: BlogPostSummary }) {
             {post.title}
           </h2>
           {post.publishedAt ? (
-            <p className="text-xs text-zinc-500">
+            <time dateTime={post.publishedAt} className="text-xs text-zinc-500">
               {formatDate(post.publishedAt)}
-            </p>
+            </time>
           ) : null}
         </div>
 

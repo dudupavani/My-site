@@ -1,9 +1,41 @@
+import sanitizeHtml from "sanitize-html";
+
 import type { BlogPostDetail, BlogPostSummary } from "@/src/modules/blog/domain/post";
 import {
   getBlogCoverBucketName,
   getSignedUrlTtlSeconds,
   getSupabaseAdminClient,
 } from "@/src/shared/server/supabase";
+
+const ALLOWED_TAGS = [
+  "h1", "h2", "h3", "h4", "h5", "h6",
+  "p", "br", "hr",
+  "strong", "em", "u", "s", "sub", "sup",
+  "ul", "ol", "li",
+  "blockquote", "pre", "code",
+  "a",
+  "img",
+  "table", "thead", "tbody", "tr", "th", "td",
+  "figure", "figcaption",
+  "div", "span",
+];
+
+function sanitizeBlogHtml(html: string): string {
+  return sanitizeHtml(html, {
+    allowedTags: ALLOWED_TAGS,
+    allowedAttributes: {
+      a: ["href", "target", "rel"],
+      img: ["src", "alt", "width", "height"],
+      td: ["colspan", "rowspan"],
+      th: ["colspan", "rowspan"],
+      "*": ["class"],
+    },
+    allowedSchemes: ["https", "http", "mailto"],
+    transformTags: {
+      a: sanitizeHtml.simpleTransform("a", { rel: "noopener noreferrer" }),
+    },
+  });
+}
 
 async function createSignedCoverUrl(path: string | null): Promise<string | null> {
   if (!path) return null;
@@ -76,6 +108,20 @@ export async function listPublishedPosts(opts?: {
   };
 }
 
+export async function listPublishedPostSlugs(): Promise<string[]> {
+  const supabase = getSupabaseAdminClient();
+
+  const { data, error } = await supabase
+    .from("posts")
+    .select("slug")
+    .eq("status", "published")
+    .returns<{ slug: string }[]>();
+
+  if (error) return [];
+
+  return (data ?? []).map((row) => row.slug);
+}
+
 export async function getPublishedPostBySlug(slug: string): Promise<BlogPostDetail | null> {
   const supabase = getSupabaseAdminClient();
 
@@ -106,7 +152,7 @@ export async function getPublishedPostBySlug(slug: string): Promise<BlogPostDeta
     title: post.title,
     coverImageUrl,
     publishedAt: post.published_at,
-    contentHtml: post.content ?? "",
+    contentHtml: sanitizeBlogHtml(post.content ?? ""),
     seoTitle: post.seo_title,
     seoDescription: post.seo_description,
   };
