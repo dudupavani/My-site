@@ -20,6 +20,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
-  return <BlogListPage />;
+type Props = {
+  searchParams: Promise<{ page?: string }>;
+};
+
+export default async function BlogPage({ searchParams }: Props) {
+  const { page } = await searchParams;
+  const pageNumber = Math.max(1, Number(page) || 1);
+  return <BlogListPage page={pageNumber} />;
 }

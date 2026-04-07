@@ -25,37 +25,65 @@ function stripHtmlToExcerpt(html: string | null, maxLength = 160): string | null
   return text.slice(0, maxLength - 1).trimEnd() + "…";
 }
 
-export async function listPublishedPosts(): Promise<BlogPostSummary[]> {
+const POSTS_PER_PAGE = 10;
+
+type PostRow = {
+  id: string;
+  slug: string;
+  title: string;
+  seo_description: string | null;
+  content: string | null;
+  cover_image_path: string | null;
+  published_at: string | null;
+};
+
+export type PublishedPostsResult = {
+  posts: BlogPostSummary[];
+  total: number;
+  totalPages: number;
+  currentPage: number;
+};
+
+export async function listPublishedPosts(opts?: {
+  page?: number;
+  limit?: number;
+}): Promise<PublishedPostsResult> {
+  const limit = opts?.limit ?? POSTS_PER_PAGE;
+  const page = Math.max(1, opts?.page ?? 1);
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
   const supabase = getSupabaseAdminClient();
 
-  const { data, error } = await supabase
+  const { data, error, count } = await supabase
     .from("posts")
-    .select("id, slug, title, seo_description, content, cover_image_path, published_at")
+    .select("id, slug, title, seo_description, content, cover_image_path, published_at", {
+      count: "exact",
+    })
     .eq("status", "published")
     .order("published_at", { ascending: false })
-    .returns<Array<{
-      id: string;
-      slug: string;
-      title: string;
-      seo_description: string | null;
-      content: string | null;
-      cover_image_path: string | null;
-      published_at: string | null;
-    }>>();
+    .range(from, to)
+    .returns<PostRow[]>();
 
   if (error) throw new Error("Falha ao listar posts do blog.");
 
   const rows = data ?? [];
   const coverUrls = await Promise.all(rows.map((row) => createSignedCoverUrl(row.cover_image_path)));
+  const total = count ?? 0;
 
-  return rows.map((row, index) => ({
-    id: row.id,
-    slug: row.slug,
-    title: row.title,
-    excerpt: row.seo_description ?? stripHtmlToExcerpt(row.content),
-    coverImageUrl: coverUrls[index],
-    publishedAt: row.published_at,
-  }));
+  return {
+    posts: rows.map((row, index) => ({
+      id: row.id,
+      slug: row.slug,
+      title: row.title,
+      excerpt: row.seo_description ?? stripHtmlToExcerpt(row.content),
+      coverImageUrl: coverUrls[index],
+      publishedAt: row.published_at,
+    })),
+    total,
+    totalPages: Math.ceil(total / limit),
+    currentPage: page,
+  };
 }
 
 export async function getPublishedPostBySlug(slug: string): Promise<BlogPostDetail | null> {

@@ -4,8 +4,12 @@ import type { BlogPostSummary } from "@/src/modules/blog/domain/post";
 import { listPublishedPosts } from "@/src/modules/blog/server/queries";
 import { formatDate } from "@/src/shared/utils/format";
 
-export async function BlogListPage() {
-  const posts = await listPublishedPosts();
+type Props = {
+  page?: number;
+};
+
+export async function BlogListPage({ page = 1 }: Props) {
+  const { posts, totalPages, currentPage } = await listPublishedPosts({ page });
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
@@ -39,6 +43,10 @@ export async function BlogListPage() {
               <PostCard key={post.id} post={post} />
             ))}
           </div>
+        )}
+
+        {totalPages > 1 && (
+          <Pagination currentPage={currentPage} totalPages={totalPages} />
         )}
       </main>
     </div>
@@ -78,5 +86,53 @@ function PostCard({ post }: { post: BlogPostSummary }) {
         </div>
       </Link>
     </article>
+  );
+}
+
+function Pagination({
+  currentPage,
+  totalPages,
+}: {
+  currentPage: number;
+  totalPages: number;
+}) {
+  const prev = currentPage > 1 ? currentPage - 1 : null;
+  const next = currentPage < totalPages ? currentPage + 1 : null;
+
+  return (
+    <nav
+      className="mt-12 flex items-center justify-between border-t border-zinc-800 pt-8"
+      aria-label="Paginação"
+    >
+      <div>
+        {prev ? (
+          <Link
+            href={prev === 1 ? "/blog" : `/blog?page=${prev}`}
+            className="text-sm text-zinc-400 transition-colors hover:text-white"
+          >
+            ← Mais recentes
+          </Link>
+        ) : (
+          <span />
+        )}
+      </div>
+
+      <span className="text-xs text-zinc-600">
+        {currentPage} / {totalPages}
+      </span>
+
+      <div>
+        {next ? (
+          <Link
+            href={`/blog?page=${next}`}
+            className="text-sm text-zinc-400 transition-colors hover:text-white"
+          >
+            Mais antigos →
+          </Link>
+        ) : (
+          <span />
+        )}
+      </div>
+    </nav>
   );
 }
