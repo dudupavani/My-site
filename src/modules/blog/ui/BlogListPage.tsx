@@ -13,7 +13,7 @@ export async function BlogListPage({ page = 1 }: Props) {
 
   return (
     <div className="min-h-screen bg-zinc-800 text-white">
-      <header className="border-b border-zinc-800 px-6 py-4">
+      <header className="px-6 pt-8 pb-6">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           <Link href="/" className="flex items-center">
             <img
@@ -63,9 +63,9 @@ function PostCard({ post }: { post: BlogPostSummary }) {
     <article className="group">
       <Link
         href={`/blog/${post.slug}`}
-        className="flex flex-col h-full bg-zinc-900 border border-zinc-700 rounded-2xl">
+        className="flex flex-col h-full bg-zinc-900/30 border border-zinc-700/50 rounded-2xl">
         <div className="justify-between flex flex-1 flex-col gap-4 px-6 pt-8 pb-4">
-          <h2 className="text-2xl text-white line-clamp-2 transition-colors group-hover:text-blue-400">
+          <h2 className="text-2xl text-zinc-300 line-clamp-2 transition-colors group-hover:text-white">
             {post.title}
           </h2>
           {post.publishedAt ? (
@@ -76,7 +76,7 @@ function PostCard({ post }: { post: BlogPostSummary }) {
         </div>
 
         {post.coverImageUrl ? (
-          <div className="p-2">
+          <div className="p-4">
             <div className="overflow-hidden rounded-xl">
               <img
                 src={post.coverImageUrl}

@@ -230,7 +230,7 @@ export function CoverImageCropper({
         </div>
       ) : null}
 
-      {previewUrl ? (
+      {previewUrl && !sourceDataUrl ? (
         <div className="space-y-1">
           <div className="overflow-hidden rounded-lg border border-border">
             <img
