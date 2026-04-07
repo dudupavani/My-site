@@ -1,49 +1,47 @@
+import { InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/src/modules/home/icons";
+
 export function ContactFooter() {
   return (
-    <footer
-      className="bg-zinc-900"
-      dangerouslySetInnerHTML={{
-        __html: `
-    <div class="flex flex-col items-center gap-8 pt-12 pb-40 px-6 sm:px-10 max-w-6xl mx-auto">
-      <div class="flex items-center my-10 md:mb-12 md:mt-20">
-        <img src="/images/logo-footer.svg" alt="eduardopavani" class="h-16 sm:h-20 md:h-32 lg:h-40 w-auto" />
+    <footer className="bg-zinc-900">
+      <div className="flex flex-col items-center gap-8 pt-12 pb-40 px-6 sm:px-10 max-w-6xl mx-auto">
+        <div className="flex items-center my-10 md:mb-12 md:mt-20">
+          <img
+            src="/images/logo-footer.svg"
+            alt="eduardopavani"
+            className="h-16 sm:h-20 md:h-32 lg:h-40 w-auto"
+          />
+        </div>
+        <h2 className="text-2xl sm:text-2xl md:text-3xl font-extralight mb-4 sm:mb-2 -tracking-[0.02em] !leading-[1.5] text-zinc-400">
+          Vamos conversar?
+        </h2>
+        <div className="flex items-center gap-6 md:gap-8">
+          <a
+            href="https://wa.me/5548991587232"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Entre em contato pelo WhatsApp"
+            className="text-zinc-400 hover:text-white hover:border-blue-700 transition-colors duration-300 px-6 py-3 sm:px-10 sm:py-4 rounded-lg border border-zinc-800"
+          >
+            <WhatsAppIcon className="w-8 h-8" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/eduardopavani/"
+            aria-label="Visite meu perfil no LinkedIn"
+            className="text-zinc-400 hover:text-white hover:border-blue-700 transition-colors duration-300 px-6 py-3 sm:px-10 sm:py-4 rounded-lg border border-zinc-800"
+          >
+            <LinkedInIcon className="w-8 h-8" />
+          </a>
+          <a
+            href="https://www.instagram.com/eduardopavanipro"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visite meu perfil no Instagram"
+            className="text-zinc-400 hover:text-white hover:border-blue-700 transition-colors duration-300 px-6 py-3 sm:px-10 sm:py-4 rounded-lg border border-zinc-800"
+          >
+            <InstagramIcon className="w-8 h-8" />
+          </a>
+        </div>
       </div>
-      <h2
-        class="text-2xl sm:text-2xl md:text-3xl font-extralight mb-4 sm:mb-2 -tracking-[0.02em] !leading-[1.5] text-zinc-400">
-        Vamos conversar?
-      </h2>
-      <div class="flex items-center gap-6 md:gap-8">
-        <a href="https://wa.me/5548991587232" target="_blank" rel="noopener noreferrer"
-          aria-label="Entre em contato pelo WhatsApp"
-          class="text-zinc-400 hover:text-white hover:border-blue-700 transition-colors duration-300 px-6 py-3 sm:px-10 sm:py-4 rounded-lg border border-zinc-800">
-          <svg class="w-8 h-8" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M23.8017 4.07059C22.5181 2.77502 20.9894 1.74789 19.3048 1.04905C17.6202 0.350202 15.8133 -0.00637748 13.9895 8.63284e-05C6.34725 8.63284e-05 0.119 6.22659 0.112 13.8706C0.112 16.3188 0.7525 18.7006 1.96175 20.8093L0 28.0001L7.357 26.0716C9.39226 27.1792 11.6724 27.7597 13.9895 27.7603H13.9965C21.6405 27.7603 27.867 21.5338 27.874 13.8828C27.8757 12.0594 27.5167 10.2537 26.8175 8.56962C26.1183 6.88558 25.0945 5.35654 23.8017 4.07059ZM13.9895 25.4118C11.9227 25.4125 9.89398 24.8564 8.1165 23.8018L7.6965 23.5498L3.332 24.6943L4.4975 20.4366L4.2245 19.9973C3.06916 18.1604 2.45813 16.0336 2.46225 13.8636C2.46225 7.51809 7.637 2.34159 13.9965 2.34159C15.5115 2.33887 17.0121 2.63607 18.4118 3.21605C19.8114 3.79603 21.0824 4.64732 22.1515 5.72084C23.2243 6.79017 24.0748 8.06133 24.6539 9.46099C25.233 10.8607 25.5292 12.3611 25.5255 13.8758C25.5185 20.2441 20.3438 25.4118 13.9895 25.4118ZM20.3158 16.7773C19.971 16.6041 18.2682 15.7658 17.948 15.6468C17.6295 15.5331 17.3967 15.4736 17.1692 15.8201C16.9365 16.1648 16.2715 16.9506 16.072 17.1763C15.8725 17.4091 15.666 17.4353 15.3195 17.2638C14.9747 17.0888 13.8565 16.7248 12.5335 15.5401C11.501 14.6213 10.8098 13.4838 10.6033 13.1391C10.4038 12.7926 10.584 12.6071 10.7572 12.4338C10.9095 12.2798 11.102 12.0278 11.2752 11.8283C11.4502 11.6288 11.508 11.4818 11.6217 11.2508C11.7355 11.0163 11.6812 10.8168 11.5955 10.6436C11.508 10.4703 10.8167 8.76059 10.5245 8.07109C10.2445 7.39034 9.95925 7.48484 9.74575 7.47609C9.54625 7.46384 9.3135 7.46384 9.08075 7.46384C8.90499 7.4682 8.73202 7.50886 8.57271 7.58324C8.41341 7.65762 8.27119 7.76413 8.155 7.89609C7.8365 8.24259 6.94575 9.08084 6.94575 10.7906C6.94575 12.5003 8.18825 14.1436 8.36325 14.3763C8.53475 14.6091 10.8027 18.1073 14.2835 19.6123C15.106 19.9711 15.7535 20.1828 16.2593 20.3438C17.0905 20.6098 17.8412 20.5696 18.4397 20.4838C19.1047 20.3823 20.489 19.6438 20.7812 18.8336C21.0683 18.0216 21.0683 17.3286 20.9808 17.1833C20.895 17.0363 20.6623 16.9506 20.3158 16.7773Z"
-              fill="currentColor" />
-          </svg>
-        </a>
-        <a href="https://www.linkedin.com/in/eduardopavani/" aria-label="Visite meu perfil no LinkedIn"
-          class="text-zinc-400 hover:text-white hover:border-blue-700 transition-colors duration-300 px-6 py-3 sm:px-10 sm:py-4 rounded-lg border border-zinc-800">
-          <svg class="w-8 h-8" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M0 2.0055C0 0.89775 0.9205 0 2.05625 0H25.9437C27.0795 0 28 0.89775 28 2.0055V25.9945C28 27.1023 27.0795 28 25.9437 28H2.05625C0.9205 28 0 27.1023 0 25.9945V2.0055ZM8.65025 23.4395V10.7958H4.4485V23.4395H8.65025ZM6.55025 9.0685C8.015 9.0685 8.92675 8.099 8.92675 6.8845C8.9005 5.64375 8.01675 4.7005 6.57825 4.7005C5.13975 4.7005 4.2 5.6455 4.2 6.8845C4.2 8.099 5.11175 9.0685 6.52225 9.0685H6.55025ZM15.1393 23.4395V16.3783C15.1393 16.0003 15.1672 15.6222 15.2792 15.3527C15.582 14.5985 16.2733 13.8162 17.4353 13.8162C18.956 13.8162 19.5632 14.9748 19.5632 16.6758V23.4395H23.765V16.1875C23.765 12.3025 21.693 10.4965 18.928 10.4965C16.6985 10.4965 15.6993 11.7215 15.1393 12.5842V12.628H15.1113C15.1205 12.6134 15.1299 12.5988 15.1393 12.5842V10.7958H10.9392C10.9917 11.9823 10.9392 23.4395 10.9392 23.4395H15.1393Z"
-              fill="currentColor" />
-          </svg>
-        </a>
-        <a href="https://www.instagram.com/eduardopavanipro" target="_blank" rel="noopener noreferrer"
-          aria-label="Visite meu perfil no Instagram"
-          class="text-zinc-400 hover:text-white hover:border-blue-700 transition-colors duration-300 px-6 py-3 sm:px-10 sm:py-4 rounded-lg border border-zinc-800">
-          <svg class="w-8 h-8" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M295.42,6c-53.2,2.51-89.53,11-121.29,23.48-32.87,12.81-60.73,30-88.45,57.82S40.89,143,28.17,175.92c-12.31,31.83-20.65,68.19-23,121.42S2.3,367.68,2.56,503.46,3.42,656.26,6,709.6c2.54,53.19,11,89.51,23.48,121.28,12.83,32.87,30,60.72,57.83,88.45S143,964.09,176,976.83c31.8,12.29,68.17,20.67,121.39,23s70.35,2.87,206.09,2.61,152.83-.86,206.16-3.39S799.1,988,830.88,975.58c32.87-12.86,60.74-30,88.45-57.84S964.1,862,976.81,829.06c12.32-31.8,20.69-68.17,23-121.35,2.33-53.37,2.88-70.41,2.62-206.17s-.87-152.78-3.4-206.1-11-89.53-23.47-121.32c-12.85-32.87-30-60.7-57.82-88.45S862,40.87,829.07,28.19c-31.82-12.31-68.17-20.7-121.39-23S637.33,2.3,501.54,2.56,348.75,3.4,295.42,6m5.84,903.88c-48.75-2.12-75.22-10.22-92.86-17-23.36-9-40-19.88-57.58-37.29s-28.38-34.11-37.5-57.42c-6.85-17.64-15.1-44.08-17.38-92.83-2.48-52.69-3-68.51-3.29-202s.22-149.29,2.53-202c2.08-48.71,10.23-75.21,17-92.84,9-23.39,19.84-40,37.29-57.57s34.1-28.39,57.43-37.51c17.62-6.88,44.06-15.06,92.79-17.38,52.73-2.5,68.53-3,202-3.29s149.31.21,202.06,2.53c48.71,2.12,75.22,10.19,92.83,17,23.37,9,40,19.81,57.57,37.29s28.4,34.07,37.52,57.45c6.89,17.57,15.07,44,17.37,92.76,2.51,52.73,3.08,68.54,3.32,202s-.23,149.31-2.54,202c-2.13,48.75-10.21,75.23-17,92.89-9,23.35-19.85,40-37.31,57.56s-34.09,28.38-57.43,37.5c-17.6,6.87-44.07,15.07-92.76,17.39-52.73,2.48-68.53,3-202.05,3.29s-149.27-.25-202-2.53m407.6-674.61a60,60,0,1,0,59.88-60.1,60,60,0,0,0-59.88,60.1M245.77,503c.28,141.8,115.44,256.49,257.21,256.22S759.52,643.8,759.25,502,643.79,245.48,502,245.76,245.5,361.22,245.77,503m90.06-.18a166.67,166.67,0,1,1,167,166.34,166.65,166.65,0,0,1-167-166.34"
-              fill="currentColor" transform="translate(-2.5 -2.5)" />
-          </svg>
-        </a>
-      </div>
-
-    </div>
-`,
-      }}
-    />
+    </footer>
   );
 }

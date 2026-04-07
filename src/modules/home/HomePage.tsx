@@ -1,5 +1,3 @@
-import Script from "next/script";
-
 import { BaseSection } from "./sections/BaseSection";
 import { ContactFooter } from "./sections/ContactFooter";
 import { DecisionSection } from "./sections/DecisionSection";
@@ -20,11 +18,6 @@ export function HomePage() {
       <BaseSection />
       <FormationSection />
       <ContactFooter />
-
-      {/* Inicializa os ícones data-lucide usados nas seções da home */}
-      <Script id="lucide-init" strategy="afterInteractive">
-        {`window.lucide?.createIcons();`}
-      </Script>
     </>
   );
 }
