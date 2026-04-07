@@ -3335,7 +3335,12 @@ body {
   margin-bottom: 1.25rem;
   color: white;
 }
-
+@media (max-width: 640px) {
+  .prose-blog p,
+  .prose-blog a {
+    font-size: 0.875rem;
+  }
+}
 .prose-blog a {
   color: #2563eb;
   text-underline-offset: 3px;

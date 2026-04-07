@@ -11,7 +11,7 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
   return (
     <div className="min-h-screen bg-zinc-800 text-white">
       <header className="pt-8 pb-4">
-        <div className="mx-auto flex max-w-3xl px-4 sm:px-6 items-center justify-between">
+        <div className="mx-auto flex max-w-5xl px-4 sm:px-6 items-center justify-between">
           <Link href="/" className="flex items-center">
             <img
               src="/images/logo.svg"
@@ -27,37 +27,36 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
         </div>
       </header>
 
-      <main className="mx-auto max-w-3xl px-4 sm:px-6 pt-10 pb-16">
+      <main className="mx-auto max-w-5xl px-4 sm:px-6 pt-16 pb-16">
         <article>
-          {/* Cover image */}
-          {post.coverImageUrl ? (
-            <div className="mb-10 overflow-hidden rounded-2xl">
-              <img
-                src={post.coverImageUrl}
-                alt={post.title}
-                className="aspect-[2/1] w-full object-cover"
-              />
-            </div>
-          ) : null}
+          <div className="pb-8 sm:pb-12 lg:pb-16">
+            {/* Header */}
+            <header className="mb-6 sm:mb-10 space-y-6">
+              <h1 className="text-2xl sm:text-4xl lg:text-6xl font-light leading-tight tracking-tight text-white">
+                {post.title}
+              </h1>
+              {post.publishedAt ? (
+                <p className="mt-3 text-sm text-zinc-500">
+                  Publicado em {formatDate(post.publishedAt)}
+                </p>
+              ) : null}
+            </header>
 
-          {/* Header */}
-          <header className="mb-10">
-            <h1 className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
-              {post.title}
-            </h1>
-
-            {post.publishedAt ? (
-              <p className="mt-3 text-sm text-zinc-500">
-                Publicado em {formatDate(post.publishedAt)}
-              </p>
+            {/* Cover image */}
+            {post.coverImageUrl ? (
+              <div className="overflow-hidden rounded-2xl">
+                <img
+                  src={post.coverImageUrl}
+                  alt={post.title}
+                  className="aspect-[2/1] w-full object-cover"
+                />
+              </div>
             ) : null}
-
-            <div className="mt-6 border-t border-zinc-800" />
-          </header>
+          </div>
 
           {/* Content */}
           <div
-            className="prose-blog"
+            className="prose-blog max-w-3xl mx-auto"
             dangerouslySetInnerHTML={{ __html: post.contentHtml }}
           />
         </article>
