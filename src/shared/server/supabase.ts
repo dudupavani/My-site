@@ -1,6 +1,7 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-const DEFAULT_SIGNED_URL_TTL_SECONDS = 3600;
+// 2× the page revalidate interval (3600s) so cached pages never serve expired image URLs.
+const DEFAULT_SIGNED_URL_TTL_SECONDS = 7200;
 const DEFAULT_COVER_BUCKET = "blog-post-covers";
 
 let supabaseAdminClient: SupabaseClient | null = null;
