@@ -12,16 +12,6 @@ import { TodaySection } from "./sections/TodaySection";
 export function HomePage() {
   return (
     <>
-      <noscript>
-        <iframe
-          src="https://www.googletagmanager.com/ns.html?id=GTM-W2H798B"
-          height="0"
-          width="0"
-          style={{ display: "none", visibility: "hidden" }}
-          title="Google Tag Manager"
-        />
-      </noscript>
-
       <HeroSection />
       <ProductThinkingSection />
       <DecisionSection />
@@ -31,6 +21,7 @@ export function HomePage() {
       <FormationSection />
       <ContactFooter />
 
+      {/* Inicializa os ícones data-lucide usados nas seções da home */}
       <Script id="lucide-init" strategy="afterInteractive">
         {`window.lucide?.createIcons();`}
       </Script>

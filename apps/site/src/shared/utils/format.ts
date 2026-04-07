@@ -8,6 +8,15 @@ export function formatDateTime(value: string): string {
   }).format(date);
 }
 
+export function formatDate(value: string): string {
+  const date = new Date(value);
+  return new Intl.DateTimeFormat("pt-BR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+}
+
 export function summarizeRecord(record: Record<string, unknown>): string {
   const entries = Object.entries(record);
   if (entries.length === 0) {

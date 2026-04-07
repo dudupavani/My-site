@@ -1,0 +1,12 @@
+{
+  "name": "my-site",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --dir apps/site run dev",
+    "build": "pnpm --dir apps/site run build",
+    "start": "pnpm --dir apps/site run start",
+    "typecheck": "pnpm --dir apps/site run typecheck",
+    "install:site": "pnpm --dir apps/site install"
+  },
+  "packageManager": "pnpm@8.6.12+sha512.1336b80b948efd7979218a33ba96d9e4d380e6578144f6319979977deec6e3fe2e0a444b864b3ce2b077dda8adc4d654fee32b9c31868f0acb92da0abcf8ea1c"
+}

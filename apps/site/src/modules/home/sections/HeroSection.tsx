@@ -5,30 +5,30 @@ export function HeroSection() {
       dangerouslySetInnerHTML={{
         __html: `
     <div class="absolute inset-0 z-0">
-      <img src="images/hero-bg.png" alt="" class="w-full h-full object-cover opacity-60" />
+      <img src="/images/hero-bg.png" alt="" class="w-full h-full object-cover opacity-60" />
     </div>
 
 
-    <img src="images/symbol.svg" class="absolute h-[80%] w-auto object-contain filter opacity-20 left-[20%]" alt="" />
+    <img src="/images/symbol.svg" class="absolute h-[80%] w-auto object-contain filter opacity-20 left-[20%]" alt="" />
 
-    <img src="images/symbol.svg" class="absolute h-[20%] w-auto object-contain filter !blur-sm opacity-30 right-[10%]"
+    <img src="/images/symbol.svg" class="absolute h-[20%] w-auto object-contain filter !blur-sm opacity-30 right-[10%]"
       alt="" />
 
     <div class="absolute inset-0 z-5 flex items-center justify-center top-20">
-      <img src="images/symbol.svg" class="h-[100%] w-auto object-contain !blur-3xl !fill-blue-600" alt="" />
+      <img src="/images/symbol.svg" class="h-[100%] w-auto object-contain !blur-3xl !fill-blue-600" alt="" />
     </div>
 
     <div class="absolute inset-0 z-10 flex items-end justify-center">
-      <img src="images/symbol.svg" alt=""
+      <img src="/images/symbol.svg" alt=""
         class="absolute inset-0 z-30 top-[400px] left-[40%] h-[70%] w-auto object-contain !blur-3xl !fill-blue-600 !mix-blend-hard-light" />
 
-      <img src="images/img-profile-2.webp" alt="Eduardo Pavani"
+      <img src="/images/img-profile-2.webp" alt="Eduardo Pavani"
         class="max-w-[115%] max-h-[80%] sm:h-full sm:max-h-full sm:max-w-lg md:max-w-xl lg:max-w-[100%] w-auto object-contain object-bottom" />
     </div>
 
     <div class="relative z-20 flex flex-col items-center text-center px-6 mt-12 md:mt-44">
       <div class="flex items-center mb-6 md:mb-6">
-        <img src="images/logo.svg" alt="eduardopavani" class="h-11 sm:h-14 md:h-20 lg:h-28 w-auto" />
+        <img src="/images/logo.svg" alt="eduardopavani" class="h-11 sm:h-14 md:h-20 lg:h-28 w-auto" />
       </div>
       <h1 class="text-lg sm:text-xl md:text-2xl md:text-4xl max-w-3xl !leading-relaxed font-extralight">
         Estratégia, clareza e execução na construção de produtos digitais.

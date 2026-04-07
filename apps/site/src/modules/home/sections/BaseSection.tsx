@@ -57,7 +57,7 @@ export function BaseSection() {
         <div
           class="relative flex items-center justify-center min-h-[400px] rounded-md overflow-hidden p-4 sm:p-8 md:p-12">
           <div class="absolute inset-0">
-            <img src="images/office.webp" alt="" class="w-full h-full object-cover" />
+            <img src="/images/office.webp" alt="" class="w-full h-full object-cover" />
           </div>
           <div class="absolute inset-0 bg-black/20"></div>
           <h3

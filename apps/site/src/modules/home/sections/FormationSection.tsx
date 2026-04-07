@@ -15,7 +15,7 @@ export function FormationSection() {
             Bacharel em Desenho Industrial - Programação Visual
           </h3>
           <div class="opacity-40">
-            <img src="images/logos-form/univ%20positivo%20white.webp" alt="Universidade Positivo"
+            <img src="/images/logos-form/univ%20positivo%20white.webp" alt="Universidade Positivo"
               class="max-w-[110px] max-h-[24px] sm:max-w-[120px] sm:max-h-[50px] object-contain" />
           </div>
         </div>
@@ -24,7 +24,7 @@ export function FormationSection() {
             Pós-graduação em Design de Hipermídia
           </h3>
           <div class="opacity-40">
-            <img src="images/logos-form/anhembi%20white.webp" alt="Anhembi Morumbi"
+            <img src="/images/logos-form/anhembi%20white.webp" alt="Anhembi Morumbi"
               class="max-w-[110px] max-h-[24px] sm:max-w-[130px] sm:max-h-[50px] object-contain" />
           </div>
         </div>
@@ -33,7 +33,7 @@ export function FormationSection() {
             Digital Product Leadership - Product Manager
           </h3>
           <div class="opacity-40">
-            <img src="images/logos-form/tera%20white.webp" alt="Tera"
+            <img src="/images/logos-form/tera%20white.webp" alt="Tera"
               class="max-w-[120px] max-h-[20px] sm:max-w-[120px] sm:max-h-[26px] object-contain" />
           </div>
         </div>
@@ -42,7 +42,7 @@ export function FormationSection() {
             Marketing Digital - Nanodegree
           </h3>
           <div class="opacity-40">
-            <img src="images/logos-form/udacity%20white.webp" alt="Udacity"
+            <img src="/images/logos-form/udacity%20white.webp" alt="Udacity"
               class="max-w-[100px] max-h-[24px] sm:max-h-[50px] object-contain" />
           </div>
         </div>
@@ -51,7 +51,7 @@ export function FormationSection() {
             Estratégias Digitais de Marketing
           </h3>
           <div class="opacity-40">
-            <img src="images/logos-form/espm%20vazada%20white.webp" alt="ESPM"
+            <img src="/images/logos-form/espm%20vazada%20white.webp" alt="ESPM"
               class="max-w-[100px] max-h-[18px] sm:max-w-[120px] sm:max-h-[24px] object-contain" />
           </div>
         </div>
@@ -60,7 +60,7 @@ export function FormationSection() {
             Atendimento em Agências de Comunicação
           </h3>
           <div class="opacity-40">
-            <img src="images/logos-form/espm%20vazada%20white.webp" alt="ESPM"
+            <img src="/images/logos-form/espm%20vazada%20white.webp" alt="ESPM"
               class="max-w-[100px] max-h-[18px] sm:max-w-[120px] sm:max-h-[24px] object-contain" />
           </div>
         </div>

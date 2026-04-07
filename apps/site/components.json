@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "radix-nova",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/modules/blog-admin/ui/admin-theme.css",
+    "baseColor": "stone",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "rtl": false,
+  "aliases": {
+    "components": "@/src/modules/blog-admin/ui/components",
+    "utils": "@/src/modules/blog-admin/ui/lib/utils",
+    "ui": "@/src/modules/blog-admin/ui/components",
+    "lib": "@/src/modules/blog-admin/ui/lib",
+    "hooks": "@/src/modules/blog-admin/ui/hooks"
+  },
+  "menuColor": "default",
+  "menuAccent": "subtle",
+  "registries": {}
+}

@@ -5,7 +5,7 @@ export function ExperienceSection() {
       dangerouslySetInnerHTML={{
         __html: `
     <div class="absolute inset-0 z-0 opacity-10">
-      <img src="images/bg-arch.webp" alt="" class="w-full h-full object-cover" />
+      <img src="/images/bg-arch.webp" alt="" class="w-full h-full object-cover" />
     </div>
 
     <div class="relative flex flex-col gap-12 xl:gap-20 items-center z-10">

@@ -11,4 +11,6 @@ export type BlogPostSummary = {
 
 export type BlogPostDetail = BlogPostSummary & {
   contentHtml: string;
+  seoTitle: string | null;
+  seoDescription: string | null;
 };

@@ -6,7 +6,7 @@ export function ContactFooter() {
         __html: `
     <div class="flex flex-col items-center gap-8 pt-12 pb-40 px-6 sm:px-10 max-w-6xl mx-auto">
       <div class="flex items-center my-10 md:mb-12 md:mt-20">
-        <img src="images/logo-footer.svg" alt="eduardopavani" class="h-16 sm:h-20 md:h-32 lg:h-40 w-auto" />
+        <img src="/images/logo-footer.svg" alt="eduardopavani" class="h-16 sm:h-20 md:h-32 lg:h-40 w-auto" />
       </div>
       <h2
         class="text-2xl sm:text-2xl md:text-3xl font-extralight mb-4 sm:mb-2 -tracking-[0.02em] !leading-[1.5] text-zinc-400">

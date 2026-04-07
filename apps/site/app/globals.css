@@ -1,3 +1,45 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   Design tokens — usados pelo painel admin
+   Baseados em CSS custom properties que o
+   Tailwind v4 mapeia automaticamente para
+   utilitários como bg-card, text-foreground etc.
+───────────────────────────────────────────── */
+@theme {
+  /* Cores base */
+  --color-background: oklch(1 0 0);
+  --color-foreground: oklch(0.145 0 0);
+
+  /* Card (superfície principal do admin) */
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.145 0 0);
+
+  /* Primary — azul do site (#2563eb ≈ blue-600) */
+  --color-primary: oklch(0.546 0.245 264);
+  --color-primary-foreground: oklch(1 0 0);
+
+  /* Secondary — cinza claro */
+  --color-secondary: oklch(0.961 0 0);
+  --color-secondary-foreground: oklch(0.21 0 0);
+
+  /* Muted — textos e fundos suaves */
+  --color-muted: oklch(0.961 0 0);
+  --color-muted-foreground: oklch(0.556 0 0);
+
+  /* Destructive — vermelho para erros/delete */
+  --color-destructive: oklch(0.577 0.245 27.3);
+  --color-destructive-foreground: oklch(1 0 0);
+
+  /* Border, input e ring */
+  --color-border: oklch(0.922 0 0);
+  --color-input: oklch(0.922 0 0);
+  --color-ring: oklch(0.546 0.245 264);
+}
+
+/* ─────────────────────────────────────────────
+   Tipografia global
+───────────────────────────────────────────── */
 body {
   font-family: "Google Sans Flex", sans-serif;
   margin: 0;
@@ -7,4 +49,96 @@ body {
 ::selection {
   background-color: #2563eb;
   color: white;
+}
+
+/* ─────────────────────────────────────────────
+   Tipografia para conteúdo HTML do CKEditor
+   Aplicado via classe .prose-blog
+───────────────────────────────────────────── */
+.prose-blog {
+  line-height: 1.8;
+  color: oklch(0.21 0 0);
+}
+
+.prose-blog h1,
+.prose-blog h2,
+.prose-blog h3,
+.prose-blog h4 {
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: oklch(0.145 0 0);
+}
+
+.prose-blog h1 { font-size: 2rem; }
+.prose-blog h2 { font-size: 1.5rem; }
+.prose-blog h3 { font-size: 1.25rem; }
+
+.prose-blog p {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+}
+
+.prose-blog a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-blog a:hover {
+  color: #1d4ed8;
+}
+
+.prose-blog ul,
+.prose-blog ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose-blog li {
+  margin-bottom: 0.4rem;
+}
+
+.prose-blog blockquote {
+  border-left: 3px solid #2563eb;
+  padding-left: 1rem;
+  margin-left: 0;
+  color: oklch(0.45 0 0);
+  font-style: italic;
+}
+
+.prose-blog pre {
+  background: oklch(0.145 0 0);
+  color: oklch(0.9 0 0);
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  margin-bottom: 1.25rem;
+}
+
+.prose-blog code {
+  background: oklch(0.93 0 0);
+  padding: 0.15em 0.35em;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.prose-blog pre code {
+  background: transparent;
+  padding: 0;
+}
+
+.prose-blog img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.prose-blog hr {
+  border: none;
+  border-top: 1px solid oklch(0.922 0 0);
+  margin: 2rem 0;
 }

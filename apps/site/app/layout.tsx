@@ -71,6 +71,18 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
       </head>
       <body className="bg-white">
+        {/* GTM noscript — deve ser o primeiro elemento do body */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-W2H798B"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+            title="Google Tag Manager"
+          />
+        </noscript>
+
+        {/* GTM script */}
         <Script id="gtm-script" strategy="afterInteractive">
           {`(function (w, d, s, l, i) {
       w[l] = w[l] || []; w[l].push({
@@ -81,8 +93,10 @@ export default function RootLayout({
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-W2H798B');`}
         </Script>
-        <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
+
+        {/* Lucide icons — usado pelas seções da home via data-lucide */}
         <Script src="https://unpkg.com/lucide@latest" strategy="afterInteractive" />
+
         {children}
       </body>
     </html>
