@@ -1,10 +1,10 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/src/modules/blog-admin/ui/lib/utils"
+import { cn } from "@/src/modules/blog-admin/ui/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.1em] transition-colors",
+  "inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] font-medium transition-colors",
   {
     variants: {
       variant: {
@@ -18,7 +18,7 @@ const badgeVariants = cva(
       variant: "default",
     },
   },
-)
+);
 
 function Badge({
   className,
@@ -31,7 +31,7 @@ function Badge({
       className={cn(badgeVariants({ variant }), className)}
       {...props}
     />
-  )
+  );
 }
 
-export { Badge, badgeVariants }
+export { Badge, badgeVariants };

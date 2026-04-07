@@ -5,7 +5,7 @@
   "tsx": true,
   "tailwind": {
     "config": "",
-    "css": "src/modules/blog-admin/ui/admin-theme.css",
+    "css": "app/globals.css",
     "baseColor": "stone",
     "cssVariables": true,
     "prefix": ""

@@ -10,7 +10,7 @@ type AdminShellProps = {
 
 export function AdminShell({ children }: AdminShellProps) {
   return (
-    <main className="mx-auto bg-background flex min-h-screen w-full max-w-7xl flex-col gap-6 px-4 py-6 lg:px-6">
+    <main className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-4 py-6 lg:px-6">
       <header className="rounded-lg border border-border bg-card p-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
@@ -19,7 +19,7 @@ export function AdminShell({ children }: AdminShellProps) {
             </h1>
           </div>
           <nav className="flex flex-wrap items-center gap-2">
-            <Button variant="outline" size="sm" asChild>
+            <Button variant="secondary" size="sm" asChild>
               <Link href="/admin/posts">Posts</Link>
             </Button>
             <Button variant="outline" size="sm" asChild>
