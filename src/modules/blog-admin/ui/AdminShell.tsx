@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { Button } from "./components/button";
+
 type AdminShellProps = {
   children: ReactNode;
 };
@@ -18,26 +20,17 @@ export function AdminShell({ children }: AdminShellProps) {
               Blog Admin Panel
             </h1>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <Link
-              href="/admin/posts"
-              className="rounded-xl border border-border bg-card px-3 py-2 text-sm font-medium text-foreground"
-            >
-              Posts
-            </Link>
-            <Link
-              href="/admin/categories"
-              className="rounded-xl border border-border bg-card px-3 py-2 text-sm font-medium text-foreground"
-            >
-              Categorias
-            </Link>
-            <Link
-              href="/"
-              className="rounded-xl border border-border bg-card px-3 py-2 text-sm font-medium text-muted-foreground"
-            >
-              Voltar ao hub
-            </Link>
-          </div>
+          <nav className="flex flex-wrap items-center gap-2">
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/admin/posts">Posts</Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/admin/categories">Categorias</Link>
+            </Button>
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/">← Voltar ao site</Link>
+            </Button>
+          </nav>
         </div>
       </header>
 
@@ -45,4 +38,3 @@ export function AdminShell({ children }: AdminShellProps) {
     </main>
   );
 }
-

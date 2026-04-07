@@ -22,6 +22,11 @@ import type {
 import { slugify } from "@/src/shared/utils/slug";
 import { CoverImageCropper } from "./CoverImageCropper";
 import { RichTextEditor } from "./RichTextEditor";
+import { Button } from "./components/button";
+import { Card, CardContent, CardHeader, CardTitle } from "./components/card";
+import { Input } from "./components/input";
+import { Label } from "./components/label";
+import { Textarea } from "./components/textarea";
 
 type PostEditorScreenProps = {
   postId?: string;
@@ -74,19 +79,9 @@ function postPayloadFromForm(form: FormState): PostPayload {
   };
 }
 
-function normalizeError(error: unknown): {
-  message: string;
-  errors?: ValidationErrorMap;
-} {
-  if (error instanceof BlogAdminHttpError) {
-    return {
-      message: error.message,
-      errors: error.errors,
-    };
-  }
-  if (error instanceof Error) {
-    return { message: error.message };
-  }
+function normalizeError(error: unknown): { message: string; errors?: ValidationErrorMap } {
+  if (error instanceof BlogAdminHttpError) return { message: error.message, errors: error.errors };
+  if (error instanceof Error) return { message: error.message };
   return { message: "Falha inesperada no formulário de post." };
 }
 
@@ -130,9 +125,7 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
           postId ? fetchPostById(postId) : Promise.resolve(null),
         ]);
 
-        if (cancelled) {
-          return;
-        }
+        if (cancelled) return;
 
         setCategories(allCategories);
 
@@ -144,22 +137,15 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
           setSlugTouched(false);
         }
       } catch (loadError) {
-        if (cancelled) {
-          return;
-        }
-        const normalized = normalizeError(loadError);
-        setError(normalized.message);
+        if (cancelled) return;
+        setError(normalizeError(loadError).message);
       } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
+        if (!cancelled) setLoading(false);
       }
     }
 
     void loadData();
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [postId]);
 
   function updateField<K extends keyof FormState>(field: K, value: FormState[K]) {
@@ -177,41 +163,29 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
   function toggleCategory(categoryId: string) {
     setForm((prev) => {
       const currentIds = new Set(prev.category_ids);
-      if (currentIds.has(categoryId)) {
-        currentIds.delete(categoryId);
-      } else {
-        currentIds.add(categoryId);
-      }
-      return {
-        ...prev,
-        category_ids: Array.from(currentIds),
-      };
+      if (currentIds.has(categoryId)) currentIds.delete(categoryId);
+      else currentIds.add(categoryId);
+      return { ...prev, category_ids: Array.from(currentIds) };
     });
   }
 
   async function persistDraft(): Promise<BlogPost> {
     const payload = postPayloadFromForm(form);
-
     if (!resolvedPostId) {
       const createdPost = await createPostDraft(payload);
       setResolvedPostId(createdPost.id);
       router.replace(`/admin/posts/${createdPost.id}`);
       return createdPost;
     }
-
     return updatePostDraft(resolvedPostId, payload);
   }
 
   async function handleSaveDraft() {
-    if (saving || publishing) {
-      return;
-    }
-
+    if (saving || publishing) return;
     setSaving(true);
     setError(null);
     setValidationErrors({});
     setSuccessMessage(null);
-
     try {
       const savedPost = await persistDraft();
       setForm(formStateFromPost(savedPost));
@@ -226,18 +200,17 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
   }
 
   async function handlePublish() {
-    if (saving || publishing) {
-      return;
-    }
-
+    if (saving || publishing) return;
     setPublishing(true);
     setError(null);
     setValidationErrors({});
     setSuccessMessage(null);
-
     try {
       const draft = await persistDraft();
-      const publishedPost = await publishPost(draft.id, postPayloadFromForm(formStateFromPost(draft)));
+      const publishedPost = await publishPost(
+        draft.id,
+        postPayloadFromForm(formStateFromPost(draft)),
+      );
       setForm(formStateFromPost(publishedPost));
       setResolvedPostId(publishedPost.id);
       setSuccessMessage("Post publicado com sucesso.");
@@ -251,197 +224,194 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
   }
 
   async function handleCoverUpload(croppedFile: File): Promise<string | null> {
-    if (!resolvedPostId) {
-      throw new Error("Salve o post antes de enviar capa.");
-    }
+    if (!resolvedPostId) throw new Error("Salve o post antes de enviar capa.");
     const uploaded = await uploadPostCover(resolvedPostId, croppedFile);
-    setForm((prev) => ({
-      ...prev,
-      cover_image_url: uploaded.cover_image_url,
-    }));
+    setForm((prev) => ({ ...prev, cover_image_url: uploaded.cover_image_url }));
     setSuccessMessage("Capa atualizada.");
     return uploaded.cover_image_url;
   }
 
   return (
-    <section className="rounded-[1.15rem] border border-border bg-card p-4 shadow-lg lg:p-5">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+    <Card>
+      <CardHeader className="flex-row items-start justify-between gap-2">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
             Posts
           </p>
-          <h2 className="text-xl font-semibold text-foreground">{titleLabel}</h2>
-          <p className="text-sm text-muted-foreground">{actionHint}</p>
+          <CardTitle>{titleLabel}</CardTitle>
+          <p className="mt-1 text-sm text-muted-foreground">{actionHint}</p>
         </div>
-        <Link
-          href="/admin/posts"
-          className="rounded-lg border border-border bg-card px-3 py-2 text-sm font-medium text-foreground"
-        >
-          Voltar para lista
-        </Link>
-      </div>
+        <Button variant="outline" size="sm" asChild>
+          <Link href="/admin/posts">← Lista</Link>
+        </Button>
+      </CardHeader>
 
-      {loading ? (
-        <p className="text-sm text-muted-foreground">Carregando formulário...</p>
-      ) : (
-        <div className="space-y-4">
-          {error ? (
-            <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-              {error}
-            </p>
-          ) : null}
-          {successMessage ? (
-            <p className="rounded-lg border border-primary/40 bg-primary/10 px-3 py-2 text-sm text-primary">
-              {successMessage}
-            </p>
-          ) : null}
+      <CardContent>
+        {loading ? (
+          <p className="text-sm text-muted-foreground">Carregando formulário...</p>
+        ) : (
+          <div className="space-y-5">
+            {error ? (
+              <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+                {error}
+              </p>
+            ) : null}
+            {successMessage ? (
+              <p className="rounded-lg border border-primary/40 bg-primary/10 px-3 py-2 text-sm text-primary">
+                {successMessage}
+              </p>
+            ) : null}
 
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_340px]">
-            <div className="space-y-4">
-              <div className="grid gap-3 md:grid-cols-2">
-                <label className="space-y-1">
-                  <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                    Título *
-                  </span>
-                  <input
-                    type="text"
-                    value={form.title}
-                    onChange={(event) => handleTitleChange(event.target.value)}
-                    className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground outline-none ring-ring focus:ring-1"
-                  />
-                  {validationErrors.title ? (
-                    <span className="text-xs text-destructive">{validationErrors.title}</span>
-                  ) : null}
-                </label>
-
-                <label className="space-y-1">
-                  <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                    Slug *
-                  </span>
-                  <input
-                    type="text"
-                    value={form.slug}
-                    onChange={(event) => {
-                      setSlugTouched(true);
-                      updateField("slug", slugify(event.target.value));
-                    }}
-                    className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground outline-none ring-ring focus:ring-1"
-                  />
-                  {validationErrors.slug ? (
-                    <span className="text-xs text-destructive">{validationErrors.slug}</span>
-                  ) : null}
-                </label>
-              </div>
-
-              <div className="space-y-1">
-                <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                  Conteúdo
-                </span>
-                <RichTextEditor value={form.content} onChange={(nextValue) => updateField("content", nextValue)} />
-                {validationErrors.content ? (
-                  <span className="text-xs text-destructive">{validationErrors.content}</span>
-                ) : null}
-              </div>
-
-              <label className="space-y-1">
-                <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                  Source Markdown (opcional)
-                </span>
-                <textarea
-                  rows={6}
-                  value={form.source_markdown}
-                  onChange={(event) => updateField("source_markdown", event.target.value)}
-                  className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground outline-none ring-ring focus:ring-1"
-                  placeholder="Use este campo apenas para conteúdo vindo de automação."
-                />
-              </label>
-            </div>
-
-            <div className="space-y-3">
-              <div className="space-y-2 rounded-xl border border-border bg-card p-3">
-                <p className="text-sm font-semibold text-foreground">SEO</p>
-                <label className="space-y-1">
-                  <span className="text-xs text-muted-foreground">SEO Title *</span>
-                  <input
-                    type="text"
-                    value={form.seo_title}
-                    onChange={(event) => updateField("seo_title", event.target.value)}
-                    className="w-full rounded-lg border border-border px-3 py-2 text-sm text-foreground outline-none ring-ring focus:ring-1"
-                  />
-                  {validationErrors.seo_title ? (
-                    <span className="text-xs text-destructive">{validationErrors.seo_title}</span>
-                  ) : null}
-                </label>
-                <label className="space-y-1">
-                  <span className="text-xs text-muted-foreground">SEO Description *</span>
-                  <textarea
-                    rows={4}
-                    value={form.seo_description}
-                    onChange={(event) => updateField("seo_description", event.target.value)}
-                    className="w-full rounded-lg border border-border px-3 py-2 text-sm text-foreground outline-none ring-ring focus:ring-1"
-                  />
-                  {validationErrors.seo_description ? (
-                    <span className="text-xs text-destructive">{validationErrors.seo_description}</span>
-                  ) : null}
-                </label>
-              </div>
-
-              <div className="space-y-2 rounded-xl border border-border bg-card p-3">
-                <p className="text-sm font-semibold text-foreground">Categorias</p>
-                {categories.length === 0 ? (
-                  <p className="text-xs text-muted-foreground">
-                    Nenhuma categoria encontrada. Crie categorias em `/admin/categories`.
-                  </p>
-                ) : (
-                  <div className="grid gap-2">
-                    {categories.map((category) => (
-                      <label key={category.id} className="inline-flex items-center gap-2 text-sm text-foreground">
-                        <input
-                          type="checkbox"
-                          checked={selectedCategoryIds.has(category.id)}
-                          onChange={() => toggleCategory(category.id)}
-                        />
-                        <span>{category.name}</span>
-                      </label>
-                    ))}
+            <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px]">
+              {/* Main column */}
+              <div className="space-y-5">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="title">Título *</Label>
+                    <Input
+                      id="title"
+                      value={form.title}
+                      onChange={(event) => handleTitleChange(event.target.value)}
+                      aria-invalid={!!validationErrors.title}
+                    />
+                    {validationErrors.title ? (
+                      <p className="text-xs text-destructive">{validationErrors.title}</p>
+                    ) : null}
                   </div>
-                )}
-                {validationErrors.category_ids ? (
-                  <p className="text-xs text-destructive">{validationErrors.category_ids}</p>
-                ) : null}
+
+                  <div className="space-y-1.5">
+                    <Label htmlFor="slug">Slug *</Label>
+                    <Input
+                      id="slug"
+                      value={form.slug}
+                      onChange={(event) => {
+                        setSlugTouched(true);
+                        updateField("slug", slugify(event.target.value));
+                      }}
+                      aria-invalid={!!validationErrors.slug}
+                    />
+                    {validationErrors.slug ? (
+                      <p className="text-xs text-destructive">{validationErrors.slug}</p>
+                    ) : null}
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label>Conteúdo</Label>
+                  <RichTextEditor
+                    value={form.content}
+                    onChange={(nextValue) => updateField("content", nextValue)}
+                  />
+                  {validationErrors.content ? (
+                    <p className="text-xs text-destructive">{validationErrors.content}</p>
+                  ) : null}
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label htmlFor="source_markdown">Source Markdown (opcional)</Label>
+                  <Textarea
+                    id="source_markdown"
+                    rows={6}
+                    value={form.source_markdown}
+                    onChange={(event) => updateField("source_markdown", event.target.value)}
+                    placeholder="Use este campo apenas para conteúdo vindo de automação."
+                  />
+                </div>
               </div>
 
-              <CoverImageCropper
-                currentCoverUrl={form.cover_image_url}
-                disabled={!resolvedPostId}
-                onUpload={handleCoverUpload}
-              />
+              {/* Sidebar */}
+              <div className="space-y-3">
+                <div className="space-y-3 rounded-xl border border-border bg-card p-4">
+                  <p className="text-sm font-semibold text-foreground">SEO</p>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="seo_title">SEO Title *</Label>
+                    <Input
+                      id="seo_title"
+                      value={form.seo_title}
+                      onChange={(event) => updateField("seo_title", event.target.value)}
+                      aria-invalid={!!validationErrors.seo_title}
+                    />
+                    {validationErrors.seo_title ? (
+                      <p className="text-xs text-destructive">{validationErrors.seo_title}</p>
+                    ) : null}
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="seo_description">SEO Description *</Label>
+                    <Textarea
+                      id="seo_description"
+                      rows={4}
+                      value={form.seo_description}
+                      onChange={(event) => updateField("seo_description", event.target.value)}
+                      aria-invalid={!!validationErrors.seo_description}
+                    />
+                    {validationErrors.seo_description ? (
+                      <p className="text-xs text-destructive">{validationErrors.seo_description}</p>
+                    ) : null}
+                  </div>
+                </div>
+
+                <div className="space-y-2 rounded-xl border border-border bg-card p-4">
+                  <p className="text-sm font-semibold text-foreground">Categorias</p>
+                  {categories.length === 0 ? (
+                    <p className="text-xs text-muted-foreground">
+                      Nenhuma categoria encontrada. Crie em{" "}
+                      <Link href="/admin/categories" className="underline">
+                        /admin/categories
+                      </Link>
+                      .
+                    </p>
+                  ) : (
+                    <div className="grid gap-2">
+                      {categories.map((category) => (
+                        <label
+                          key={category.id}
+                          className="inline-flex cursor-pointer items-center gap-2 text-sm text-foreground"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedCategoryIds.has(category.id)}
+                            onChange={() => toggleCategory(category.id)}
+                            className="accent-primary"
+                          />
+                          <span>{category.name}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                  {validationErrors.category_ids ? (
+                    <p className="text-xs text-destructive">{validationErrors.category_ids}</p>
+                  ) : null}
+                </div>
+
+                <CoverImageCropper
+                  currentCoverUrl={form.cover_image_url}
+                  disabled={!resolvedPostId}
+                  onUpload={handleCoverUpload}
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 border-t border-border pt-5">
+              <Button
+                variant="outline"
+                onClick={() => void handleSaveDraft()}
+                disabled={saving || publishing}
+              >
+                {saving ? "Salvando..." : "Salvar Draft"}
+              </Button>
+              <Button
+                onClick={() => void handlePublish()}
+                disabled={saving || publishing}
+              >
+                {publishing ? "Publicando..." : "Publicar"}
+              </Button>
+              <span className="text-xs text-muted-foreground">
+                Publicação exige título, conteúdo e metadados SEO.
+              </span>
             </div>
           </div>
-
-          <div className="flex flex-wrap items-center gap-2 border-t border-border pt-4">
-            <button
-              type="button"
-              onClick={() => void handleSaveDraft()}
-              disabled={saving || publishing}
-              className="rounded-lg border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground disabled:opacity-60"
-            >
-              {saving ? "Salvando..." : "Salvar Draft"}
-            </button>
-            <button
-              type="button"
-              onClick={() => void handlePublish()}
-              disabled={saving || publishing}
-              className="rounded-lg border border-primary bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground disabled:opacity-60"
-            >
-              {publishing ? "Publicando..." : "Publicar"}
-            </button>
-            <span className="text-xs text-muted-foreground">
-              Publicação exige título, conteúdo e metadados SEO.
-            </span>
-          </div>
-        </div>
-      )}
-    </section>
+        )}
+      </CardContent>
+    </Card>
   );
 }

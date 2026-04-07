@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { Button } from "./components/button";
+
 type CoverImageCropperProps = {
   currentCoverUrl: string | null;
   disabled?: boolean;
@@ -32,9 +34,7 @@ async function cropToTwoByOne(
   canvas.height = CANVAS_HEIGHT;
   const context = canvas.getContext("2d");
 
-  if (!context) {
-    throw new Error("Não foi possível preparar o crop da imagem.");
-  }
+  if (!context) throw new Error("Não foi possível preparar o crop da imagem.");
 
   const baseScale = Math.max(CANVAS_WIDTH / image.width, CANVAS_HEIGHT / image.height);
   const scale = baseScale * zoom;
@@ -51,9 +51,7 @@ async function cropToTwoByOne(
   const blob = await new Promise<Blob | null>((resolve) =>
     canvas.toBlob(resolve, "image/jpeg", 0.9),
   );
-  if (!blob) {
-    throw new Error("Não foi possível gerar a imagem recortada.");
-  }
+  if (!blob) throw new Error("Não foi possível gerar a imagem recortada.");
 
   return blob;
 }
@@ -80,9 +78,7 @@ export function CoverImageCropper({
 
   function handleFileChange(fileList: FileList | null) {
     const file = fileList?.[0];
-    if (!file) {
-      return;
-    }
+    if (!file) return;
     if (!file.type.startsWith("image/")) {
       setError("Apenas arquivos de imagem são aceitos.");
       return;
@@ -97,16 +93,12 @@ export function CoverImageCropper({
       setOffsetY(0);
       setError(null);
     };
-    reader.onerror = () => {
-      setError("Falha ao ler a imagem selecionada.");
-    };
+    reader.onerror = () => setError("Falha ao ler a imagem selecionada.");
     reader.readAsDataURL(file);
   }
 
   async function handleUpload() {
-    if (!sourceDataUrl || uploading || disabled) {
-      return;
-    }
+    if (!sourceDataUrl || uploading || disabled) return;
 
     setUploading(true);
     setError(null);
@@ -132,13 +124,13 @@ export function CoverImageCropper({
     <div className="space-y-3 rounded-xl border border-border bg-card p-3">
       <p className="text-sm font-semibold text-foreground">Capa (crop 2:1)</p>
 
-      <label className="block">
+      <label className="block cursor-pointer">
         <input
           type="file"
           accept="image/*"
           disabled={disabled || uploading}
           onChange={(event) => handleFileChange(event.target.files)}
-          className="w-full rounded-lg border border-border px-3 py-2 text-sm text-foreground"
+          className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground file:mr-3 file:rounded file:border-0 file:bg-primary file:px-2 file:py-1 file:text-xs file:font-medium file:text-primary-foreground disabled:cursor-not-allowed disabled:opacity-50"
         />
       </label>
 
@@ -148,60 +140,41 @@ export function CoverImageCropper({
             <img
               src={sourceDataUrl}
               alt="Prévia da capa"
-              style={{
-                transform: `translate(${offsetX}%, ${offsetY}%) scale(${zoom})`,
-              }}
+              style={{ transform: `translate(${offsetX}%, ${offsetY}%) scale(${zoom})` }}
               className="h-full w-full object-cover"
             />
           </div>
 
-          <div className="grid gap-2 md:grid-cols-3">
-            <label className="text-xs text-muted-foreground">
-              Zoom
-              <input
-                type="range"
-                min={1}
-                max={3}
-                step={0.01}
-                value={zoom}
-                onChange={(event) => setZoom(Number(event.target.value))}
-                className="mt-1 w-full"
-              />
-            </label>
-            <label className="text-xs text-muted-foreground">
-              Ajuste horizontal
-              <input
-                type="range"
-                min={-100}
-                max={100}
-                step={1}
-                value={offsetX}
-                onChange={(event) => setOffsetX(Number(event.target.value))}
-                className="mt-1 w-full"
-              />
-            </label>
-            <label className="text-xs text-muted-foreground">
-              Ajuste vertical
-              <input
-                type="range"
-                min={-100}
-                max={100}
-                step={1}
-                value={offsetY}
-                onChange={(event) => setOffsetY(Number(event.target.value))}
-                className="mt-1 w-full"
-              />
-            </label>
+          <div className="grid gap-3 md:grid-cols-3">
+            {(
+              [
+                { label: "Zoom", min: 1, max: 3, step: 0.01, value: zoom, onChange: setZoom },
+                { label: "Horizontal", min: -100, max: 100, step: 1, value: offsetX, onChange: setOffsetX },
+                { label: "Vertical", min: -100, max: 100, step: 1, value: offsetY, onChange: setOffsetY },
+              ] as const
+            ).map(({ label, min, max, step, value, onChange }) => (
+              <label key={label} className="space-y-1 text-xs text-muted-foreground">
+                {label}
+                <input
+                  type="range"
+                  min={min}
+                  max={max}
+                  step={step}
+                  value={value}
+                  onChange={(event) => onChange(Number(event.target.value))}
+                  className="mt-1 w-full accent-primary"
+                />
+              </label>
+            ))}
           </div>
 
-          <button
-            type="button"
+          <Button
+            size="sm"
             onClick={() => void handleUpload()}
             disabled={uploading || disabled}
-            className="rounded-lg border border-primary bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground disabled:opacity-60"
           >
             {uploading ? "Enviando..." : "Aplicar crop 2:1 e enviar"}
-          </button>
+          </Button>
         </div>
       ) : (
         <p className="text-xs text-muted-foreground">
@@ -232,4 +205,3 @@ export function CoverImageCropper({
     </div>
   );
 }
-
