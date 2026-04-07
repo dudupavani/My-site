@@ -1,44 +1,7 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────
-   Design tokens — usados pelo painel admin
-   Baseados em CSS custom properties que o
-   Tailwind v4 mapeia automaticamente para
-   utilitários como bg-card, text-foreground etc.
-───────────────────────────────────────────── */
-@theme {
-  /* Cores base */
-  --color-background: oklch(1 0 0);
-  --color-foreground: oklch(0.145 0 0);
-
-  /* Card (superfície principal do admin) */
-  --color-card: oklch(1 0 0);
-  --color-card-foreground: oklch(0.145 0 0);
-
-  /* Primary — azul do site (#2563eb ≈ blue-600) */
-  --color-primary: oklch(0.546 0.245 264);
-  --color-primary-foreground: oklch(1 0 0);
-
-  /* Secondary — cinza claro */
-  --color-secondary: oklch(0.961 0 0);
-  --color-secondary-foreground: oklch(0.21 0 0);
-
-  /* Muted — textos e fundos suaves */
-  --color-muted: oklch(0.961 0 0);
-  --color-muted-foreground: oklch(0.556 0 0);
-
-  /* Destructive — vermelho para erros/delete */
-  --color-destructive: oklch(0.577 0.245 27.3);
-  --color-destructive-foreground: oklch(1 0 0);
-
-  /* Border, input e ring */
-  --color-border: oklch(0.922 0 0);
-  --color-input: oklch(0.922 0 0);
-  --color-ring: oklch(0.546 0.245 264);
-}
-
-/* ─────────────────────────────────────────────
-   Tipografia global
+   Tipografia global (site público)
 ───────────────────────────────────────────── */
 body {
   font-family: "Google Sans Flex", sans-serif;

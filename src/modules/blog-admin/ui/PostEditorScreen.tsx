@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { toast } from "sonner";
 
 import {
   BlogAdminHttpError,
+  createCategoryByName,
   createPostDraft,
   fetchCategories,
   fetchPostById,
@@ -17,10 +19,12 @@ import type {
   BlogCategory,
   BlogPost,
   PostPayload,
+  PostStatus,
   ValidationErrorMap,
 } from "@/src/shared/types/blogAdmin";
 import { slugify } from "@/src/shared/utils/slug";
 import { CoverImageCropper } from "./CoverImageCropper";
+import { Badge } from "./components/badge";
 import { RichTextEditor } from "./RichTextEditor";
 import { Button } from "./components/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/card";
@@ -79,8 +83,12 @@ function postPayloadFromForm(form: FormState): PostPayload {
   };
 }
 
-function normalizeError(error: unknown): { message: string; errors?: ValidationErrorMap } {
-  if (error instanceof BlogAdminHttpError) return { message: error.message, errors: error.errors };
+function normalizeError(error: unknown): {
+  message: string;
+  errors?: ValidationErrorMap;
+} {
+  if (error instanceof BlogAdminHttpError)
+    return { message: error.message, errors: error.errors };
   if (error instanceof Error) return { message: error.message };
   return { message: "Falha inesperada no formulário de post." };
 }
@@ -88,23 +96,29 @@ function normalizeError(error: unknown): { message: string; errors?: ValidationE
 export function PostEditorScreen({ postId }: PostEditorScreenProps) {
   const router = useRouter();
   const [categories, setCategories] = useState<BlogCategory[]>([]);
+  const [postStatus, setPostStatus] = useState<PostStatus | null>(null);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [creatingCategory, setCreatingCategory] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [validationErrors, setValidationErrors] = useState<ValidationErrorMap>({});
+  const [validationErrors, setValidationErrors] = useState<ValidationErrorMap>(
+    {},
+  );
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [slugTouched, setSlugTouched] = useState(false);
-  const [resolvedPostId, setResolvedPostId] = useState<string | null>(postId ?? null);
+  const [resolvedPostId, setResolvedPostId] = useState<string | null>(
+    postId ?? null,
+  );
   const [form, setForm] = useState<FormState>(EMPTY_FORM_STATE);
 
   const isCreateMode = !resolvedPostId;
   const titleLabel = isCreateMode ? "Novo post" : "Editar post";
-  const actionHint = isCreateMode
-    ? "Preencha e salve como draft ou publique diretamente."
-    : "Atualize conteúdo, SEO, categorias e status.";
-
-  const selectedCategoryIds = useMemo(() => new Set(form.category_ids), [form.category_ids]);
+  const selectedCategoryIds = useMemo(
+    () => new Set(form.category_ids),
+    [form.category_ids],
+  );
 
   useEffect(() => {
     setResolvedPostId(postId ?? null);
@@ -131,9 +145,11 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
 
         if (post) {
           setForm(formStateFromPost(post));
+          setPostStatus(post.status);
           setSlugTouched(true);
         } else {
           setForm(EMPTY_FORM_STATE);
+          setPostStatus(null);
           setSlugTouched(false);
         }
       } catch (loadError) {
@@ -145,10 +161,15 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
     }
 
     void loadData();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [postId]);
 
-  function updateField<K extends keyof FormState>(field: K, value: FormState[K]) {
+  function updateField<K extends keyof FormState>(
+    field: K,
+    value: FormState[K],
+  ) {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
@@ -189,6 +210,7 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
     try {
       const savedPost = await persistDraft();
       setForm(formStateFromPost(savedPost));
+      setPostStatus(savedPost.status);
       setSuccessMessage("Post salvo como draft.");
     } catch (saveError) {
       const normalized = normalizeError(saveError);
@@ -212,14 +234,41 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
         postPayloadFromForm(formStateFromPost(draft)),
       );
       setForm(formStateFromPost(publishedPost));
+      setPostStatus(publishedPost.status);
       setResolvedPostId(publishedPost.id);
-      setSuccessMessage("Post publicado com sucesso.");
+      if (publishedPost.status === "published") {
+        toast.success("Post publicado com sucesso.");
+      } else {
+        toast.error(
+          "Salvo, mas status não alterado para publicado. Verifique os campos obrigatórios.",
+        );
+      }
     } catch (publishError) {
       const normalized = normalizeError(publishError);
-      setError(normalized.message);
+      toast.error(normalized.message);
       setValidationErrors(normalized.errors ?? {});
     } finally {
       setPublishing(false);
+    }
+  }
+
+  async function handleCreateCategory(event: React.FormEvent) {
+    event.preventDefault();
+    const name = newCategoryName.trim();
+    if (!name || creatingCategory) return;
+
+    setCreatingCategory(true);
+    try {
+      const created = await createCategoryByName(name);
+      setCategories((prev) =>
+        [...prev, created].sort((a, b) => a.name.localeCompare(b.name)),
+      );
+      setForm((prev) => ({ ...prev, category_ids: [...prev.category_ids, created.id] }));
+      setNewCategoryName("");
+    } catch {
+      // silently ignore — user can retry
+    } finally {
+      setCreatingCategory(false);
     }
   }
 
@@ -234,12 +283,13 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
   return (
     <Card>
       <CardHeader className="flex-row items-start justify-between gap-2">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-            Posts
-          </p>
+        <div className="flex items-center gap-3">
           <CardTitle>{titleLabel}</CardTitle>
-          <p className="mt-1 text-sm text-muted-foreground">{actionHint}</p>
+          {postStatus !== null && (
+            <Badge variant={postStatus === "published" ? "default" : "secondary"}>
+              {postStatus === "published" ? "Publicado" : "Draft"}
+            </Badge>
+          )}
         </div>
         <Button variant="outline" size="sm" asChild>
           <Link href="/admin/posts">← Lista</Link>
@@ -248,7 +298,9 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
 
       <CardContent>
         {loading ? (
-          <p className="text-sm text-muted-foreground">Carregando formulário...</p>
+          <p className="text-sm text-muted-foreground">
+            Carregando formulário...
+          </p>
         ) : (
           <div className="space-y-5">
             {error ? (
@@ -265,17 +317,21 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
             <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px]">
               {/* Main column */}
               <div className="space-y-5">
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="flex flex-col gap-4">
                   <div className="space-y-1.5">
                     <Label htmlFor="title">Título *</Label>
                     <Input
                       id="title"
                       value={form.title}
-                      onChange={(event) => handleTitleChange(event.target.value)}
+                      onChange={(event) =>
+                        handleTitleChange(event.target.value)
+                      }
                       aria-invalid={!!validationErrors.title}
                     />
                     {validationErrors.title ? (
-                      <p className="text-xs text-destructive">{validationErrors.title}</p>
+                      <p className="text-xs text-destructive">
+                        {validationErrors.title}
+                      </p>
                     ) : null}
                   </div>
 
@@ -291,7 +347,9 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
                       aria-invalid={!!validationErrors.slug}
                     />
                     {validationErrors.slug ? (
-                      <p className="text-xs text-destructive">{validationErrors.slug}</p>
+                      <p className="text-xs text-destructive">
+                        {validationErrors.slug}
+                      </p>
                     ) : null}
                   </div>
                 </div>
@@ -303,17 +361,23 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
                     onChange={(nextValue) => updateField("content", nextValue)}
                   />
                   {validationErrors.content ? (
-                    <p className="text-xs text-destructive">{validationErrors.content}</p>
+                    <p className="text-xs text-destructive">
+                      {validationErrors.content}
+                    </p>
                   ) : null}
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label htmlFor="source_markdown">Source Markdown (opcional)</Label>
+                  <Label htmlFor="source_markdown">
+                    Source Markdown (opcional)
+                  </Label>
                   <Textarea
                     id="source_markdown"
                     rows={6}
                     value={form.source_markdown}
-                    onChange={(event) => updateField("source_markdown", event.target.value)}
+                    onChange={(event) =>
+                      updateField("source_markdown", event.target.value)
+                    }
                     placeholder="Use este campo apenas para conteúdo vindo de automação."
                   />
                 </div>
@@ -324,43 +388,44 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
                 <div className="space-y-3 rounded-xl border border-border bg-card p-4">
                   <p className="text-sm font-semibold text-foreground">SEO</p>
                   <div className="space-y-1.5">
-                    <Label htmlFor="seo_title">SEO Title *</Label>
+                    <Label htmlFor="seo_title">SEO Title</Label>
                     <Input
                       id="seo_title"
                       value={form.seo_title}
-                      onChange={(event) => updateField("seo_title", event.target.value)}
+                      onChange={(event) =>
+                        updateField("seo_title", event.target.value)
+                      }
                       aria-invalid={!!validationErrors.seo_title}
                     />
                     {validationErrors.seo_title ? (
-                      <p className="text-xs text-destructive">{validationErrors.seo_title}</p>
+                      <p className="text-xs text-destructive">
+                        {validationErrors.seo_title}
+                      </p>
                     ) : null}
                   </div>
                   <div className="space-y-1.5">
-                    <Label htmlFor="seo_description">SEO Description *</Label>
+                    <Label htmlFor="seo_description">SEO Description</Label>
                     <Textarea
                       id="seo_description"
                       rows={4}
                       value={form.seo_description}
-                      onChange={(event) => updateField("seo_description", event.target.value)}
+                      onChange={(event) =>
+                        updateField("seo_description", event.target.value)
+                      }
                       aria-invalid={!!validationErrors.seo_description}
                     />
                     {validationErrors.seo_description ? (
-                      <p className="text-xs text-destructive">{validationErrors.seo_description}</p>
+                      <p className="text-xs text-destructive">
+                        {validationErrors.seo_description}
+                      </p>
                     ) : null}
                   </div>
                 </div>
 
-                <div className="space-y-2 rounded-xl border border-border bg-card p-4">
+                <div className="space-y-3 rounded-xl border border-border bg-card p-4">
                   <p className="text-sm font-semibold text-foreground">Categorias</p>
-                  {categories.length === 0 ? (
-                    <p className="text-xs text-muted-foreground">
-                      Nenhuma categoria encontrada. Crie em{" "}
-                      <Link href="/admin/categories" className="underline">
-                        /admin/categories
-                      </Link>
-                      .
-                    </p>
-                  ) : (
+
+                  {categories.length > 0 && (
                     <div className="grid gap-2">
                       {categories.map((category) => (
                         <label
@@ -378,6 +443,24 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
                       ))}
                     </div>
                   )}
+
+                  <form onSubmit={handleCreateCategory} className="flex gap-2">
+                    <Input
+                      value={newCategoryName}
+                      onChange={(e) => setNewCategoryName(e.target.value)}
+                      placeholder="Nova categoria..."
+                      className="h-7 text-xs"
+                    />
+                    <Button
+                      type="submit"
+                      size="xs"
+                      disabled={creatingCategory || !newCategoryName.trim()}
+                      className="shrink-0"
+                    >
+                      {creatingCategory ? "..." : "Criar"}
+                    </Button>
+                  </form>
+
                   {validationErrors.category_ids ? (
                     <p className="text-xs text-destructive">{validationErrors.category_ids}</p>
                   ) : null}
@@ -391,23 +474,20 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 border-t border-border pt-5">
+            <div className="flex flex-wrap items-center justify-end gap-3 border-t border-border pt-5">
               <Button
                 variant="outline"
+                size="lg"
                 onClick={() => void handleSaveDraft()}
-                disabled={saving || publishing}
-              >
-                {saving ? "Salvando..." : "Salvar Draft"}
+                disabled={saving || publishing}>
+                {saving ? "Salvando..." : "Salvar"}
               </Button>
               <Button
+                size="lg"
                 onClick={() => void handlePublish()}
-                disabled={saving || publishing}
-              >
+                disabled={saving || publishing}>
                 {publishing ? "Publicando..." : "Publicar"}
               </Button>
-              <span className="text-xs text-muted-foreground">
-                Publicação exige título, conteúdo e metadados SEO.
-              </span>
             </div>
           </div>
         )}

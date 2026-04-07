@@ -1,15 +1,15 @@
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/src/modules/blog-admin/ui/lib/utils"
+import { cn } from "@/src/modules/blog-admin/ui/lib/utils";
 
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card"
-      className={cn("rounded-[1.15rem] border border-border bg-card shadow-lg", className)}
+      className={cn("rounded-lg border border-border bg-card", className)}
       {...props}
     />
-  )
+  );
 }
 
 function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
@@ -19,17 +19,20 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
       className={cn("flex flex-col gap-1.5 p-4 lg:p-5", className)}
       {...props}
     />
-  )
+  );
 }
 
 function CardTitle({ className, ...props }: React.ComponentProps<"h2">) {
   return (
     <h2
       data-slot="card-title"
-      className={cn("text-xl font-semibold tracking-[-0.01em] text-foreground", className)}
+      className={cn(
+        "text-xl font-semibold tracking-[-0.01em] text-foreground",
+        className,
+      )}
       {...props}
     />
-  )
+  );
 }
 
 function CardDescription({ className, ...props }: React.ComponentProps<"p">) {
@@ -39,7 +42,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"p">) {
       className={cn("text-sm text-muted-foreground", className)}
       {...props}
     />
-  )
+  );
 }
 
 function CardContent({ className, ...props }: React.ComponentProps<"div">) {
@@ -49,7 +52,7 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
       className={cn("p-4 pt-0 lg:p-5 lg:pt-0", className)}
       {...props}
     />
-  )
+  );
 }
 
 function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
@@ -59,7 +62,14 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
       className={cn("flex items-center p-4 pt-0 lg:p-5 lg:pt-0", className)}
       {...props}
     />
-  )
+  );
 }
 
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
+export {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+};

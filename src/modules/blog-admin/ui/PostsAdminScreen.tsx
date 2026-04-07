@@ -9,7 +9,14 @@ import { formatDateTime } from "@/src/shared/utils/format";
 import { Badge } from "./components/badge";
 import { Button } from "./components/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./components/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./components/table";
 
 type ScreenState = {
   loading: boolean;
@@ -34,7 +41,8 @@ export function PostsAdminScreen() {
       const posts = await fetchPosts();
       setState((prev) => ({ ...prev, posts, loading: false }));
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Falha ao carregar posts.";
+      const message =
+        error instanceof Error ? error.message : "Falha ao carregar posts.";
       setState((prev) => ({ ...prev, loading: false, error: message }));
     }
   }
@@ -55,7 +63,8 @@ export function PostsAdminScreen() {
         posts: prev.posts.filter((post) => post.id !== postId),
       }));
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Falha ao excluir post.";
+      const message =
+        error instanceof Error ? error.message : "Falha ao excluir post.";
       setState((prev) => ({ ...prev, deletingPostId: null, error: message }));
     }
   }
@@ -64,16 +73,10 @@ export function PostsAdminScreen() {
     <Card>
       <CardHeader className="flex-row items-center justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-            Posts
-          </p>
-          <CardTitle>Gestão de artigos</CardTitle>
+          <CardTitle>Posts</CardTitle>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" onClick={() => void loadPosts()}>
-            Atualizar
-          </Button>
-          <Button size="sm" asChild>
+          <Button size="lg" asChild>
             <Link href="/admin/posts/new">Criar Post</Link>
           </Button>
         </div>
@@ -109,17 +112,21 @@ export function PostsAdminScreen() {
                   <TableCell>
                     <Link
                       href={`/admin/posts/${post.id}`}
-                      className="font-medium text-foreground hover:underline"
-                    >
+                      className="font-medium text-foreground hover:underline">
                       {post.title}
                     </Link>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={post.status === "published" ? "default" : "secondary"}>
+                    <Badge
+                      variant={
+                        post.status === "published" ? "default" : "secondary"
+                      }>
                       {post.status === "published" ? "Publicado" : "Draft"}
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-muted-foreground">{post.slug}</TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {post.slug}
+                  </TableCell>
                   <TableCell className="text-muted-foreground">
                     {formatDateTime(post.updated_at)}
                   </TableCell>
@@ -132,9 +139,10 @@ export function PostsAdminScreen() {
                         variant="destructive"
                         size="xs"
                         onClick={() => void handleDelete(post.id)}
-                        disabled={state.deletingPostId === post.id}
-                      >
-                        {state.deletingPostId === post.id ? "Excluindo..." : "Excluir"}
+                        disabled={state.deletingPostId === post.id}>
+                        {state.deletingPostId === post.id
+                          ? "Excluindo..."
+                          : "Excluir"}
                       </Button>
                     </div>
                   </TableCell>

@@ -14,9 +14,13 @@ type CkEditorInstance = {
   setData: (value: string) => void;
 };
 
-const CKEDITOR_LICENSE_KEY = process.env.NEXT_PUBLIC_CKEDITOR_LICENSE_KEY ?? "GPL";
+const CKEDITOR_LICENSE_KEY =
+  process.env.NEXT_PUBLIC_CKEDITOR_LICENSE_KEY ?? "GPL";
 
-export default function RichTextEditorClient({ value, onChange }: RichTextEditorClientProps) {
+export default function RichTextEditorClient({
+  value,
+  onChange,
+}: RichTextEditorClientProps) {
   const editorRef = useRef<CkEditorInstance | null>(null);
 
   useEffect(() => {
@@ -31,7 +35,7 @@ export default function RichTextEditorClient({ value, onChange }: RichTextEditor
   }, [value]);
 
   return (
-    <div className="rounded-xl border border-border bg-card p-3">
+    <div>
       <CKEditor
         editor={ClassicEditor as never}
         data={value}
@@ -63,4 +67,3 @@ export default function RichTextEditorClient({ value, onChange }: RichTextEditor
     </div>
   );
 }
-

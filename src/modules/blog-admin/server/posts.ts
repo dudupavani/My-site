@@ -288,18 +288,10 @@ async function mutatePost(
     payload.seo_description !== undefined ? normalizeString(payload.seo_description) : current.seo_description;
 
   if (mode === "publish") {
-    const errors: ValidationErrorMap = {};
     if (!content || stripHtml(content).length === 0) {
-      errors.content = "Conteúdo é obrigatório para publicar.";
-    }
-    if (!seoTitle) {
-      errors.seo_title = "SEO title é obrigatório para publicar.";
-    }
-    if (!seoDescription) {
-      errors.seo_description = "SEO description é obrigatória para publicar.";
-    }
-    if (Object.keys(errors).length > 0) {
-      throw new BlogAdminApiError("Dados inválidos para publicar post.", 422, errors);
+      throw new BlogAdminApiError("Dados inválidos para publicar post.", 422, {
+        content: "Conteúdo é obrigatório para publicar.",
+      });
     }
   }
 
@@ -309,7 +301,7 @@ async function mutatePost(
   const publishedAt =
     mode === "publish" ? current.published_at ?? new Date().toISOString() : current.published_at;
 
-  const { error } = await supabase
+  const { data: updatedRows, error } = await supabase
     .from("posts")
     .update({
       title,
@@ -321,7 +313,9 @@ async function mutatePost(
       status: nextStatus,
       published_at: publishedAt,
     })
-    .eq("id", postId);
+    .eq("id", postId)
+    .select("id, status")
+    .returns<Array<{ id: string; status: PostStatus }>>();
 
   if (error) {
     if (isDuplicateKeyError(error)) {
@@ -330,6 +324,14 @@ async function mutatePost(
       });
     }
     throw new BlogAdminApiError("Falha ao salvar post.", 500);
+  }
+
+  if (!updatedRows || updatedRows.length === 0) {
+    throw new BlogAdminApiError("Falha ao salvar post: nenhuma linha atualizada.", 500);
+  }
+
+  if (mode === "publish" && updatedRows[0].status !== "published") {
+    throw new BlogAdminApiError("Falha ao publicar post: status não foi atualizado.", 500);
   }
 
   await syncPostCategories(postId, categoryIds);
