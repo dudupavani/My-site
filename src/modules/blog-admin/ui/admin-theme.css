@@ -1,22 +1,22 @@
 .admin-theme {
   --background: oklch(0.97 0.001 106.424);
-  --foreground: oklch(0.216 0.006 56.043);
+  --foreground: oklch(0.147 0.004 49.25);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.216 0.006 56.043);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.216 0.006 56.043);
   --primary: oklch(0.546 0.245 262.881);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.553 0.013 58.071 / 0.075);
-  --secondary-foreground: oklch(0.216 0.006 56.043);
+  --secondary: oklch(0.923 0.003 48.717);
+  --secondary-foreground: oklch(0.147 0.004 49.25);
   --muted: oklch(0.923 0.003 48.717);
-  --muted-foreground: oklch(0.216 0.006 56.043 / 0.7);
+  --muted-foreground: oklch(0.444 0.011 73.639);
   --accent: oklch(0.985 0.001 106.423);
   --accent-foreground: oklch(0.216 0.006 56.043);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(100% 0.00011 271.152);
-  --border: oklch(0.709 0.01 56.259 / 0.125);
-  --input: oklch(0.216 0.006 56.043 / 0.15);
+  --border: oklch(0.923 0.003 48.717);
+  --input: oklch(0.869 0.005 56.366);
   --ring: oklch(0.97 0.001 106.424);
   --chart-1: oklch(0.809 0.105 251.813);
   --chart-2: oklch(0.623 0.214 259.815);
@@ -37,6 +37,8 @@
   --primary-light: oklch(0.623 0.214 259.815);
   --primary-dark: oklch(0.546 0.245 262.881);
   --primary-ring: oklch(0.488 0.243 264.376);
+  --success: oklch(0.723 0.219 149.579);
+  --editor-min-height: 400px;
   font-family: "Sora", sans-serif;
 }
 
@@ -55,9 +57,9 @@
   --muted-foreground: oklch(0.709 0.01 56.259);
   --accent: oklch(0.268 0.007 34.298);
   --accent-foreground: oklch(0.985 0.001 106.423);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.869 0.005 56.366);
+  --input: oklch(0.869 0.005 56.366);
   --ring: oklch(0.553 0.013 58.071);
   --chart-1: oklch(0.809 0.105 251.813);
   --chart-2: oklch(0.623 0.214 259.815);
@@ -83,4 +85,15 @@
 .admin-theme {
   background-color: var(--background);
   color: var(--foreground);
+}
+
+.admin-theme .ck.ck-content.ck-editor__editable.ck-editor__editable_inline,
+.admin-theme
+  .ck.ck-content.ck-editor__editable.ck-editor__editable_inline.ck-blurred,
+.admin-theme
+  .ck.ck-content.ck-editor__editable.ck-editor__editable_inline.ck-focused {
+  min-height: var(--editor-min-height) !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow-y: auto;
 }

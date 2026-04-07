@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Loader2, Pencil, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { deletePostById, fetchPosts } from "@/src/shared/api/blogAdmin";
@@ -9,6 +10,17 @@ import { formatDateTime } from "@/src/shared/utils/format";
 import { Badge } from "./components/badge";
 import { Button } from "./components/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./components/alert-dialog";
 import {
   Table,
   TableBody,
@@ -52,8 +64,6 @@ export function PostsAdminScreen() {
   }, []);
 
   async function handleDelete(postId: string) {
-    if (!window.confirm("Excluir este post permanentemente?")) return;
-
     setState((prev) => ({ ...prev, deletingPostId: postId, error: null }));
     try {
       await deletePostById(postId);
@@ -101,7 +111,6 @@ export function PostsAdminScreen() {
               <TableRow>
                 <TableHead>Título</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Slug</TableHead>
                 <TableHead>Atualizado</TableHead>
                 <TableHead>Ações</TableHead>
               </TableRow>
@@ -125,25 +134,49 @@ export function PostsAdminScreen() {
                     </Badge>
                   </TableCell>
                   <TableCell className="text-muted-foreground">
-                    {post.slug}
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">
                     {formatDateTime(post.updated_at)}
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Button variant="outline" size="xs" asChild>
-                        <Link href={`/admin/posts/${post.id}`}>Editar</Link>
+                      <Button variant="outline" size="icon" asChild>
+                        <Link href={`/admin/posts/${post.id}`}>
+                          <Pencil />
+                        </Link>
                       </Button>
-                      <Button
-                        variant="destructive"
-                        size="xs"
-                        onClick={() => void handleDelete(post.id)}
-                        disabled={state.deletingPostId === post.id}>
-                        {state.deletingPostId === post.id
-                          ? "Excluindo..."
-                          : "Excluir"}
-                      </Button>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="destructive"
+                            size="icon"
+                            disabled={state.deletingPostId === post.id}
+                            aria-label={`Excluir post ${post.title}`}>
+                            {state.deletingPostId === post.id ? (
+                              <Loader2 className="animate-spin" />
+                            ) : (
+                              <Trash2 />
+                            )}
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Excluir post?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Esta ação é permanente e não pode ser desfeita.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                            <AlertDialogAction
+                              variant="destructive"
+                              onClick={() => void handleDelete(post.id)}
+                              disabled={state.deletingPostId === post.id}>
+                              {state.deletingPostId === post.id
+                                ? "Excluindo..."
+                                : "Excluir"}
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </div>
                   </TableCell>
                 </TableRow>

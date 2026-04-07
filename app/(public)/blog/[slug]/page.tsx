@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${post.seoTitle ?? post.title} | Eduardo Pavani`,
-    description: post.excerpt ?? undefined,
+    description: post.seoDescription ?? undefined,
     alternates: {
       canonical: `/blog/${post.slug}`,
     },
@@ -30,14 +30,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "article",
       url: `https://eduardopavani.com.br/blog/${post.slug}`,
       title: post.seoTitle ?? post.title,
-      description: post.excerpt ?? undefined,
+      description: post.seoDescription ?? undefined,
       images: [ogImage],
       publishedTime: post.publishedAt ?? undefined,
     },
     twitter: {
       card: "summary_large_image",
       title: post.seoTitle ?? post.title,
-      description: post.excerpt ?? undefined,
+      description: post.seoDescription ?? undefined,
       images: [ogImage],
     },
   };

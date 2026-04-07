@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
@@ -24,10 +25,11 @@ import type {
 } from "@/src/shared/types/blogAdmin";
 import { slugify } from "@/src/shared/utils/slug";
 import { CoverImageCropper } from "./CoverImageCropper";
-import { Badge } from "./components/badge";
 import { RichTextEditor } from "./RichTextEditor";
+import { Badge } from "./components/badge";
 import { Button } from "./components/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/card";
+import { Checkbox } from "./components/checkbox";
 import { Input } from "./components/input";
 import { Label } from "./components/label";
 import { Textarea } from "./components/textarea";
@@ -111,6 +113,7 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
   const [resolvedPostId, setResolvedPostId] = useState<string | null>(
     postId ?? null,
   );
+  const [pendingCoverFile, setPendingCoverFile] = useState<File | null>(null);
   const [form, setForm] = useState<FormState>(EMPTY_FORM_STATE);
 
   const isCreateMode = !resolvedPostId;
@@ -147,10 +150,12 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
           setForm(formStateFromPost(post));
           setPostStatus(post.status);
           setSlugTouched(true);
+          setPendingCoverFile(null);
         } else {
           setForm(EMPTY_FORM_STATE);
           setPostStatus(null);
           setSlugTouched(false);
+          setPendingCoverFile(null);
         }
       } catch (loadError) {
         if (cancelled) return;
@@ -201,6 +206,13 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
     return updatePostDraft(resolvedPostId, payload);
   }
 
+  async function uploadPendingCover(postId: string): Promise<void> {
+    if (!pendingCoverFile) return;
+    const uploaded = await uploadPostCover(postId, pendingCoverFile);
+    setForm((prev) => ({ ...prev, cover_image_url: uploaded.cover_image_url }));
+    setPendingCoverFile(null);
+  }
+
   async function handleSaveDraft() {
     if (saving || publishing) return;
     setSaving(true);
@@ -210,8 +222,13 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
     try {
       const savedPost = await persistDraft();
       setForm(formStateFromPost(savedPost));
+      await uploadPendingCover(savedPost.id);
       setPostStatus(savedPost.status);
-      setSuccessMessage("Post salvo como draft.");
+      setSuccessMessage(
+        pendingCoverFile
+          ? "Post salvo como draft e capa enviada."
+          : "Post salvo como draft.",
+      );
     } catch (saveError) {
       const normalized = normalizeError(saveError);
       setError(normalized.message);
@@ -229,6 +246,7 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
     setSuccessMessage(null);
     try {
       const draft = await persistDraft();
+      await uploadPendingCover(draft.id);
       const publishedPost = await publishPost(
         draft.id,
         postPayloadFromForm(formStateFromPost(draft)),
@@ -263,7 +281,10 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
       setCategories((prev) =>
         [...prev, created].sort((a, b) => a.name.localeCompare(b.name)),
       );
-      setForm((prev) => ({ ...prev, category_ids: [...prev.category_ids, created.id] }));
+      setForm((prev) => ({
+        ...prev,
+        category_ids: [...prev.category_ids, created.id],
+      }));
       setNewCategoryName("");
     } catch {
       // silently ignore — user can retry
@@ -272,28 +293,43 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
     }
   }
 
-  async function handleCoverUpload(croppedFile: File): Promise<string | null> {
-    if (!resolvedPostId) throw new Error("Salve o post antes de enviar capa.");
-    const uploaded = await uploadPostCover(resolvedPostId, croppedFile);
-    setForm((prev) => ({ ...prev, cover_image_url: uploaded.cover_image_url }));
-    setSuccessMessage("Capa atualizada.");
-    return uploaded.cover_image_url;
+  function handleCoverUpload(croppedFile: File): void {
+    setPendingCoverFile(croppedFile);
+    setSuccessMessage("Capa pronta. Será enviada ao salvar ou publicar.");
   }
 
   return (
     <Card>
       <CardHeader className="flex-row items-start justify-between gap-2">
         <div className="flex items-center gap-3">
+          <Button variant="outline" size="icon" asChild>
+            <Link href="/admin/posts">
+              <ArrowLeft />
+            </Link>
+          </Button>
           <CardTitle>{titleLabel}</CardTitle>
           {postStatus !== null && (
-            <Badge variant={postStatus === "published" ? "default" : "secondary"}>
+            <Badge
+              variant={postStatus === "published" ? "default" : "secondary"}>
               {postStatus === "published" ? "Publicado" : "Draft"}
             </Badge>
           )}
         </div>
-        <Button variant="outline" size="sm" asChild>
-          <Link href="/admin/posts">← Lista</Link>
-        </Button>
+        <div className="flex flex-wrap items-center justify-end gap-3">
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={() => void handleSaveDraft()}
+            disabled={saving || publishing}>
+            {saving ? "Salvando..." : "Salvar"}
+          </Button>
+          <Button
+            size="lg"
+            onClick={() => void handlePublish()}
+            disabled={saving || publishing}>
+            {publishing ? "Publicando..." : "Publicar"}
+          </Button>
+        </div>
       </CardHeader>
 
       <CardContent>
@@ -322,6 +358,7 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
                     <Label htmlFor="title">Título *</Label>
                     <Input
                       id="title"
+                      size="lg"
                       value={form.title}
                       onChange={(event) =>
                         handleTitleChange(event.target.value)
@@ -339,6 +376,7 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
                     <Label htmlFor="slug">Slug *</Label>
                     <Input
                       id="slug"
+                      size="lg"
                       value={form.slug}
                       onChange={(event) => {
                         setSlugTouched(true);
@@ -384,7 +422,7 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
               </div>
 
               {/* Sidebar */}
-              <div className="space-y-3">
+              <div className="space-y-3 mt-4">
                 <div className="space-y-3 rounded-xl border border-border bg-card p-4">
                   <p className="text-sm font-semibold text-foreground">SEO</p>
                   <div className="space-y-1.5">
@@ -423,20 +461,17 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
                 </div>
 
                 <div className="space-y-3 rounded-xl border border-border bg-card p-4">
-                  <p className="text-sm font-semibold text-foreground">Categorias</p>
+                  <p className="font-semibold text-foreground">Categorias</p>
 
                   {categories.length > 0 && (
                     <div className="grid gap-2">
                       {categories.map((category) => (
                         <label
                           key={category.id}
-                          className="inline-flex cursor-pointer items-center gap-2 text-sm text-foreground"
-                        >
-                          <input
-                            type="checkbox"
+                          className="inline-flex cursor-pointer items-center gap-2 text-sm text-foreground">
+                          <Checkbox
                             checked={selectedCategoryIds.has(category.id)}
-                            onChange={() => toggleCategory(category.id)}
-                            className="accent-primary"
+                            onCheckedChange={() => toggleCategory(category.id)}
                           />
                           <span>{category.name}</span>
                         </label>
@@ -449,27 +484,27 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
                       value={newCategoryName}
                       onChange={(e) => setNewCategoryName(e.target.value)}
                       placeholder="Nova categoria..."
-                      className="h-7 text-xs"
                     />
                     <Button
                       type="submit"
-                      size="xs"
                       disabled={creatingCategory || !newCategoryName.trim()}
-                      className="shrink-0"
-                    >
+                      className="shrink-0">
                       {creatingCategory ? "..." : "Criar"}
                     </Button>
                   </form>
 
                   {validationErrors.category_ids ? (
-                    <p className="text-xs text-destructive">{validationErrors.category_ids}</p>
+                    <p className="text-xs text-destructive">
+                      {validationErrors.category_ids}
+                    </p>
                   ) : null}
                 </div>
 
                 <CoverImageCropper
                   currentCoverUrl={form.cover_image_url}
-                  disabled={!resolvedPostId}
-                  onUpload={handleCoverUpload}
+                  hasPendingUpload={Boolean(pendingCoverFile)}
+                  disabled={saving || publishing}
+                  onApply={handleCoverUpload}
                 />
               </div>
             </div>

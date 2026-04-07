@@ -34,7 +34,9 @@ const INITIAL_STATE: CategoriesState = {
 export function CategoriesAdminScreen() {
   const [state, setState] = useState<CategoriesState>(INITIAL_STATE);
   const [newCategoryName, setNewCategoryName] = useState("");
-  const [editingNameById, setEditingNameById] = useState<Record<string, string>>({});
+  const [editingNameById, setEditingNameById] = useState<
+    Record<string, string>
+  >({});
 
   async function loadCategories() {
     setState((prev) => ({ ...prev, loading: true, error: null }));
@@ -42,10 +44,15 @@ export function CategoriesAdminScreen() {
       const categories = await fetchCategories();
       setState((prev) => ({ ...prev, loading: false, categories }));
       setEditingNameById(
-        Object.fromEntries(categories.map((category) => [category.id, category.name])),
+        Object.fromEntries(
+          categories.map((category) => [category.id, category.name]),
+        ),
       );
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Falha ao carregar categorias.";
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Falha ao carregar categorias.";
       setState((prev) => ({ ...prev, loading: false, error: message }));
     }
   }
@@ -69,10 +76,14 @@ export function CategoriesAdminScreen() {
           a.name.localeCompare(b.name),
         ),
       }));
-      setEditingNameById((prev) => ({ ...prev, [createdCategory.id]: createdCategory.name }));
+      setEditingNameById((prev) => ({
+        ...prev,
+        [createdCategory.id]: createdCategory.name,
+      }));
       setNewCategoryName("");
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Falha ao criar categoria.";
+      const message =
+        error instanceof Error ? error.message : "Falha ao criar categoria.";
       setState((prev) => ({ ...prev, creating: false, error: message }));
     }
   }
@@ -88,18 +99,31 @@ export function CategoriesAdminScreen() {
         ...prev,
         editingId: null,
         categories: prev.categories
-          .map((category) => (category.id === categoryId ? updatedCategory : category))
+          .map((category) =>
+            category.id === categoryId ? updatedCategory : category,
+          )
           .sort((a, b) => a.name.localeCompare(b.name)),
       }));
-      setEditingNameById((prev) => ({ ...prev, [categoryId]: updatedCategory.name }));
+      setEditingNameById((prev) => ({
+        ...prev,
+        [categoryId]: updatedCategory.name,
+      }));
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Falha ao atualizar categoria.";
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Falha ao atualizar categoria.";
       setState((prev) => ({ ...prev, editingId: null, error: message }));
     }
   }
 
   async function handleDeleteCategory(categoryId: string) {
-    if (!window.confirm("Excluir categoria? Essa ação também remove o vínculo com posts.")) return;
+    if (
+      !window.confirm(
+        "Excluir categoria? Essa ação também remove o vínculo com posts.",
+      )
+    )
+      return;
 
     setState((prev) => ({ ...prev, deletingId: categoryId, error: null }));
     try {
@@ -107,7 +131,9 @@ export function CategoriesAdminScreen() {
       setState((prev) => ({
         ...prev,
         deletingId: null,
-        categories: prev.categories.filter((category) => category.id !== categoryId),
+        categories: prev.categories.filter(
+          (category) => category.id !== categoryId,
+        ),
       }));
       setEditingNameById((prev) => {
         const next = { ...prev };
@@ -115,7 +141,8 @@ export function CategoriesAdminScreen() {
         return next;
       });
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Falha ao excluir categoria.";
+      const message =
+        error instanceof Error ? error.message : "Falha ao excluir categoria.";
       setState((prev) => ({ ...prev, deletingId: null, error: message }));
     }
   }
@@ -136,7 +163,9 @@ export function CategoriesAdminScreen() {
           </p>
         ) : null}
 
-        <form onSubmit={handleCreateCategory} className="flex flex-col gap-2 md:flex-row">
+        <form
+          onSubmit={handleCreateCategory}
+          className="flex flex-col gap-2 md:flex-row">
           <Input
             type="text"
             value={newCategoryName}
@@ -149,16 +178,19 @@ export function CategoriesAdminScreen() {
         </form>
 
         {state.loading ? (
-          <p className="text-sm text-muted-foreground">Carregando categorias...</p>
+          <p className="text-sm text-muted-foreground">
+            Carregando categorias...
+          </p>
         ) : state.categories.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Nenhuma categoria criada.</p>
+          <p className="text-sm text-muted-foreground">
+            Nenhuma categoria criada.
+          </p>
         ) : (
           <div className="space-y-2">
             {state.categories.map((category) => (
               <div
                 key={category.id}
-                className="flex flex-col gap-2 rounded-xl border border-border bg-card p-3 md:flex-row md:items-center"
-              >
+                className="flex flex-col gap-2 rounded-xl border border-border bg-card p-3 md:flex-row md:items-center">
                 <Input
                   type="text"
                   value={editingNameById[category.id] ?? ""}
@@ -174,17 +206,17 @@ export function CategoriesAdminScreen() {
                     variant="outline"
                     size="sm"
                     onClick={() => void handleEditCategory(category.id)}
-                    disabled={state.editingId === category.id}
-                  >
+                    disabled={state.editingId === category.id}>
                     {state.editingId === category.id ? "Salvando..." : "Salvar"}
                   </Button>
                   <Button
                     variant="destructive"
                     size="sm"
                     onClick={() => void handleDeleteCategory(category.id)}
-                    disabled={state.deletingId === category.id}
-                  >
-                    {state.deletingId === category.id ? "Excluindo..." : "Excluir"}
+                    disabled={state.deletingId === category.id}>
+                    {state.deletingId === category.id
+                      ? "Excluindo..."
+                      : "Excluir"}
                   </Button>
                 </div>
               </div>

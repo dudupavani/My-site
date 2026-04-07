@@ -4,7 +4,6 @@ export type BlogPostSummary = {
   id: BlogPostId;
   slug: string;
   title: string;
-  excerpt: string | null;
   coverImageUrl: string | null;
   publishedAt: string | null;
 };

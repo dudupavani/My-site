@@ -18,21 +18,12 @@ async function createSignedCoverUrl(path: string | null): Promise<string | null>
   return data.signedUrl;
 }
 
-function stripHtmlToExcerpt(html: string | null, maxLength = 160): string | null {
-  if (!html) return null;
-  const text = html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-  if (text.length <= maxLength) return text;
-  return text.slice(0, maxLength - 1).trimEnd() + "…";
-}
-
 const POSTS_PER_PAGE = 10;
 
 type PostRow = {
   id: string;
   slug: string;
   title: string;
-  seo_description: string | null;
-  content: string | null;
   cover_image_path: string | null;
   published_at: string | null;
 };
@@ -57,7 +48,7 @@ export async function listPublishedPosts(opts?: {
 
   const { data, error, count } = await supabase
     .from("posts")
-    .select("id, slug, title, seo_description, content, cover_image_path, published_at", {
+    .select("id, slug, title, cover_image_path, published_at", {
       count: "exact",
     })
     .eq("status", "published")
@@ -76,7 +67,6 @@ export async function listPublishedPosts(opts?: {
       id: row.id,
       slug: row.slug,
       title: row.title,
-      excerpt: row.seo_description ?? stripHtmlToExcerpt(row.content),
       coverImageUrl: coverUrls[index],
       publishedAt: row.published_at,
     })),
@@ -114,7 +104,6 @@ export async function getPublishedPostBySlug(slug: string): Promise<BlogPostDeta
     id: post.id,
     slug: post.slug,
     title: post.title,
-    excerpt: post.seo_description ?? stripHtmlToExcerpt(post.content),
     coverImageUrl,
     publishedAt: post.published_at,
     contentHtml: post.content ?? "",

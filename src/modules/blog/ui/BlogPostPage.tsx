@@ -9,22 +9,25 @@ type BlogPostPageProps = {
 
 export function BlogPostPage({ post }: BlogPostPageProps) {
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
-      <header className="border-b border-zinc-800 px-6 py-4">
-        <div className="mx-auto flex max-w-4xl items-center justify-between">
+    <div className="min-h-screen bg-zinc-800 text-white">
+      <header className="pt-8 pb-4">
+        <div className="mx-auto flex max-w-3xl px-4 sm:px-6 items-center justify-between">
           <Link href="/" className="flex items-center">
-            <img src="/images/logo.svg" alt="Eduardo Pavani" className="h-8 w-auto" />
+            <img
+              src="/images/logo.svg"
+              alt="Eduardo Pavani"
+              className="h-8 w-auto"
+            />
           </Link>
           <Link
             href="/blog"
-            className="text-sm text-zinc-400 transition-colors hover:text-white"
-          >
+            className="text-sm text-zinc-400 transition-colors hover:text-white">
             ← Todos os posts
           </Link>
         </div>
       </header>
 
-      <main className="mx-auto max-w-3xl px-6 py-16">
+      <main className="mx-auto max-w-3xl px-4 sm:px-6 pt-10 pb-16">
         <article>
           {/* Cover image */}
           {post.coverImageUrl ? (
@@ -49,12 +52,6 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
               </p>
             ) : null}
 
-            {post.excerpt ? (
-              <p className="mt-4 text-lg leading-relaxed text-zinc-400">
-                {post.excerpt}
-              </p>
-            ) : null}
-
             <div className="mt-6 border-t border-zinc-800" />
           </header>
 
@@ -68,8 +65,7 @@ export function BlogPostPage({ post }: BlogPostPageProps) {
         <footer className="mt-16 border-t border-zinc-800 pt-8">
           <Link
             href="/blog"
-            className="text-sm text-zinc-400 transition-colors hover:text-white"
-          >
+            className="text-sm text-zinc-400 transition-colors hover:text-white">
             ← Ver todos os posts
           </Link>
         </footer>

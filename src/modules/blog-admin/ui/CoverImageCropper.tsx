@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "./components/button";
 
 type CoverImageCropperProps = {
   currentCoverUrl: string | null;
+  hasPendingUpload?: boolean;
   disabled?: boolean;
-  onUpload: (croppedFile: File) => Promise<string | null>;
+  onApply: (croppedFile: File, previewUrl: string) => void | Promise<void>;
 };
 
 const CANVAS_WIDTH = 1200;
@@ -17,7 +18,8 @@ function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error("Não foi possível carregar a imagem."));
+    image.onerror = () =>
+      reject(new Error("Não foi possível carregar a imagem."));
     image.src = src;
   });
 }
@@ -36,7 +38,10 @@ async function cropToTwoByOne(
 
   if (!context) throw new Error("Não foi possível preparar o crop da imagem.");
 
-  const baseScale = Math.max(CANVAS_WIDTH / image.width, CANVAS_HEIGHT / image.height);
+  const baseScale = Math.max(
+    CANVAS_WIDTH / image.width,
+    CANVAS_HEIGHT / image.height,
+  );
   const scale = baseScale * zoom;
   const drawWidth = image.width * scale;
   const drawHeight = image.height * scale;
@@ -58,23 +63,33 @@ async function cropToTwoByOne(
 
 export function CoverImageCropper({
   currentCoverUrl,
+  hasPendingUpload = false,
   disabled,
-  onUpload,
+  onApply,
 }: CoverImageCropperProps) {
   const [sourceDataUrl, setSourceDataUrl] = useState<string | null>(null);
   const [sourceFilename, setSourceFilename] = useState("capa.jpg");
   const [zoom, setZoom] = useState(1);
   const [offsetX, setOffsetX] = useState(0);
   const [offsetY, setOffsetY] = useState(0);
-  const [uploading, setUploading] = useState(false);
+  const [applying, setApplying] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(currentCoverUrl);
+  const [localPreviewUrl, setLocalPreviewUrl] = useState<string | null>(null);
 
   useEffect(() => {
+    if (localPreviewUrl) {
+      URL.revokeObjectURL(localPreviewUrl);
+      setLocalPreviewUrl(null);
+    }
     setPreviewUrl(currentCoverUrl);
   }, [currentCoverUrl]);
 
-  const hasPendingSelection = useMemo(() => Boolean(sourceDataUrl), [sourceDataUrl]);
+  useEffect(() => {
+    return () => {
+      if (localPreviewUrl) URL.revokeObjectURL(localPreviewUrl);
+    };
+  }, [localPreviewUrl]);
 
   function handleFileChange(fileList: FileList | null) {
     const file = fileList?.[0];
@@ -86,7 +101,9 @@ export function CoverImageCropper({
 
     const reader = new FileReader();
     reader.onload = () => {
-      setSourceDataUrl(typeof reader.result === "string" ? reader.result : null);
+      setSourceDataUrl(
+        typeof reader.result === "string" ? reader.result : null,
+      );
       setSourceFilename(file.name || "capa.jpg");
       setZoom(1);
       setOffsetX(0);
@@ -97,38 +114,49 @@ export function CoverImageCropper({
     reader.readAsDataURL(file);
   }
 
-  async function handleUpload() {
-    if (!sourceDataUrl || uploading || disabled) return;
+  async function handleApply() {
+    if (!sourceDataUrl || applying || disabled) return;
 
-    setUploading(true);
+    setApplying(true);
     setError(null);
     try {
-      const croppedBlob = await cropToTwoByOne(sourceDataUrl, zoom, offsetX, offsetY);
+      const croppedBlob = await cropToTwoByOne(
+        sourceDataUrl,
+        zoom,
+        offsetX,
+        offsetY,
+      );
       const file = new File(
         [croppedBlob],
         `${sourceFilename.replace(/\.[^.]+$/, "") || "capa"}-2x1.jpg`,
         { type: "image/jpeg" },
       );
-      const nextCoverUrl = await onUpload(file);
-      setPreviewUrl(nextCoverUrl);
+      const nextPreviewUrl = URL.createObjectURL(file);
+      if (localPreviewUrl) URL.revokeObjectURL(localPreviewUrl);
+      setLocalPreviewUrl(nextPreviewUrl);
+      setPreviewUrl(nextPreviewUrl);
+      await onApply(file, nextPreviewUrl);
       setSourceDataUrl(null);
     } catch (uploadError) {
-      const message = uploadError instanceof Error ? uploadError.message : "Falha ao enviar capa.";
+      const message =
+        uploadError instanceof Error
+          ? uploadError.message
+          : "Falha ao enviar capa.";
       setError(message);
     } finally {
-      setUploading(false);
+      setApplying(false);
     }
   }
 
   return (
     <div className="space-y-3 rounded-xl border border-border bg-card p-3">
-      <p className="text-sm font-semibold text-foreground">Capa (crop 2:1)</p>
+      <p className="font-semibold text-foreground">Capa</p>
 
       <label className="block cursor-pointer">
         <input
           type="file"
           accept="image/*"
-          disabled={disabled || uploading}
+          disabled={disabled || applying}
           onChange={(event) => handleFileChange(event.target.files)}
           className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground file:mr-3 file:rounded file:border-0 file:bg-primary file:px-2 file:py-1 file:text-xs file:font-medium file:text-primary-foreground disabled:cursor-not-allowed disabled:opacity-50"
         />
@@ -140,7 +168,9 @@ export function CoverImageCropper({
             <img
               src={sourceDataUrl}
               alt="Prévia da capa"
-              style={{ transform: `translate(${offsetX}%, ${offsetY}%) scale(${zoom})` }}
+              style={{
+                transform: `translate(${offsetX}%, ${offsetY}%) scale(${zoom})`,
+              }}
               className="h-full w-full object-cover"
             />
           </div>
@@ -148,12 +178,35 @@ export function CoverImageCropper({
           <div className="grid gap-3 md:grid-cols-3">
             {(
               [
-                { label: "Zoom", min: 1, max: 3, step: 0.01, value: zoom, onChange: setZoom },
-                { label: "Horizontal", min: -100, max: 100, step: 1, value: offsetX, onChange: setOffsetX },
-                { label: "Vertical", min: -100, max: 100, step: 1, value: offsetY, onChange: setOffsetY },
+                {
+                  label: "Zoom",
+                  min: 1,
+                  max: 3,
+                  step: 0.01,
+                  value: zoom,
+                  onChange: setZoom,
+                },
+                {
+                  label: "Horizontal",
+                  min: -100,
+                  max: 100,
+                  step: 1,
+                  value: offsetX,
+                  onChange: setOffsetX,
+                },
+                {
+                  label: "Vertical",
+                  min: -100,
+                  max: 100,
+                  step: 1,
+                  value: offsetY,
+                  onChange: setOffsetY,
+                },
               ] as const
             ).map(({ label, min, max, step, value, onChange }) => (
-              <label key={label} className="space-y-1 text-xs text-muted-foreground">
+              <label
+                key={label}
+                className="space-y-1 text-xs text-muted-foreground">
                 {label}
                 <input
                   type="range"
@@ -170,36 +223,32 @@ export function CoverImageCropper({
 
           <Button
             size="sm"
-            onClick={() => void handleUpload()}
-            disabled={uploading || disabled}
-          >
-            {uploading ? "Enviando..." : "Aplicar crop 2:1 e enviar"}
+            onClick={() => void handleApply()}
+            disabled={applying || disabled}>
+            {applying ? "Processando..." : "Aplicar"}
           </Button>
         </div>
-      ) : (
-        <p className="text-xs text-muted-foreground">
-          Selecione uma imagem e ajuste o enquadramento antes de enviar.
-        </p>
-      )}
+      ) : null}
 
       {previewUrl ? (
         <div className="space-y-1">
-          <p className="text-xs text-muted-foreground">Capa atual</p>
           <div className="overflow-hidden rounded-lg border border-border">
-            <img src={previewUrl} alt="Capa atual" className="aspect-[2/1] w-full object-cover" />
+            <img
+              src={previewUrl}
+              alt="Capa atual"
+              className="aspect-[2/1] w-full object-cover"
+            />
           </div>
         </div>
+      ) : null}
+
+      {hasPendingUpload ? (
+        <p className="text-xs text-success">Capa pronta.</p>
       ) : null}
 
       {error ? (
         <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-xs text-destructive">
           {error}
-        </p>
-      ) : null}
-
-      {disabled && !hasPendingSelection ? (
-        <p className="text-xs text-muted-foreground">
-          Salve o post primeiro para habilitar o upload da capa.
         </p>
       ) : null}
     </div>
