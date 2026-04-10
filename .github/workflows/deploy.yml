@@ -26,6 +26,7 @@ jobs:
             **/.git*
             **/.git*/**
             **/.github/**
+            **/apps/**
             **/node_modules/**
             **/.DS_Store
             **/.ftp-deploy-sync-state.json
