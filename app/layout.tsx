@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
+import { Google_Sans_Flex } from "next/font/google";
 import Script from "next/script";
 
 import "./globals.css";
+
+const googleSansFlex = Google_Sans_Flex({
+  subsets: ["latin"],
+  variable: "--font-google-sans-flex",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://eduardopavani.com.br"),
@@ -44,14 +51,24 @@ const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Eduardo Pavani",
-  jobTitle: "Product Manager Estratégico",
+  jobTitle: "Product Lead Estratégico",
   url: "https://eduardopavani.com.br",
   sameAs: [
     "https://www.linkedin.com/in/eduardopavani/",
     "https://wa.me/5548991587232",
     "https://www.instagram.com/eduardopavanipro",
   ],
-  description: "Estratégia, clareza e execução na construção de produtos digitais.",
+  description:
+    "Estratégia, clareza e execução na construção de produtos digitais.",
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Eduardo Pavani",
+  url: "https://eduardopavani.com.br",
+  description:
+    "Estratégia, clareza e execução na construção de produtos digitais.",
 };
 
 export default function RootLayout({
@@ -60,15 +77,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={googleSansFlex.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,100..1000&display=swap"
-          rel="stylesheet"
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
       </head>
       <body className="bg-white">
         {/* GTM noscript — deve ser o primeiro elemento do body */}
@@ -93,9 +111,6 @@ export default function RootLayout({
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-W2H798B');`}
         </Script>
-
-        {/* Lucide icons — usado pelas seções da home via data-lucide */}
-        <Script src="https://unpkg.com/lucide@latest" strategy="afterInteractive" />
 
         {children}
       </body>

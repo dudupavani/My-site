@@ -1,5 +1,5 @@
 .public-theme {
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-google-sans-flex), sans-serif;
 }
 
 .public-theme ::selection {

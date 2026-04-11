@@ -6,7 +6,6 @@ import type {
   PostListItem,
   PostPayload,
   PostStatus,
-  ValidationErrorMap,
 } from "@/src/shared/types/blogAdmin";
 import {
   getBlogCoverBucketName,
@@ -401,4 +400,3 @@ export async function uploadPostCover(
     cover_image_url: await createSignedCoverUrl(objectPath),
   };
 }
-

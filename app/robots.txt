@@ -1,4 +1,23 @@
 User-agent: *
 Allow: /
 
+# Crawlers de IA - Permitir todos
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 Sitemap: https://eduardopavani.com.br/sitemap.xml

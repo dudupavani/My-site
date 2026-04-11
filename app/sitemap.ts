@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { listPublicCategories } from "@/src/modules/blog/server/queries";
 import { getSupabaseAdminClient } from "@/src/shared/server/supabase";
 
 const BASE_URL = "https://eduardopavani.com.br";
@@ -22,6 +23,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "monthly",
     priority: 0.8,
   }));
+  const categories = await listPublicCategories();
+  const categoryUrls: MetadataRoute.Sitemap = categories.map((category) => ({
+    url: `${BASE_URL}/blog/categoria/${category.slug}`,
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }));
 
   return [
     {
@@ -34,6 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.9,
     },
+    ...categoryUrls,
     ...posts,
   ];
 }
