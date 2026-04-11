@@ -1,10 +1,15 @@
-# Blog Admin (Next.js)
+# Site (Next.js)
 
-Aplicacao Next.js para administracao de posts e categorias.
+Aplicacao Next.js principal do projeto. Contem:
+- site publico (home e blog)
+- CMS de conteudo do blog (area `/admin`)
 
 ## Estrutura
-- `app/admin/*`: paginas de admin (App Router)
+- `app/(public)/*`: paginas publicas (sem alterar URL final)
+- `app/(admin)/admin/*`: paginas do CMS admin (URL final `/admin/*`)
 - `app/api/admin/*`: endpoints HTTP do admin
+- `src/modules/home/*`: modulo da home publica
+- `src/modules/blog/*`: modulo de leitura publica do blog (em evolucao)
 - `src/modules/blog-admin/ui/*`: telas e componentes do dominio
 - `src/modules/blog-admin/server/*`: casos de uso e regras de dominio
 - `src/shared/server/*`: fachada de servicos, infra e auth guard
@@ -27,6 +32,8 @@ Aplicacao Next.js para administracao de posts e categorias.
 
 ## Observacoes de integracao
 - O alias `@/*` esta configurado no `tsconfig.json`.
+- As rotas publicas ficam no grupo `app/(public)/*`.
+- As rotas de CMS ficam no grupo `app/(admin)/admin/*`.
 - As rotas de API admin usam `app/api/admin/*` (Next App Router).
 - As variaveis de ambiente necessarias estao em `.env.example`.
 
