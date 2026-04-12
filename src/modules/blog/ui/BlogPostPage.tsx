@@ -14,8 +14,8 @@ type BlogPostPageProps = {
 export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
   return (
     <div className="min-h-screen bg-zinc-800 text-white">
-      <main className="mx-auto max-w-5xl px-4 sm:px-10 md:px-16 lg:px-6 pt-28 sm:pt-32 pb-16">
-        <nav aria-label="Breadcrumb" className="mb-8">
+      <main className="mx-auto max-w-5xl px-4 sm:px-10 md:px-16 lg:px-6 pt-24 sm:pt-32 pb-16">
+        <nav aria-label="Breadcrumb" className="mb-12 sm:mb-8">
           <ol className="flex items-center gap-2 text-xs sm:text-sm text-zinc-400">
             <li>
               <Link href="/" className="transition-colors hover:text-white">
@@ -38,7 +38,7 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
         <article>
           <div className="pb-6 sm:pb-12 lg:pb-16">
             {/* Header */}
-            <header className="mb-6 sm:mb-10 space-y-6">
+            <header className="mb-6 sm:mb-10 space-y-3 sm:space-y-6">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight tracking-tight text-white">
                 {post.title}
               </h1>

@@ -13,7 +13,7 @@ export async function BlogListPage({ page = 1 }: Props) {
 
   return (
     <div className="min-h-screen bg-zinc-900 text-white">
-      <main className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-16 xl:px-6 pt-30 sm:pt-30 lg:pt-40 pb-16">
+      <main className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-16 xl:px-6 pt-22 sm:pt-30 lg:pt-40 pb-16">
         <div className="mb-6">
           <h1 className="text-2xl sm:text-4xl font-extralight tracking-tight text-zinc-500">
             Conteúdos
@@ -40,8 +40,8 @@ export async function BlogListPage({ page = 1 }: Props) {
 
 function PostCard({ post }: { post: BlogPostSummary }) {
   return (
-    <article className="group flex h-full flex-col rounded-2xl border border-zinc-700/50 bg-zinc-800/60">
-      <div className="flex flex-1 flex-col gap-4 px-6 pb-4 pt-6 sm:pt-8">
+    <article className="group flex h-full flex-col rounded-2xl border border-zinc-700/50 bg-zinc-800 sm:bg-zinc-800/60">
+      <div className="flex flex-1 flex-col gap-4 px-4 sm:px-6 pb-4 pt-6 sm:pt-8">
         <h2 className="text-lg sm:text-xl md:text-2xl text-zinc-300 line-clamp-2 transition-colors group-hover:text-white">
           <Link
             href={`/blog/${post.slug}`}
@@ -70,7 +70,7 @@ function PostCard({ post }: { post: BlogPostSummary }) {
       </div>
 
       {post.coverImageUrl ? (
-        <div className="p-4">
+        <div className="p-2 sm:p-4">
           <Link
             href={`/blog/${post.slug}`}
             className="block overflow-hidden rounded-xl">
