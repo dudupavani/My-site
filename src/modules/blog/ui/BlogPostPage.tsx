@@ -88,7 +88,7 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
 
           {relatedPosts.length > 0 ? (
             <aside className="mx-auto mt-12 max-w-3xl border-t border-zinc-700 pt-8">
-              <ul className="grid grid-cols-2 mt-4 space-y-4">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 space-y-4 items-stretch">
                 {relatedPosts.map((relatedPost) => (
                   <li
                     key={relatedPost.id}
