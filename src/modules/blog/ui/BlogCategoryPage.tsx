@@ -22,24 +22,7 @@ export async function BlogCategoryPage({ category, page = 1 }: Props) {
 
   return (
     <div className="min-h-screen bg-zinc-800 text-white">
-      <header className="px-6 pt-8 pb-6">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <Link href="/" className="flex items-center">
-            <img
-              src="/images/logo.svg"
-              alt="Eduardo Pavani"
-              className="h-8 w-auto"
-            />
-          </Link>
-          <Link
-            href="/blog"
-            className="text-sm text-zinc-400 transition-colors hover:text-white">
-            ← Voltar ao blog
-          </Link>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-7xl px-6 py-16">
+      <main className="mx-auto max-w-7xl px-6 pt-6 pb-16 sm:pt-10">
         <div className="mb-12 space-y-3">
           <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">
             Categoria

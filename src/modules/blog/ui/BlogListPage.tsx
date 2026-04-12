@@ -12,32 +12,12 @@ export async function BlogListPage({ page = 1 }: Props) {
   const { posts, totalPages, currentPage } = await listPublishedPosts({ page });
 
   return (
-    <div className="min-h-screen bg-zinc-800 text-white">
-      <header className="px-6 pt-8 pb-6">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <Link href="/" className="flex items-center">
-            <img
-              src="/images/logo.svg"
-              alt="Eduardo Pavani"
-              className="h-8 w-auto"
-            />
-          </Link>
-          <Link
-            href="/"
-            className="text-sm text-zinc-400 transition-colors hover:text-white">
-            ← Voltar ao site
-          </Link>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 pt-8 sm:pt-16 pb-16">
-        <div className="mb-6 sm:mb-12">
-          <h1 className="text-xl sm:text-3xl font-medium tracking-tight text-white">
+    <div className="min-h-screen bg-zinc-900 text-white">
+      <main className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-16 xl:px-6 pt-30 sm:pt-30 lg:pt-40 pb-16">
+        <div className="mb-6">
+          <h1 className="text-2xl sm:text-4xl font-extralight tracking-tight text-zinc-500">
             Conteúdos
           </h1>
-          <p className="mt-3 text-sm sm:text-lg text-zinc-500">
-            Estratégia, produto e reflexões sobre construção de software.
-          </p>
         </div>
 
         {posts.length === 0 ? (
@@ -60,7 +40,7 @@ export async function BlogListPage({ page = 1 }: Props) {
 
 function PostCard({ post }: { post: BlogPostSummary }) {
   return (
-    <article className="group flex h-full flex-col rounded-2xl border border-zinc-700/80 bg-zinc-700/40">
+    <article className="group flex h-full flex-col rounded-2xl border border-zinc-700/50 bg-zinc-800/60">
       <div className="flex flex-1 flex-col gap-4 px-6 pb-4 pt-6 sm:pt-8">
         <h2 className="text-lg sm:text-xl md:text-2xl text-zinc-300 line-clamp-2 transition-colors group-hover:text-white">
           <Link

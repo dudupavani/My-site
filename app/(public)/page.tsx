@@ -1,4 +1,5 @@
 import { HomePage } from "@/src/modules/home/HomePage";
+import { PublicHeader } from "@/src/shared/ui/PublicHeader";
 import { redirect } from "next/navigation";
 
 type SearchParams = Record<string, string | string[] | undefined>;
@@ -38,5 +39,10 @@ export default async function StartPage({
     redirect(`/admin/auth/callback${query ? `?${query}` : ""}`);
   }
 
-  return <HomePage />;
+  return (
+    <>
+      <PublicHeader variant="home" />
+      <HomePage />
+    </>
+  );
 }
