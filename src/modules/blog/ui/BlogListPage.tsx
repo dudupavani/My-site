@@ -60,7 +60,7 @@ export async function BlogListPage({ page = 1 }: Props) {
 
 function PostCard({ post }: { post: BlogPostSummary }) {
   return (
-    <article className="group flex h-full flex-col rounded-2xl border border-zinc-700/50 bg-zinc-900/30">
+    <article className="group flex h-full flex-col rounded-2xl border border-zinc-700/80 bg-zinc-700/40">
       <div className="flex flex-1 flex-col gap-4 px-6 pb-4 pt-6 sm:pt-8">
         <h2 className="text-lg sm:text-xl md:text-2xl text-zinc-300 line-clamp-2 transition-colors group-hover:text-white">
           <Link

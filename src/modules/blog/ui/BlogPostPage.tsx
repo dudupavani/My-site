@@ -86,25 +86,37 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
             dangerouslySetInnerHTML={{ __html: post.contentHtml }}
           />
 
+          {post.categories.length > 0 ? (
+            <div className="mx-auto mt-8 flex max-w-3xl flex-wrap gap-2">
+              {post.categories.map((category) => (
+                <Link
+                  key={category.id}
+                  href={`/blog/categoria/${category.slug}`}
+                  className="rounded-full border border-zinc-700 px-2.5 py-1 text-xs text-zinc-300 transition-colors hover:border-zinc-500 hover:text-white">
+                  {category.name}
+                </Link>
+              ))}
+            </div>
+          ) : null}
+
           {relatedPosts.length > 0 ? (
-            <aside className="mx-auto mt-12 max-w-3xl border-t border-zinc-700 pt-8">
+            <aside className="mx-auto mt-12 max-w-3xl">
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 space-y-4 items-stretch">
                 {relatedPosts.map((relatedPost) => (
-                  <li
-                    key={relatedPost.id}
-                    className="space-y-1 border border-zinc-700 rounded-lg p-4">
+                  <li key={relatedPost.id} className="h-full">
                     <Link
                       href={`/blog/${relatedPost.slug}`}
-                      className="text-zinc-200 transition-colors hover:text-white">
-                      {relatedPost.title}
+                      className="flex flex-col gap-2 justify-between bg-zinc-700 border border-transparent rounded-lg p-4 h-full transition-colors hover:bg-zinc-700/50 hover:border-zinc-700">
+                      <h2 className="line-clamp-2">{relatedPost.title}</h2>
+
+                      {relatedPost.publishedAt ? (
+                        <time
+                          dateTime={relatedPost.publishedAt}
+                          className="block text-xs text-zinc-500">
+                          {formatDate(relatedPost.publishedAt)}
+                        </time>
+                      ) : null}
                     </Link>
-                    {relatedPost.publishedAt ? (
-                      <time
-                        dateTime={relatedPost.publishedAt}
-                        className="block text-xs text-zinc-500">
-                        {formatDate(relatedPost.publishedAt)}
-                      </time>
-                    ) : null}
                   </li>
                 ))}
               </ul>
@@ -112,11 +124,11 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
           ) : null}
         </article>
 
-        <footer className="mt-16 border-t border-zinc-800 pt-8">
+        <footer className="flex items-center justify-center mt-10 pt-8 ">
           <Link
             href="/blog"
-            className="text-sm text-zinc-400 transition-colors hover:text-white">
-            ← Ver todos os posts
+            className=" text-zinc-400 transition-colors hover:text-white!">
+            Ver todos os posts
           </Link>
         </footer>
       </main>
