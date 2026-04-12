@@ -30,12 +30,12 @@ export async function BlogListPage({ page = 1 }: Props) {
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-6 py-16">
-        <div className="mb-12">
-          <h1 className="text-3xl font-medium tracking-tight text-white">
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 pt-8 sm:pt-16 pb-16">
+        <div className="mb-6 sm:mb-12">
+          <h1 className="text-xl sm:text-3xl font-medium tracking-tight text-white">
             Conteúdos
           </h1>
-          <p className="mt-3 text-lg text-zinc-500">
+          <p className="mt-3 text-sm sm:text-lg text-zinc-500">
             Estratégia, produto e reflexões sobre construção de software.
           </p>
         </div>
@@ -43,7 +43,7 @@ export async function BlogListPage({ page = 1 }: Props) {
         {posts.length === 0 ? (
           <p className="text-zinc-500">Nenhum post publicado ainda.</p>
         ) : (
-          <div className="grid grid-cols-2 gap-6 divide-y divide-zinc-800">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 divide-y divide-zinc-800">
             {posts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
@@ -61,9 +61,11 @@ export async function BlogListPage({ page = 1 }: Props) {
 function PostCard({ post }: { post: BlogPostSummary }) {
   return (
     <article className="group flex h-full flex-col rounded-2xl border border-zinc-700/50 bg-zinc-900/30">
-      <div className="flex flex-1 flex-col gap-4 px-6 pb-4 pt-8">
-        <h2 className="text-2xl text-zinc-300 line-clamp-2 transition-colors group-hover:text-white">
-          <Link href={`/blog/${post.slug}`} className="transition-colors hover:text-white">
+      <div className="flex flex-1 flex-col gap-4 px-6 pb-4 pt-6 sm:pt-8">
+        <h2 className="text-lg sm:text-xl md:text-2xl text-zinc-300 line-clamp-2 transition-colors group-hover:text-white">
+          <Link
+            href={`/blog/${post.slug}`}
+            className="transition-colors hover:text-white">
             {post.title}
           </Link>
         </h2>
@@ -89,7 +91,9 @@ function PostCard({ post }: { post: BlogPostSummary }) {
 
       {post.coverImageUrl ? (
         <div className="p-4">
-          <Link href={`/blog/${post.slug}`} className="block overflow-hidden rounded-xl">
+          <Link
+            href={`/blog/${post.slug}`}
+            className="block overflow-hidden rounded-xl">
             <img
               src={post.coverImageUrl}
               alt={post.title}
