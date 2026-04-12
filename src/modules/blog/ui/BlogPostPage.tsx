@@ -1,6 +1,9 @@
 import Link from "next/link";
 
-import type { BlogPostDetail, BlogRelatedPost } from "@/src/modules/blog/domain/post";
+import type {
+  BlogPostDetail,
+  BlogRelatedPost,
+} from "@/src/modules/blog/domain/post";
 import { formatDate } from "@/src/shared/utils/format";
 
 type BlogPostPageProps = {
@@ -57,7 +60,9 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
                 {post.title}
               </h1>
               {post.publishedAt ? (
-                <time dateTime={post.publishedAt} className="mt-3 text-sm text-zinc-500">
+                <time
+                  dateTime={post.publishedAt}
+                  className="mt-3 text-sm text-zinc-500">
                   Publicado em {formatDate(post.publishedAt)}
                 </time>
               ) : null}
@@ -83,17 +88,20 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
 
           {relatedPosts.length > 0 ? (
             <aside className="mx-auto mt-12 max-w-3xl border-t border-zinc-700 pt-8">
-              <h2 className="text-xl font-medium text-white">Posts relacionados</h2>
-              <ul className="mt-4 space-y-4">
+              <ul className="grid grid-cols-2 mt-4 space-y-4">
                 {relatedPosts.map((relatedPost) => (
-                  <li key={relatedPost.id} className="space-y-1">
+                  <li
+                    key={relatedPost.id}
+                    className="space-y-1 border border-zinc-700 rounded-lg p-4">
                     <Link
                       href={`/blog/${relatedPost.slug}`}
                       className="text-zinc-200 transition-colors hover:text-white">
                       {relatedPost.title}
                     </Link>
                     {relatedPost.publishedAt ? (
-                      <time dateTime={relatedPost.publishedAt} className="block text-xs text-zinc-500">
+                      <time
+                        dateTime={relatedPost.publishedAt}
+                        className="block text-xs text-zinc-500">
                         {formatDate(relatedPost.publishedAt)}
                       </time>
                     ) : null}
