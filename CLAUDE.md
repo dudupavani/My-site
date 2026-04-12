@@ -75,8 +75,7 @@ Padrão: 10 posts por página. A rota `/blog` lê `?page=` de `searchParams`.
 ### Admin auth modes
 Configurado via `BLOG_ADMIN_AUTH_MODE`:
 - `off` — sem auth (dev local apenas, **nunca em produção**)
-- `static_token` — Bearer token via `BLOG_ADMIN_STATIC_TOKENS`
-- `supabase_jwt` — JWT do Supabase + email whitelist via `BLOG_ADMIN_ALLOWED_EMAILS`
+- `supabase_jwt` — sessão Supabase via Magic Link
 
 ### Erros da API admin
 Use `BlogAdminApiError` de `src/modules/blog-admin/server/errors.ts`. Respostas seguem `{ detail: string, errors?: { [field]: string } }`.
@@ -104,7 +103,7 @@ SUPABASE_URL
 SUPABASE_SERVICE_ROLE_KEY
 SUPABASE_STORAGE_BUCKET_BLOG_COVERS   # padrão: blog-post-covers
 SUPABASE_SIGNED_URL_TTL_SECONDS       # padrão: 7200
-BLOG_ADMIN_AUTH_MODE                  # off | supabase_jwt | static_token
+BLOG_ADMIN_AUTH_MODE                  # off | supabase_jwt
 NEXT_PUBLIC_CKEDITOR_LICENSE_KEY      # GPL para open source
 ```
 

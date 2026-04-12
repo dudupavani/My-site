@@ -6,6 +6,17 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Restaura estilos de heading/lista dentro do editor CKEditor,
+   sobrescritos pelo preflight do Tailwind */
+.ck-content h1 { font-size: 2em; font-weight: 700; margin-block: 0.5em; }
+.ck-content h2 { font-size: 1.5em; font-weight: 700; margin-block: 0.5em; }
+.ck-content h3 { font-size: 1.25em; font-weight: 600; margin-block: 0.5em; }
+.ck-content h4 { font-size: 1em; font-weight: 600; margin-block: 0.5em; }
+.ck-content ul { list-style-type: disc; padding-inline-start: 1.5em; }
+.ck-content ol { list-style-type: decimal; padding-inline-start: 1.5em; }
+.ck-content li { margin-block: 0.25em; }
+.ck-content blockquote { border-inline-start: 4px solid #ccc; padding-inline-start: 1em; color: #666; }
+
 :root {
   --background: oklch(0.97 0.001 106.424);
   --foreground: oklch(0.216 0.006 56.043);

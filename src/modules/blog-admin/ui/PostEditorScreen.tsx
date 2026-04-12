@@ -23,13 +23,14 @@ import type {
   PostStatus,
   ValidationErrorMap,
 } from "@/src/shared/types/blogAdmin";
+import { marked } from "marked";
 import { slugify } from "@/src/shared/utils/slug";
 import { CoverImageCropper } from "./CoverImageCropper";
 import { RichTextEditor } from "./RichTextEditor";
 import { Badge } from "./components/badge";
 import { Button } from "./components/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/card";
-import { Checkbox } from "./components/checkbox";
+import { Toggle } from "./components/toggle";
 import { Input } from "./components/input";
 import { Label } from "./components/label";
 import { Textarea } from "./components/textarea";
@@ -300,7 +301,7 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
 
   return (
     <Card>
-      <CardHeader className="flex-row items-start justify-between gap-2">
+      <CardHeader className="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-2 mb-6">
         <div className="flex items-center gap-3">
           <Button variant="outline" size="icon" asChild>
             <Link href="/admin/posts">
@@ -310,7 +311,7 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
           <CardTitle>{titleLabel}</CardTitle>
           {postStatus !== null && (
             <Badge
-              variant={postStatus === "published" ? "default" : "secondary"}>
+              variant={postStatus === "published" ? "success" : "secondary"}>
               {postStatus === "published" ? "Publicado" : "Draft"}
             </Badge>
           )}
@@ -318,13 +319,11 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
         <div className="flex flex-wrap items-center justify-end gap-3">
           <Button
             variant="outline"
-            size="lg"
             onClick={() => void handleSaveDraft()}
             disabled={saving || publishing}>
             {saving ? "Salvando..." : "Salvar"}
           </Button>
           <Button
-            size="lg"
             onClick={() => void handlePublish()}
             disabled={saving || publishing}>
             {publishing ? "Publicando..." : "Publicar"}
@@ -350,15 +349,15 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
               </p>
             ) : null}
 
-            <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px]">
+            <div className="flex flex-col sm:flex-row flex-1 gap-12 sm:gap-8">
               {/* Main column */}
-              <div className="space-y-5">
-                <div className="flex flex-col gap-4">
+              <div className="min-w-0 basis-0 grow-8 space-y-8">
+                <div className="flex flex-col gap-6">
                   <div className="space-y-1.5">
                     <Label htmlFor="title">Título *</Label>
                     <Input
                       id="title"
-                      size="lg"
+                      size="xl"
                       value={form.title}
                       onChange={(event) =>
                         handleTitleChange(event.target.value)
@@ -405,99 +404,123 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
                   ) : null}
                 </div>
 
-                <div className="space-y-1.5">
-                  <Label htmlFor="source_markdown">
+                <div className="space-y-3">
+                  <Label htmlFor="source_markdown" className="font-semibold">
                     Source Markdown (opcional)
                   </Label>
                   <Textarea
                     id="source_markdown"
-                    rows={6}
+                    rows={8}
                     value={form.source_markdown}
                     onChange={(event) =>
                       updateField("source_markdown", event.target.value)
                     }
-                    placeholder="Use este campo apenas para conteúdo vindo de automação."
+                    placeholder="Cole aqui o Markdown gerado por IA e clique em Converter."
+                    className="p-4"
                   />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    disabled={!form.source_markdown.trim()}
+                    onClick={() => {
+                      const html = marked.parse(form.source_markdown, {
+                        async: false,
+                      });
+                      updateField("content", html as string);
+                    }}>
+                    Converter
+                  </Button>
                 </div>
               </div>
 
               {/* Sidebar */}
-              <div className="space-y-3 mt-4">
-                <div className="space-y-3 rounded-xl border border-border bg-card p-4">
-                  <p className="text-sm font-semibold text-foreground">SEO</p>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="seo_title">SEO Title</Label>
-                    <Input
-                      id="seo_title"
-                      value={form.seo_title}
-                      onChange={(event) =>
-                        updateField("seo_title", event.target.value)
-                      }
-                      aria-invalid={!!validationErrors.seo_title}
-                    />
-                    {validationErrors.seo_title ? (
-                      <p className="text-xs text-destructive">
-                        {validationErrors.seo_title}
-                      </p>
-                    ) : null}
+              <div className="mt-4 min-w-0 basis-0 grow-4 space-y-5">
+                <div className="space-y-3 rounded-xl border border-border bg-card p-4 shadow-sm">
+                  <div className="mb-2">
+                    <span className="text-lg text-foreground">SEO</span>
                   </div>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="seo_description">SEO Description</Label>
-                    <Textarea
-                      id="seo_description"
-                      rows={4}
-                      value={form.seo_description}
-                      onChange={(event) =>
-                        updateField("seo_description", event.target.value)
-                      }
-                      aria-invalid={!!validationErrors.seo_description}
-                    />
-                    {validationErrors.seo_description ? (
-                      <p className="text-xs text-destructive">
-                        {validationErrors.seo_description}
-                      </p>
-                    ) : null}
+                  <div className="flex flex-col gap-4">
+                    <div>
+                      <Input
+                        id="seo_title"
+                        placeholder="SEO Title"
+                        aria-label="SEO Title"
+                        value={form.seo_title}
+                        onChange={(event) =>
+                          updateField("seo_title", event.target.value)
+                        }
+                        aria-invalid={!!validationErrors.seo_title}
+                      />
+                      {validationErrors.seo_title ? (
+                        <p className="text-xs text-destructive">
+                          {validationErrors.seo_title}
+                        </p>
+                      ) : null}
+                    </div>
+                    <div>
+                      <Textarea
+                        id="seo_description"
+                        placeholder="SEO Description"
+                        aria-label="SEO Description"
+                        rows={6}
+                        value={form.seo_description}
+                        onChange={(event) =>
+                          updateField("seo_description", event.target.value)
+                        }
+                        aria-invalid={!!validationErrors.seo_description}
+                      />
+                      {validationErrors.seo_description ? (
+                        <p className="text-xs text-destructive">
+                          {validationErrors.seo_description}
+                        </p>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
 
-                <div className="space-y-3 rounded-xl border border-border bg-card p-4">
-                  <p className="font-semibold text-foreground">Categorias</p>
+                <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
+                  <div className="mb-2">
+                    <span className="text-lg text-foreground">Categorias</span>
+                  </div>
+
+                  <div className="mb-6">
+                    <form
+                      onSubmit={handleCreateCategory}
+                      className="flex gap-2">
+                      <Input
+                        value={newCategoryName}
+                        onChange={(e) => setNewCategoryName(e.target.value)}
+                        placeholder="Nova categoria..."
+                      />
+                      <Button
+                        type="submit"
+                        disabled={creatingCategory || !newCategoryName.trim()}
+                        className="shrink-0">
+                        {creatingCategory ? "..." : "Criar"}
+                      </Button>
+                    </form>
+
+                    {validationErrors.category_ids ? (
+                      <p className="text-xs text-destructive">
+                        {validationErrors.category_ids}
+                      </p>
+                    ) : null}
+                  </div>
 
                   {categories.length > 0 && (
-                    <div className="grid gap-2">
+                    <div className="flex flex-wrap gap-2">
                       {categories.map((category) => (
-                        <label
+                        <Toggle
                           key={category.id}
-                          className="inline-flex cursor-pointer items-center gap-2 text-sm text-foreground">
-                          <Checkbox
-                            checked={selectedCategoryIds.has(category.id)}
-                            onCheckedChange={() => toggleCategory(category.id)}
-                          />
-                          <span>{category.name}</span>
-                        </label>
+                          variant="outline"
+                          size="sm"
+                          pressed={selectedCategoryIds.has(category.id)}
+                          onPressedChange={() => toggleCategory(category.id)}>
+                          {category.name}
+                        </Toggle>
                       ))}
                     </div>
                   )}
-
-                  <form onSubmit={handleCreateCategory} className="flex gap-2">
-                    <Input
-                      value={newCategoryName}
-                      onChange={(e) => setNewCategoryName(e.target.value)}
-                      placeholder="Nova categoria..."
-                    />
-                    <Button
-                      type="submit"
-                      disabled={creatingCategory || !newCategoryName.trim()}
-                      className="shrink-0">
-                      {creatingCategory ? "..." : "Criar"}
-                    </Button>
-                  </form>
-
-                  {validationErrors.category_ids ? (
-                    <p className="text-xs text-destructive">
-                      {validationErrors.category_ids}
-                    </p>
-                  ) : null}
                 </div>
 
                 <CoverImageCropper

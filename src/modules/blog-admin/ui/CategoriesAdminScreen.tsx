@@ -150,13 +150,10 @@ export function CategoriesAdminScreen() {
   return (
     <Card>
       <CardHeader>
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-          Categorias
-        </p>
-        <CardTitle>CRUD de categorias</CardTitle>
+        <CardTitle>Categorias</CardTitle>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-6">
         {state.error ? (
           <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive">
             {state.error}
@@ -168,12 +165,13 @@ export function CategoriesAdminScreen() {
           className="flex flex-col gap-2 md:flex-row">
           <Input
             type="text"
+            size="lg"
             value={newCategoryName}
             onChange={(event) => setNewCategoryName(event.target.value)}
             placeholder="Nome da nova categoria"
           />
-          <Button type="submit" disabled={state.creating} className="shrink-0">
-            {state.creating ? "Salvando..." : "Criar categoria"}
+          <Button type="submit" disabled={state.creating} size="lg">
+            {state.creating ? "Salvando..." : "Criar"}
           </Button>
         </form>
 
@@ -186,7 +184,7 @@ export function CategoriesAdminScreen() {
             Nenhuma categoria criada.
           </p>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-6 md:space-y-2">
             {state.categories.map((category) => (
               <div
                 key={category.id}
@@ -204,14 +202,12 @@ export function CategoriesAdminScreen() {
                 <div className="flex shrink-0 items-center gap-2">
                   <Button
                     variant="outline"
-                    size="sm"
                     onClick={() => void handleEditCategory(category.id)}
                     disabled={state.editingId === category.id}>
                     {state.editingId === category.id ? "Salvando..." : "Salvar"}
                   </Button>
                   <Button
                     variant="destructive"
-                    size="sm"
                     onClick={() => void handleDeleteCategory(category.id)}
                     disabled={state.deletingId === category.id}>
                     {state.deletingId === category.id

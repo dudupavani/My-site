@@ -149,8 +149,10 @@ export function CoverImageCropper({
   }
 
   return (
-    <div className="space-y-3 rounded-xl border border-border bg-card p-3">
-      <p className="font-semibold text-foreground">Capa</p>
+    <div className="space-y-3 rounded-xl border border-border bg-card p-4 shadow-sm">
+      <div className="mb-2">
+        <span className="text-lg text-foreground">Capa</span>
+      </div>
 
       <label className="block cursor-pointer">
         <input
@@ -158,7 +160,7 @@ export function CoverImageCropper({
           accept="image/*"
           disabled={disabled || applying}
           onChange={(event) => handleFileChange(event.target.files)}
-          className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground file:mr-3 file:rounded file:border-0 file:bg-primary file:px-2 file:py-1 file:text-xs file:font-medium file:text-primary-foreground disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-lg border border-border bg-background px-1 py-1 text-xs text-foreground file:mr-3 file:rounded file:border-0 file:bg-primary file:px-2 file:py-1 file:text-sm file:font-medium file:text-primary-foreground disabled:cursor-not-allowed disabled:opacity-50"
         />
       </label>
 

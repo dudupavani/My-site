@@ -106,83 +106,155 @@ export function PostsAdminScreen() {
             Nenhum post cadastrado ainda. Use "Criar Post" para começar.
           </p>
         ) : (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Título</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Atualizado</TableHead>
-                <TableHead>Ações</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
+          <>
+            {/* Mobile: cards */}
+            <div className="flex flex-col gap-3 sm:hidden">
               {state.posts.map((post) => (
-                <TableRow key={post.id}>
-                  <TableCell>
+                <div
+                  key={post.id}
+                  className="rounded-lg border border-border bg-card p-4 flex items-start justify-between gap-3">
+                  <div className="min-w-0 flex flex-col gap-3">
                     <Link
                       href={`/admin/posts/${post.id}`}
-                      className="font-medium text-foreground hover:underline">
+                      className="font-medium text-foreground hover:underline leading-snug">
                       {post.title}
                     </Link>
-                  </TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={
-                        post.status === "published" ? "default" : "secondary"
-                      }>
-                      {post.status === "published" ? "Publicado" : "Draft"}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">
-                    {formatDateTime(post.updated_at)}
-                  </TableCell>
-                  <TableCell>
                     <div className="flex items-center gap-2">
-                      <Button variant="outline" size="icon" asChild>
-                        <Link href={`/admin/posts/${post.id}`}>
-                          <Pencil />
-                        </Link>
-                      </Button>
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <Button
-                            variant="destructive"
-                            size="icon"
-                            disabled={state.deletingPostId === post.id}
-                            aria-label={`Excluir post ${post.title}`}>
-                            {state.deletingPostId === post.id ? (
-                              <Loader2 className="animate-spin" />
-                            ) : (
-                              <Trash2 />
-                            )}
-                          </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>Excluir post?</AlertDialogTitle>
-                            <AlertDialogDescription>
-                              Esta ação é permanente e não pode ser desfeita.
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                            <AlertDialogAction
-                              variant="destructive"
-                              onClick={() => void handleDelete(post.id)}
-                              disabled={state.deletingPostId === post.id}>
-                              {state.deletingPostId === post.id
-                                ? "Excluindo..."
-                                : "Excluir"}
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
+                      <Badge
+                        variant={
+                          post.status === "published" ? "default" : "secondary"
+                        }>
+                        {post.status === "published" ? "Publicado" : "Draft"}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">
+                        {formatDateTime(post.updated_at)}
+                      </span>
                     </div>
-                  </TableCell>
-                </TableRow>
+                  </div>
+                  <div className="flex flex-col sm:flex-row items-center gap-2 shrink-0">
+                    <Button variant="outline" size="icon" asChild>
+                      <Link href={`/admin/posts/${post.id}`}>
+                        <Pencil />
+                      </Link>
+                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          variant="destructive"
+                          size="icon"
+                          disabled={state.deletingPostId === post.id}
+                          aria-label={`Excluir post ${post.title}`}>
+                          {state.deletingPostId === post.id ? (
+                            <Loader2 className="animate-spin" />
+                          ) : (
+                            <Trash2 />
+                          )}
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Excluir post?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Esta ação é permanente e não pode ser desfeita.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                          <AlertDialogAction
+                            variant="destructive"
+                            onClick={() => void handleDelete(post.id)}
+                            disabled={state.deletingPostId === post.id}>
+                            {state.deletingPostId === post.id
+                              ? "Excluindo..."
+                              : "Excluir"}
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
+                </div>
               ))}
-            </TableBody>
-          </Table>
+            </div>
+
+            {/* Desktop: tabela */}
+            <Table className="hidden sm:table">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Título</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Atualizado</TableHead>
+                  <TableHead>Ações</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {state.posts.map((post) => (
+                  <TableRow key={post.id}>
+                    <TableCell>
+                      <Link
+                        href={`/admin/posts/${post.id}`}
+                        className="font-medium text-foreground hover:underline">
+                        {post.title}
+                      </Link>
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          post.status === "published" ? "default" : "secondary"
+                        }>
+                        {post.status === "published" ? "Publicado" : "Draft"}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">
+                      {formatDateTime(post.updated_at)}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <Button variant="outline" size="icon" asChild>
+                          <Link href={`/admin/posts/${post.id}`}>
+                            <Pencil />
+                          </Link>
+                        </Button>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button
+                              variant="destructive"
+                              size="icon"
+                              disabled={state.deletingPostId === post.id}
+                              aria-label={`Excluir post ${post.title}`}>
+                              {state.deletingPostId === post.id ? (
+                                <Loader2 className="animate-spin" />
+                              ) : (
+                                <Trash2 />
+                              )}
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Excluir post?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                Esta ação é permanente e não pode ser desfeita.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                              <AlertDialogAction
+                                variant="destructive"
+                                onClick={() => void handleDelete(post.id)}
+                                disabled={state.deletingPostId === post.id}>
+                                {state.deletingPostId === post.id
+                                  ? "Excluindo..."
+                                  : "Excluir"}
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </>
         )}
       </CardContent>
     </Card>
