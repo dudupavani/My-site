@@ -4,7 +4,6 @@ import {
   responseJson,
   toErrorResponse,
 } from "@/src/shared/server/blogAdminHttp";
-import { readAllowedAdminEmail } from "@/src/shared/server/adminAuth";
 import { createSupabaseServerAuthClient } from "@/src/shared/server/supabaseAuth";
 
 export const runtime = "nodejs";
@@ -23,7 +22,7 @@ function isValidEmail(email: string): boolean {
 }
 
 const SAFE_SUCCESS_MESSAGE =
-  "Se o email estiver autorizado, voce recebera um Magic Link em instantes.";
+  "Se o email existir como usuario do admin, voce recebera um Magic Link em instantes.";
 
 export async function POST(request: Request) {
   try {
@@ -34,11 +33,6 @@ export async function POST(request: Request) {
       throw new BlogAdminApiError("Informe um email valido.", 422, {
         email: "Informe um email valido.",
       });
-    }
-
-    const allowedEmail = readAllowedAdminEmail();
-    if (email !== allowedEmail) {
-      return responseJson({ ok: true, message: SAFE_SUCCESS_MESSAGE });
     }
 
     const supabase = await createSupabaseServerAuthClient();

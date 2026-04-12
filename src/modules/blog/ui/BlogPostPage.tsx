@@ -57,7 +57,7 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
                 <img
                   src={post.coverImageUrl}
                   alt={post.title}
-                  className="aspect-[2/1] w-full object-cover"
+                  className="aspect-2/1 w-full object-cover"
                 />
               </div>
             ) : null}
@@ -89,7 +89,7 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
                   <li key={relatedPost.id} className="h-full">
                     <Link
                       href={`/blog/${relatedPost.slug}`}
-                      className="group flex flex-col gap-2 justify-between bg-zinc-700/50 hover:bg-zinc-700 border-zinc-700 border border-transparent rounded-lg p-4 h-full transition-colors ">
+                      className="group flex flex-col gap-2 justify-between bg-zinc-700/50 hover:bg-zinc-700  border border-transparent rounded-lg p-4 h-full transition-colors ">
                       <h2 className="line-clamp-2 text-zinc-300 transition-colors group-hover:text-white">
                         {relatedPost.title}
                       </h2>

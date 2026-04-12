@@ -6,7 +6,7 @@ import {
 
 export function HeroSection() {
   return (
-    <section className="relative h-dvh md:h-screen min-h-[700px] bg-zinc-900 text-white flex flex-col items-center justify-start md:justify-center overflow-hidden">
+    <section className="relative h-dvh md:h-screen min-h-175 bg-zinc-900 text-white flex flex-col items-center justify-start md:justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img
           src="/images/hero-bg.png"
@@ -22,14 +22,14 @@ export function HeroSection() {
       />
       <img
         src="/images/symbol.svg"
-        className="absolute h-[20%] w-auto object-contain filter !blur-sm opacity-30 right-[10%]"
+        className="absolute h-[20%] w-auto object-contain filter blur-sm! opacity-30 right-[10%]"
         alt=""
       />
 
       <div className="absolute inset-0 z-5 flex items-center justify-center top-20">
         <img
           src="/images/symbol.svg"
-          className="h-[100%] w-auto object-contain !blur-3xl !fill-blue-600"
+          className="h-full w-auto object-contain blur-3xl! fill-blue-600!"
           alt=""
         />
       </div>
@@ -38,12 +38,12 @@ export function HeroSection() {
         <img
           src="/images/symbol.svg"
           alt=""
-          className="absolute inset-0 z-30 top-[400px] left-[40%] h-[70%] w-auto object-contain !blur-3xl !fill-blue-600 !mix-blend-hard-light"
+          className="absolute inset-0 z-30 top-100 left-[40%] h-[70%] w-auto object-contain blur-3xl! fill-blue-600! mix-blend-hard-light!"
         />
         <img
           src="/images/img-profile-2.webp"
           alt="Eduardo Pavani"
-          className="max-w-[110%] max-h-[80%] sm:h-full sm:max-h-full sm:max-w-lg md:max-w-2xl lg:max-w-[100%] w-auto object-contain object-bottom"
+          className="max-w-[110%] max-h-[80%] sm:h-full sm:max-h-full sm:max-w-lg md:max-w-2xl lg:max-w-full w-auto object-contain object-bottom"
         />
       </div>
 

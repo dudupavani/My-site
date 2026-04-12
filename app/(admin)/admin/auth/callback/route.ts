@@ -1,7 +1,6 @@
 import type { EmailOtpType } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
-import { isAllowedAdminEmail } from "@/src/shared/server/adminAuth";
 import { createSupabaseServerAuthClient } from "@/src/shared/server/supabaseAuth";
 
 export const runtime = "nodejs";
@@ -54,7 +53,7 @@ export async function GET(request: Request) {
   }
 
   const { data, error } = await supabase.auth.getUser();
-  if (error || !data.user || !isAllowedAdminEmail(data.user.email)) {
+  if (error || !data.user) {
     await supabase.auth.signOut();
     return loginRedirect(request, "magic_link_invalid");
   }
