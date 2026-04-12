@@ -45,6 +45,11 @@ async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
   });
 
   if (!response.ok) {
+    if (response.status === 401 || response.status === 403) {
+      if (typeof window !== "undefined") {
+        window.location.assign("/admin?error=session_expired");
+      }
+    }
     throw await parseError(response);
   }
 
@@ -129,4 +134,3 @@ export async function updateCategoryById(categoryId: string, name: string): Prom
 export async function deleteCategoryById(categoryId: string): Promise<void> {
   await requestJson<{ ok: true }>(`/categories/${categoryId}`, { method: "DELETE" });
 }
-

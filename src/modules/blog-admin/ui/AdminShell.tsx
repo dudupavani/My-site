@@ -26,6 +26,11 @@ export function AdminShell({ children }: AdminShellProps) {
               <Link href="/admin/categories">Categorias</Link>
             </Button>
           </nav>
+          <form action="/api/admin/auth/logout" method="post">
+            <Button variant="outline" size="default" type="submit">
+              Sair
+            </Button>
+          </form>
         </div>
       </header>
 
