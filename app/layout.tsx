@@ -3,6 +3,7 @@ import { Google_Sans_Flex } from "next/font/google";
 import Script from "next/script";
 
 import "./globals.css";
+import "react-easy-crop/react-easy-crop.css";
 
 const googleSansFlex = Google_Sans_Flex({
   subsets: ["latin"],
