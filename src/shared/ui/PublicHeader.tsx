@@ -16,7 +16,9 @@ type PublicHeaderProps = {
 
 export function PublicHeader({ variant }: PublicHeaderProps) {
   const isBlog = variant === "blog";
-  const logoSrc = isBlog ? "/images/symbol.svg" : "/images/symbol-white.svg";
+  const logoSrc = isBlog
+    ? "/images/symbol-white.svg"
+    : "/images/symbol-white.svg";
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -94,7 +96,7 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden inline-flex items-center justify-center rounded-sm text-stone-100 p-2  bg-black/20 backdrop-blur-sm transition-colors hover:bg-black/40">
+          className="md:hidden inline-flex items-center justify-center rounded-sm text-stone-100 p-2  backdrop-blur-sm transition-colors hover:bg-black/40">
           {isMenuOpen ? (
             <X className="h-6 w-6" />
           ) : (

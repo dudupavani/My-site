@@ -13,7 +13,7 @@ export async function BlogListPage({ page = 1 }: Props) {
 
   return (
     <div className="min-h-screen bg-stone-900 text-white">
-      <main className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-16 xl:px-6 pt-22 sm:pt-30 lg:pt-40 pb-16">
+      <main className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-16 xl:px-6 pt-30 sm:pt-30 lg:pt-40 pb-16">
         <div className="mb-6">
           <h1 className="text-2xl sm:text-4xl font-extralight tracking-tight text-stone-500">
             Conteúdos
