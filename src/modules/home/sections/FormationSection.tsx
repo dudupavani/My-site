@@ -44,10 +44,10 @@ const formations = [
 
 export function FormationSection() {
   return (
-    <section className="bg-zinc-900 text-white">
+    <section className="bg-stone-900 text-white">
       <div className="flex flex-col items-stretch">
-        <div className="flex justify-start md:justify-center items-center px-6 py-12">
-          <h2 className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.6em]! text-zinc-500">
+        <div className="flex justify-start md:justify-center items-center px-6 pt-12 pb-6 sm:py-12">
+          <h2 className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.6em]! text-stone-500">
             Formação
           </h2>
         </div>
@@ -56,11 +56,11 @@ export function FormationSection() {
           {formations.map((item) => (
             <div
               key={item.degree}
-              className="px-6 py-6 md:py-10 md:px-10 border border-zinc-800/60 flex flex-col gap-4 justify-between">
-              <h3 className="text-base sm:text-lg font-medium mb-2 text-zinc-300">
+              className="px-6 py-4 sm:py-6 md:py-10 md:px-10 border border-stone-800/60 flex flex-col gap-2 justify-between">
+              <h3 className="text-base sm:text-lg font-medium mb-2 text-stone-300">
                 {item.degree}
               </h3>
-              <div className="opacity-40">
+              <div className="opacity-60">
                 <img
                   src={item.logo}
                   alt={item.alt}

@@ -13,14 +13,14 @@ const googleSansFlex = Google_Sans_Flex({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://eduardopavani.com.br"),
-  title: "Eduardo Pavani - Product Manager Estratégico",
+  title: "Eduardo Pavani - Product Lead",
   description:
-    "Eduardo Pavani - Product Manager Estratégico focado em estratégia, clareza e execução na construção de produtos digitais. Especialista em UX e gestão de produtos.",
+    "Eduardo Pavani - Product Lead focado em estratégia, clareza e execução na construção de produtos digitais.",
   keywords: [
     "Product Manager",
+    "Product Lead",
     "Gestão de Produtos",
     "Eduardo Pavani",
-    "UX Design",
     "Estratégia de Produto",
     "Produtos Digitais",
   ],
@@ -31,16 +31,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://eduardopavani.com.br/",
-    title: "Eduardo Pavani - Product Manager Estratégico",
+    title: "Eduardo Pavani - Product Lead",
     description:
-      "Estratégia, clareza e execução na construção de produtos digitais. Conheça minha trajetória e visão sobre produto.",
+      "Eduardo Pavani - Product Lead focado em estratégia, clareza e execução na construção de produtos digitais.",
     images: ["https://eduardopavani.com.br/images/img-profile-2.webp"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Eduardo Pavani - Product Manager Estratégico",
+    title: "Eduardo Pavani - Product Lead",
     description:
-      "Estratégia, clareza e execução na construção de produtos digitais. Conheça minha trajetória e visão sobre produto.",
+      "Eduardo Pavani - Product Lead focado em estratégia, clareza e execução na construção de produtos digitais.",
     images: ["https://eduardopavani.com.br/images/img-profile-2.webp"],
   },
   icons: {
@@ -52,7 +52,7 @@ const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Eduardo Pavani",
-  jobTitle: "Product Lead Estratégico",
+  jobTitle: "Product Lead",
   url: "https://eduardopavani.com.br",
   sameAs: [
     "https://www.linkedin.com/in/eduardopavani/",
@@ -60,7 +60,7 @@ const personSchema = {
     "https://www.instagram.com/eduardopavanipro",
   ],
   description:
-    "Estratégia, clareza e execução na construção de produtos digitais.",
+    "Product Lead focado em estratégia, clareza e execução na construção de produtos digitais.",
 };
 
 const websiteSchema = {

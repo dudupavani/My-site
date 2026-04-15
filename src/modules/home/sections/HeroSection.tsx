@@ -1,11 +1,6 @@
 import { Suspense } from "react";
 import Link from "next/link";
 
-import {
-  InstagramIcon,
-  LinkedInIcon,
-  WhatsAppIcon,
-} from "@/src/modules/home/icons";
 import { getFeaturedPost } from "@/src/modules/blog/server/queries";
 
 async function FeaturedPostBanner() {
@@ -16,7 +11,7 @@ async function FeaturedPostBanner() {
     <Link
       href={`/blog/${post.slug}`}
       className="group mt-8 md:mt-10 block w-full max-w-sm sm:max-w-md">
-      <div className="flex items-center gap-0 rounded-xl bg-zinc-800 overflow-hidden border border-zinc-700/50 transition-colors group-hover:border-zinc-600">
+      <div className="flex items-center gap-0 rounded-xl bg-stone-800 overflow-hidden border border-stone-700/50 transition-colors group-hover:border-stone-600">
         {post.coverImageUrl ? (
           <img
             src={post.coverImageUrl}
@@ -24,9 +19,9 @@ async function FeaturedPostBanner() {
             className="h-16 w-16 sm:h-20 sm:w-20 shrink-0 object-cover"
           />
         ) : (
-          <div className="h-16 w-16 sm:h-20 sm:w-20 shrink-0 bg-zinc-700" />
+          <div className="h-16 w-16 sm:h-20 sm:w-20 shrink-0 bg-stone-700" />
         )}
-        <span className="px-4 text-sm sm:text-base font-light text-zinc-300 line-clamp-2 group-hover:text-white transition-colors leading-snug">
+        <span className="px-4 text-sm sm:text-base font-light text-stone-300 line-clamp-2 group-hover:text-white transition-colors leading-snug">
           {post.title}
         </span>
       </div>
@@ -36,85 +31,84 @@ async function FeaturedPostBanner() {
 
 export function HeroSection() {
   return (
-    <section className="relative h-dvh md:h-screen min-h-175 bg-zinc-900 text-white flex flex-col items-center justify-start md:justify-center overflow-hidden">
+    <section className="relative h-dvh md:h-screen min-h-175 bg-stone-900 text-white flex flex-col items-center justify-start md:justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/hero-bg.png"
+          src="/images/hero-bg-blur.png"
           alt=""
           className="w-full h-full object-cover opacity-60"
         />
       </div>
 
-      <img
-        src="/images/symbol.svg"
-        className="absolute  h-60 md:h-[80%] top-50 w-auto object-contain filter opacity-20 left-[20%]"
-        alt=""
-      />
-      <img
-        src="/images/symbol.svg"
-        className="absolute h-[20%] w-auto object-contain filter blur-sm! opacity-30 right-[10%]"
-        alt=""
-      />
-
-      <div className="absolute inset-0 z-5 flex items-center justify-center top-20">
-        <img
-          src="/images/symbol.svg"
-          className="h-full w-auto object-contain blur-3xl! fill-blue-600!"
-          alt=""
-        />
+      {/* Simbolo Grande esquerda */}
+      <div className="absolute z-5 top-[170px] -left-[130px]">
+        <svg
+          viewBox="0 0 150 150"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-[150px] h-[150px] origin-top-left scale-[8] opacity-50 fill-current text-[#998663]"
+          aria-hidden="true">
+          <path
+            d="M48.4031 101.41C55.3743 108.434 64.8403 112.42 74.7389 112.5L74.8902 150C55.0142 149.96 35.9659 142.041 21.9256 127.98C7.88534 113.919 -4.03957e-05 94.8651 0 75V0H75.0415C88.207 0.014549 101.137 3.49061 112.533 10.0792C123.929 16.6677 133.391 26.1369 139.967 37.5359C146.544 48.9349 150.004 61.8625 150 75.0207C149.996 88.1789 146.529 101.105 139.946 112.5H75.3441C85.2952 112.46 94.8228 108.471 101.831 101.41C108.839 94.3486 112.754 84.7944 112.714 74.8488C112.673 64.9032 108.682 55.3808 101.617 48.3766C94.5521 41.3723 84.9926 37.4599 75.0415 37.5H37.5208V75C37.5204 84.8934 41.432 94.3862 48.4031 101.41Z"
+            fill="currentColor"
+          />
+        </svg>
       </div>
 
+      {/* Simbolo blur direita */}
+      <img
+        src="/images/symbol.svg"
+        className="absolute h-60 xl:h-80 w-auto right-20 xl:right-50 2xl:right-100 top-40 object-contain filter blur-lg! opacity-30 "
+        alt=""
+      />
+
+      {/* Simbolo topo direita */}
+      <div className="absolute inset-0 z-5 flex items-center justify-center -top-150 -right-380 2xl:-top-150 2xl:-right-460 opacity-70">
+        <svg
+          viewBox="0 0 150 150"
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-200 2xl:h-300 w-auto object-contain fill-current text-[#68553C]"
+          aria-hidden="true">
+          <path
+            d="M48.4031 101.41C55.3743 108.434 64.8403 112.42 74.7389 112.5L74.8902 150C55.0142 149.96 35.9659 142.041 21.9256 127.98C7.88534 113.919 -4.03957e-05 94.8651 0 75V0H75.0415C88.207 0.014549 101.137 3.49061 112.533 10.0792C123.929 16.6677 133.391 26.1369 139.967 37.5359C146.544 48.9349 150.004 61.8625 150 75.0207C149.996 88.1789 146.529 101.105 139.946 112.5H75.3441C85.2952 112.46 94.8228 108.471 101.831 101.41C108.839 94.3486 112.754 84.7944 112.714 74.8488C112.673 64.9032 108.682 55.3808 101.617 48.3766C94.5521 41.3723 84.9926 37.4599 75.0415 37.5H37.5208V75C37.5204 84.8934 41.432 94.3862 48.4031 101.41Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+
+      {/* Simbolo blur light */}
       <div className="absolute inset-0 z-10 flex items-end justify-center">
         <img
           src="/images/symbol.svg"
           alt=""
-          className="absolute inset-0 z-30 top-100 left-[40%] h-[70%] w-auto object-contain blur-3xl! fill-blue-600! mix-blend-hard-light!"
+          className="absolute inset-0 opacity-40 z-20 top-100 2xl:top-130  left-40 2xl:left-80 h-300 w-auto object-contain blur-3xl! fill-stone-600! mix-blend-hard-light!"
         />
         <img
           src="/images/me-hero.webp"
           alt="Eduardo Pavani"
-          className="max-w-[110%] max-h-[80%] md:h-full md:max-h-full sm:max-w-lg md:max-w-3xl lg:max-w-4xl xl:max-w-5xl object-contain object-bottom"
+          className="drop-shadow-2xl drop-shadow-[#292524]/50 relative z-10 max-w-[110%] max-h-[80%] md:h-full md:max-h-full sm:max-w-lg md:max-w-3xl lg:max-w-4xl xl:max-w-5xl object-contain object-bottom"
         />
-      </div>
-
-      <div className="relative z-20 flex flex-col items-center text-center px-6 mt-28 md:mt-50 xl:mt-80">
-        <div className="flex items-center mb-6 md:mb-6">
+        <div className="absolute inset-0 flex items-center justify-center">
           <img
-            src="/images/logo.svg"
+            src="/images/eduardo-pavani.svg"
             alt="eduardopavani"
-            className="h-12 sm:h-14 md:h-20 lg:h-28 w-auto"
+            className="hidden md:block h-20 lg:h-40 2xl:h-50 w-auto"
+          />
+          <img
+            src="/images/eduardo-pavani-vert.svg"
+            alt="eduardopavani"
+            className="block md:hidden h-50 w-auto -mt-20"
           />
         </div>
-        <div className="mx-auto md:max-w-3xl 2xl:max-w-5xl space-y-4">
+      </div>
+
+      <div className="relative z-20 flex flex-col items-center text-center px-6 mt-28 md:mt-80">
+        <div className="mx-auto md:max-w-4xl 2xl:max-w-5xl space-y-4">
           <h1 className="text-lg sm:text-xl md:text-3xl 2xl:text-4xl leading-[1.7] sm:leading-[1.4] 2xl:leading-[1.3] font-light">
-          Ajudo empresas de tecnologia a transformar visão de produto em execução estruturada que gera resultado.
-        </h1>
-        <p className="text-lg leading-[1.6] font-extralight">Atuo na interseção entre negócio, produto e operação, organizando direção, prioridade e execução para fazer o produto avançar com consistência.</p>
+            Ajudo empresas de tecnologia a transformar visão de produto em
+            estratégia de execução estruturada que gera resultado.
+          </h1>
         </div>
-        <div className="flex items-center gap-2 sm:gap-6 mt-90 sm:mt-8 md:mt-12 text-white">
-          <a
-            href="https://wa.me/5548991587232"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Entre em contato pelo WhatsApp"
-            className="text-white border border-transparent hover:border-blue-700 transition-colors duration-300 p-4 rounded-lg bg-transparent">
-            <WhatsAppIcon className="w-6 h-6" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/eduardopavani/"
-            aria-label="Visite meu perfil no LinkedIn"
-            className="text-white border border-transparent hover:border-blue-700 transition-colors duration-300 p-4 rounded-lg bg-transparent">
-            <LinkedInIcon className="w-6 h-6" />
-          </a>
-          <a
-            href="https://www.instagram.com/eduardopavanipro"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Visite meu perfil no Instagram"
-            className="text-white border border-transparent hover:border-blue-700 transition-colors duration-300 p-4 rounded-lg bg-transparent">
-            <InstagramIcon className="w-6 h-6" />
-          </a>
-        </div>
+
         <Suspense fallback={null}>
           <FeaturedPostBanner />
         </Suspense>

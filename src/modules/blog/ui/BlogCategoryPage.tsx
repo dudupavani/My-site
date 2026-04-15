@@ -21,10 +21,10 @@ export async function BlogCategoryPage({ category, page = 1 }: Props) {
   );
 
   return (
-    <div className="min-h-screen bg-zinc-800 text-white">
+    <div className="min-h-screen bg-stone-800 text-white">
       <main className="mx-auto max-w-7xl px-6 pt-6 pb-16 sm:pt-10">
         <div className="mb-12 space-y-3">
-          <p className="text-xs uppercase tracking-[0.16em] text-zinc-500">
+          <p className="text-xs uppercase tracking-[0.16em] text-stone-500">
             Categoria
           </p>
           <h1 className="text-3xl font-medium tracking-tight text-white">
@@ -33,7 +33,7 @@ export async function BlogCategoryPage({ category, page = 1 }: Props) {
         </div>
 
         {posts.length === 0 ? (
-          <p className="text-zinc-500">
+          <p className="text-stone-500">
             Nenhum post publicado nesta categoria.
           </p>
         ) : (
@@ -58,9 +58,9 @@ export async function BlogCategoryPage({ category, page = 1 }: Props) {
 
 function PostCard({ post }: { post: BlogPostSummary }) {
   return (
-    <article className="group flex h-full flex-col rounded-2xl border border-zinc-700/50 bg-zinc-900/30">
+    <article className="group flex h-full flex-col rounded-2xl border border-stone-700/50 bg-stone-900/30">
       <div className="flex flex-1 flex-col gap-4 px-6 pb-4 pt-8">
-        <h2 className="line-clamp-2 text-2xl text-zinc-300 transition-colors group-hover:text-white">
+        <h2 className="line-clamp-2 text-2xl text-stone-300 transition-colors group-hover:text-white">
           <Link
             href={`/blog/${post.slug}`}
             className="transition-colors hover:text-white">
@@ -68,7 +68,7 @@ function PostCard({ post }: { post: BlogPostSummary }) {
           </Link>
         </h2>
         {post.publishedAt ? (
-          <time dateTime={post.publishedAt} className="text-xs text-zinc-500">
+          <time dateTime={post.publishedAt} className="text-xs text-stone-500">
             {formatDate(post.publishedAt)}
           </time>
         ) : null}
@@ -106,13 +106,13 @@ function Pagination({
 
   return (
     <nav
-      className="mt-12 flex items-center justify-between border-t border-zinc-800 pt-8"
+      className="mt-12 flex items-center justify-between border-t border-stone-800 pt-8"
       aria-label="Paginação da categoria">
       <div>
         {prev ? (
           <Link
             href={prev === 1 ? basePath : `${basePath}?page=${prev}`}
-            className="text-sm text-zinc-400 transition-colors hover:text-white">
+            className="text-sm text-stone-400 transition-colors hover:text-white">
             ← Mais recentes
           </Link>
         ) : (
@@ -120,7 +120,7 @@ function Pagination({
         )}
       </div>
 
-      <span className="text-xs text-zinc-600">
+      <span className="text-xs text-stone-600">
         {currentPage} / {totalPages}
       </span>
 
@@ -128,7 +128,7 @@ function Pagination({
         {next ? (
           <Link
             href={`${basePath}?page=${next}`}
-            className="text-sm text-zinc-400 transition-colors hover:text-white">
+            className="text-sm text-stone-400 transition-colors hover:text-white">
             Mais antigos →
           </Link>
         ) : (

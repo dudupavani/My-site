@@ -12,18 +12,18 @@ export async function BlogListPage({ page = 1 }: Props) {
   const { posts, totalPages, currentPage } = await listPublishedPosts({ page });
 
   return (
-    <div className="min-h-screen bg-zinc-900 text-white">
+    <div className="min-h-screen bg-stone-900 text-white">
       <main className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-16 xl:px-6 pt-22 sm:pt-30 lg:pt-40 pb-16">
         <div className="mb-6">
-          <h1 className="text-2xl sm:text-4xl font-extralight tracking-tight text-zinc-500">
+          <h1 className="text-2xl sm:text-4xl font-extralight tracking-tight text-stone-500">
             Conteúdos
           </h1>
         </div>
 
         {posts.length === 0 ? (
-          <p className="text-zinc-500">Nenhum post publicado ainda.</p>
+          <p className="text-stone-500">Nenhum post publicado ainda.</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 divide-y divide-zinc-800">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 divide-y divide-stone-800">
             {posts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
@@ -40,9 +40,9 @@ export async function BlogListPage({ page = 1 }: Props) {
 
 function PostCard({ post }: { post: BlogPostSummary }) {
   return (
-    <article className="group flex h-full flex-col rounded-2xl border border-zinc-700/50 bg-zinc-800 sm:bg-zinc-800/60">
+    <article className="group flex h-full flex-col rounded-2xl border border-stone-700/50 bg-stone-800 sm:bg-stone-800/60">
       <div className="flex flex-1 flex-col gap-4 px-4 sm:px-6 pb-4 pt-6 sm:pt-8">
-        <h2 className="text-lg sm:text-xl md:text-2xl text-zinc-300 line-clamp-2 transition-colors group-hover:text-white">
+        <h2 className="text-lg sm:text-xl md:text-2xl text-stone-300 line-clamp-2 transition-colors group-hover:text-white">
           <Link
             href={`/blog/${post.slug}`}
             className="transition-colors hover:text-white">
@@ -50,7 +50,7 @@ function PostCard({ post }: { post: BlogPostSummary }) {
           </Link>
         </h2>
         {post.publishedAt ? (
-          <time dateTime={post.publishedAt} className="text-xs text-zinc-500">
+          <time dateTime={post.publishedAt} className="text-xs text-stone-500">
             {formatDate(post.publishedAt)}
           </time>
         ) : null}
@@ -61,7 +61,7 @@ function PostCard({ post }: { post: BlogPostSummary }) {
               <Link
                 key={category.id}
                 href={`/blog/categoria/${category.slug}`}
-                className="rounded-full border border-zinc-700 px-2.5 py-1 text-xs text-zinc-300 transition-colors hover:border-zinc-500 hover:text-white">
+                className="rounded-full border border-stone-700 px-2.5 py-1 text-xs text-stone-300 transition-colors hover:border-stone-500 hover:text-white">
                 {category.name}
               </Link>
             ))}
@@ -98,13 +98,13 @@ function Pagination({
 
   return (
     <nav
-      className="mt-12 flex items-center justify-between border-t border-zinc-800 pt-8"
+      className="mt-12 flex items-center justify-between border-t border-stone-800 pt-8"
       aria-label="Paginação">
       <div>
         {prev ? (
           <Link
             href={prev === 1 ? "/blog" : `/blog?page=${prev}`}
-            className="text-sm text-zinc-400 transition-colors hover:text-white">
+            className="text-sm text-stone-400 transition-colors hover:text-white">
             ← Mais recentes
           </Link>
         ) : (
@@ -112,7 +112,7 @@ function Pagination({
         )}
       </div>
 
-      <span className="text-xs text-zinc-600">
+      <span className="text-xs text-stone-600">
         {currentPage} / {totalPages}
       </span>
 
@@ -120,7 +120,7 @@ function Pagination({
         {next ? (
           <Link
             href={`/blog?page=${next}`}
-            className="text-sm text-zinc-400 transition-colors hover:text-white">
+            className="text-sm text-stone-400 transition-colors hover:text-white">
             Mais antigos →
           </Link>
         ) : (

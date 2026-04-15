@@ -13,10 +13,10 @@ type BlogPostPageProps = {
 
 export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
   return (
-    <div className="min-h-screen bg-zinc-800 text-white">
+    <div className="min-h-screen bg-stone-800 text-white">
       <main className="mx-auto max-w-5xl px-4 sm:px-10 md:px-16 lg:px-6 pt-24 sm:pt-32 pb-16">
         <nav aria-label="Breadcrumb" className="mb-12 sm:mb-8">
-          <ol className="flex items-center gap-2 text-xs sm:text-sm text-zinc-400">
+          <ol className="flex items-center gap-2 text-xs sm:text-sm text-stone-400">
             <li>
               <Link href="/" className="transition-colors hover:text-white">
                 Home
@@ -29,7 +29,7 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
               </Link>
             </li>
             <li aria-hidden="true">›</li>
-            <li className="truncate text-zinc-500" aria-current="page">
+            <li className="truncate text-stone-500" aria-current="page">
               {post.title}
             </li>
           </ol>
@@ -45,7 +45,7 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
               {post.publishedAt ? (
                 <time
                   dateTime={post.publishedAt}
-                  className="mt-3 text-sm text-zinc-500">
+                  className="mt-3 text-sm text-stone-500">
                   Publicado em {formatDate(post.publishedAt)}
                 </time>
               ) : null}
@@ -75,7 +75,7 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
                 <Link
                   key={category.id}
                   href={`/blog/categoria/${category.slug}`}
-                  className="rounded-full border border-zinc-700 px-2.5 py-1 text-xs text-zinc-300 transition-colors hover:border-zinc-500 hover:text-white">
+                  className="rounded-full border border-stone-700 px-2.5 py-1 text-xs text-stone-300 transition-colors hover:border-stone-500 hover:text-white">
                   {category.name}
                 </Link>
               ))}
@@ -89,15 +89,15 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
                   <li key={relatedPost.id} className="h-full">
                     <Link
                       href={`/blog/${relatedPost.slug}`}
-                      className="group flex flex-col gap-2 justify-between bg-zinc-700/50 hover:bg-zinc-700  border border-transparent rounded-lg p-4 h-full transition-colors ">
-                      <h2 className="line-clamp-2 text-zinc-300 transition-colors group-hover:text-white">
+                      className="group flex flex-col gap-2 justify-between bg-stone-700/50 hover:bg-stone-700  border border-transparent rounded-lg p-4 h-full transition-colors ">
+                      <h2 className="line-clamp-2 text-stone-300 transition-colors group-hover:text-white">
                         {relatedPost.title}
                       </h2>
 
                       {relatedPost.publishedAt ? (
                         <time
                           dateTime={relatedPost.publishedAt}
-                          className="block text-xs text-zinc-500">
+                          className="block text-xs text-stone-500">
                           {formatDate(relatedPost.publishedAt)}
                         </time>
                       ) : null}
@@ -112,7 +112,7 @@ export function BlogPostPage({ post, relatedPosts }: BlogPostPageProps) {
         <footer className="flex items-center justify-center mt-10 pt-8 ">
           <Link
             href="/blog"
-            className=" text-zinc-400 transition-colors hover:text-white!">
+            className=" text-stone-400 transition-colors hover:text-white!">
             Ver todos os posts
           </Link>
         </footer>
