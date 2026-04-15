@@ -200,9 +200,9 @@ export async function listPosts(): Promise<PostListItem[]> {
   const supabase = getSupabaseAdminClient();
   const { data, error } = await supabase
     .from("posts")
-    .select("id,title,slug,status,updated_at,cover_image_path")
+    .select("id,title,slug,status,updated_at,cover_image_path,is_featured")
     .order("updated_at", { ascending: false })
-    .returns<Array<Pick<PostRow, "id" | "title" | "slug" | "status" | "updated_at" | "cover_image_path">>>();
+    .returns<Array<Pick<PostRow, "id" | "title" | "slug" | "status" | "updated_at" | "cover_image_path" | "is_featured">>>();
 
   if (error) {
     throw new BlogAdminApiError("Falha ao listar posts.", 500);
@@ -219,7 +219,30 @@ export async function listPosts(): Promise<PostListItem[]> {
     updated_at: row.updated_at,
     cover_image_path: row.cover_image_path,
     cover_image_url: signedUrls[index],
+    is_featured: row.is_featured,
   }));
+}
+
+export async function setPostFeatured(postId: string, featured: boolean): Promise<void> {
+  const supabase = getSupabaseAdminClient();
+
+  if (featured) {
+    const { error: clearError } = await supabase
+      .from("posts")
+      .update({ is_featured: false })
+      .eq("is_featured", true);
+    if (clearError) {
+      throw new BlogAdminApiError("Falha ao atualizar destaque.", 500);
+    }
+  }
+
+  const { error } = await supabase
+    .from("posts")
+    .update({ is_featured: featured })
+    .eq("id", postId);
+  if (error) {
+    throw new BlogAdminApiError("Falha ao atualizar destaque.", 500);
+  }
 }
 
 export async function createDraftPost(payload: PostPayload): Promise<BlogPost> {

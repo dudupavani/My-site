@@ -4,12 +4,13 @@ import Link from "next/link";
 import { Loader2, Pencil, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { deletePostById, fetchPosts } from "@/src/shared/api/blogAdmin";
+import { deletePostById, fetchPosts, setPostFeatured } from "@/src/shared/api/blogAdmin";
 import type { PostListItem } from "@/src/shared/types/blogAdmin";
 import { formatDateTime } from "@/src/shared/utils/format";
 import { Badge } from "./components/badge";
 import { Button } from "./components/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/card";
+import { Switch } from "./components/switch";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -33,6 +34,7 @@ import {
 type ScreenState = {
   loading: boolean;
   deletingPostId: string | null;
+  featuringPostId: string | null;
   error: string | null;
   posts: PostListItem[];
 };
@@ -40,6 +42,7 @@ type ScreenState = {
 const INITIAL_STATE: ScreenState = {
   loading: true,
   deletingPostId: null,
+  featuringPostId: null,
   error: null,
   posts: [],
 };
@@ -76,6 +79,25 @@ export function PostsAdminScreen() {
       const message =
         error instanceof Error ? error.message : "Falha ao excluir post.";
       setState((prev) => ({ ...prev, deletingPostId: null, error: message }));
+    }
+  }
+
+  async function handleFeature(postId: string, featured: boolean) {
+    setState((prev) => ({ ...prev, featuringPostId: postId, error: null }));
+    try {
+      await setPostFeatured(postId, featured);
+      setState((prev) => ({
+        ...prev,
+        featuringPostId: null,
+        posts: prev.posts.map((post) => ({
+          ...post,
+          is_featured: featured ? post.id === postId : post.id === postId ? false : post.is_featured,
+        })),
+      }));
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Falha ao atualizar destaque.";
+      setState((prev) => ({ ...prev, featuringPostId: null, error: message }));
     }
   }
 
@@ -130,6 +152,15 @@ export function PostsAdminScreen() {
                         {formatDateTime(post.updated_at)}
                       </span>
                     </div>
+                    <div className="flex items-center gap-2">
+                      <Switch
+                        checked={post.is_featured}
+                        disabled={state.featuringPostId === post.id}
+                        onCheckedChange={(checked) => void handleFeature(post.id, checked)}
+                        aria-label={`Destacar post ${post.title}`}
+                      />
+                      <span className="text-xs text-muted-foreground">Destaque</span>
+                    </div>
                   </div>
                   <div className="flex flex-col sm:flex-row items-center gap-2 shrink-0">
                     <Button variant="outline" size="icon" asChild>
@@ -182,6 +213,7 @@ export function PostsAdminScreen() {
                 <TableRow>
                   <TableHead>Título</TableHead>
                   <TableHead>Status</TableHead>
+                  <TableHead>Destaque</TableHead>
                   <TableHead>Atualizado</TableHead>
                   <TableHead>Ações</TableHead>
                 </TableRow>
@@ -203,6 +235,14 @@ export function PostsAdminScreen() {
                         }>
                         {post.status === "published" ? "Publicado" : "Draft"}
                       </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Switch
+                        checked={post.is_featured}
+                        disabled={state.featuringPostId === post.id}
+                        onCheckedChange={(checked) => void handleFeature(post.id, checked)}
+                        aria-label={`Destacar post ${post.title}`}
+                      />
                     </TableCell>
                     <TableCell className="text-muted-foreground">
                       {formatDateTime(post.updated_at)}

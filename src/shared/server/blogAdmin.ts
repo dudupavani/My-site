@@ -6,6 +6,7 @@ export {
   getPostById,
   listPosts,
   publishPost,
+  setPostFeatured,
   updateDraftPost,
   uploadPostCover,
 } from "@/src/modules/blog-admin/server/posts";

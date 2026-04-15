@@ -5,17 +5,17 @@ export function BaseSection() {
     <section className="bg-white pt-16 pb-24 md:py-24 px-6 md:px-24">
       <div className="flex flex-col max-w-7xl mx-auto">
         <div className="mb-10 md:mb-16 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 sm:mb-2 -tracking-[0.02em] !leading-[1.4]">
+          <h2 className="text-3xl md:text-4xl lg:text-4xl font-semibold mb-4 sm:mb-2 -tracking-[0.02em] leading-[1.4]">
             Base que sustenta minha atuação
           </h2>
-          <p className="text-base md:text-xl leading-relaxed text-zinc-600 text-regular md:text-light !leading-[1.7]">
+          <p className="text-base md:text-xl text-zinc-500 text-regular md:text-light leading-[1.7]">
             Minha trajetória começou no design, com foco em aplicações digitais, ainda antes da
             consolidação dos produtos digitais como conhecemos hoje.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl">
-          <div className="space-y-6 md:space-y-10 text-sm sm:text-base !leading-[1.8] text-zinc-900 text-regular md:text-light">
+          <div className="space-y-6 md:space-y-10 text-sm sm:text-base leading-[1.8] text-zinc-900 text-regular md:text-light">
             <div className="flex items-start gap-2 sm:gap-4">
               <span className="text-blue-600 mt-1">
                 <ChevronRight className="w-6 h-6" />

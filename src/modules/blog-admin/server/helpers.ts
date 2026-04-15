@@ -15,6 +15,7 @@ export type PostRow = {
   created_at: string;
   updated_at: string;
   published_at: string | null;
+  is_featured: boolean;
 };
 
 export type CategoryRow = {

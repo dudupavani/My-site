@@ -16,6 +16,7 @@ export type PostListItem = {
   updated_at: string;
   cover_image_path: string | null;
   cover_image_url: string | null;
+  is_featured: boolean;
 };
 
 export type BlogPost = {

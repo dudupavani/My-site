@@ -57,7 +57,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Post não encontrado | Eduardo Pavani" };
   }
 
-  const ogImage = post.coverImageUrl ?? DEFAULT_OG_IMAGE;
+  const ogImage = post.coverImageUrl
+    ? new URL(post.coverImageUrl, BASE_URL).toString()
+    : DEFAULT_OG_IMAGE;
   const description = getPostDescription(post);
 
   return {
@@ -99,6 +101,9 @@ export default async function BlogPostRoute({ params }: PageProps) {
   });
 
   const postUrl = `${BASE_URL}/blog/${post.slug}`;
+  const postCoverImage = post.coverImageUrl
+    ? new URL(post.coverImageUrl, BASE_URL).toString()
+    : DEFAULT_OG_IMAGE;
   const description = getPostDescription(post);
   const wordCount = getWordCountFromHtml(post.contentHtml);
   const jsonLd = {
@@ -125,7 +130,7 @@ export default async function BlogPostRoute({ params }: PageProps) {
       "@type": "WebPage",
       "@id": postUrl,
     },
-    image: post.coverImageUrl ? [post.coverImageUrl] : [DEFAULT_OG_IMAGE],
+    image: [postCoverImage],
     url: postUrl,
     wordCount,
   };

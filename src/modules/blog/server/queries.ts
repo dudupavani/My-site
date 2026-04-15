@@ -1,11 +1,7 @@
 import sanitizeHtml from "sanitize-html";
 
 import type { BlogCategory, BlogPostDetail, BlogPostSummary, BlogRelatedPost } from "@/src/modules/blog/domain/post";
-import {
-  getBlogCoverBucketName,
-  getSignedUrlTtlSeconds,
-  getSupabaseAdminClient,
-} from "@/src/shared/server/supabase";
+import { getSupabaseAdminClient } from "@/src/shared/server/supabase";
 import { slugify } from "@/src/shared/utils/slug";
 
 const ALLOWED_TAGS = [
@@ -38,17 +34,14 @@ function sanitizeBlogHtml(html: string): string {
   });
 }
 
-async function createSignedCoverUrl(path: string | null): Promise<string | null> {
+function createCoverUrl(path: string | null): string | null {
   if (!path) return null;
 
-  const supabase = getSupabaseAdminClient();
-  const bucket = getBlogCoverBucketName();
-  const ttl = getSignedUrlTtlSeconds();
-
-  const { data, error } = await supabase.storage.from(bucket).createSignedUrl(path, ttl);
-  if (error || !data?.signedUrl) return null;
-
-  return data.signedUrl;
+  const encodedPath = path
+    .split("/")
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+  return `/api/blog/covers/${encodedPath}`;
 }
 
 const POSTS_PER_PAGE = 10;
@@ -175,7 +168,7 @@ export async function listPublishedPosts(opts?: {
 
   const rows = data ?? [];
   const [coverUrls, categoriesByPostId] = await Promise.all([
-    Promise.all(rows.map((row) => createSignedCoverUrl(row.cover_image_path))),
+    rows.map((row) => createCoverUrl(row.cover_image_path)),
     listCategoriesByPostIds(rows.map((row) => row.id)),
   ]);
   const total = count ?? 0;
@@ -304,7 +297,7 @@ export async function listPublishedPostsByCategory(opts: {
 
   const rows = data ?? [];
   const [coverUrls, categoriesByPostId] = await Promise.all([
-    Promise.all(rows.map((row) => createSignedCoverUrl(row.cover_image_path))),
+    rows.map((row) => createCoverUrl(row.cover_image_path)),
     listCategoriesByPostIds(rows.map((row) => row.id)),
   ]);
   const total = count ?? 0;
@@ -363,7 +356,7 @@ export async function getPublishedPostBySlug(slug: string): Promise<BlogPostDeta
   if (!post) return null;
 
   const [coverImageUrl, categories] = await Promise.all([
-    createSignedCoverUrl(post.cover_image_path),
+    createCoverUrl(post.cover_image_path),
     listCategoriesByPostId(post.id),
   ]);
 
@@ -378,6 +371,33 @@ export async function getPublishedPostBySlug(slug: string): Promise<BlogPostDeta
     seoTitle: post.seo_title,
     seoDescription: post.seo_description,
     categories,
+  };
+}
+
+export async function getFeaturedPost(): Promise<BlogPostSummary | null> {
+  const supabase = getSupabaseAdminClient();
+
+  const { data, error } = await supabase
+    .from("posts")
+    .select("id, slug, title, cover_image_path, published_at, updated_at")
+    .eq("status", "published")
+    .eq("is_featured", true)
+    .order("updated_at", { ascending: false })
+    .limit(1)
+    .returns<PostRow[]>();
+
+  if (error) return null;
+  const featuredPost = data?.[0];
+  if (!featuredPost) return null;
+
+  return {
+    id: featuredPost.id,
+    slug: featuredPost.slug,
+    title: featuredPost.title,
+    coverImageUrl: createCoverUrl(featuredPost.cover_image_path),
+    publishedAt: featuredPost.published_at,
+    updatedAt: featuredPost.updated_at,
+    categories: [],
   };
 }
 

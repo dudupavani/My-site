@@ -97,6 +97,14 @@ export async function deletePostById(postId: string): Promise<void> {
   await requestJson<{ ok: true }>(`/posts/${postId}`, { method: "DELETE" });
 }
 
+export async function setPostFeatured(postId: string, featured: boolean): Promise<void> {
+  await requestJson<{ ok: true }>(`/posts/${postId}/feature`, {
+    method: "PATCH",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ featured }),
+  });
+}
+
 export async function uploadPostCover(postId: string, file: File): Promise<{
   cover_image_path: string;
   cover_image_url: string | null;
