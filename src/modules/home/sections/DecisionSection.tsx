@@ -10,7 +10,7 @@ export function DecisionSection() {
             contexto, impacto e direção.
           </p>
         </div>
-        <div className="flex justify-center gap-12 text-stone-700 text-lg sm:text-xl leading-relaxed!">
+        <div className="flex flex-col md:flex-row justify-center gap-6 sm:gap-12 text-stone-700 text-lg sm:text-xl leading-relaxed!">
           <div className="flex items-start gap-3 sm:gap-3 py-2 px-4 border border-stone-400 rounded-full">
             <span className="text-yellow-500 mt-2">
               <Check className="min-w-4 min-h-4 w-4 h-4 sm:min-w-6 sm:min-h-6 sm:w-6 sm:h-6" />

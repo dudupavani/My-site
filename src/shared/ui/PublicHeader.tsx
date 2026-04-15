@@ -40,7 +40,11 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
       }>
       <div className="flex items-center justify-between flex-1 max-w-8xl ">
         <Link href="/" className="flex items-center">
-          <img src={logoSrc} alt="Eduardo Pavani" className="h-9 sm:h-12 w-auto" />
+          <img
+            src={logoSrc}
+            alt="Eduardo Pavani"
+            className="h-9 sm:h-12 w-auto"
+          />
         </Link>
 
         <div className="hidden md:flex items-center gap-3 sm:gap-12">
@@ -90,15 +94,21 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden inline-flex items-center justify-center text-stone-100 p-2  bg-black/20 backdrop-blur-sm transition-colors hover:bg-black/40">
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          className="md:hidden inline-flex items-center justify-center rounded-sm text-stone-100 p-2  bg-black/20 backdrop-blur-sm transition-colors hover:bg-black/40">
+          {isMenuOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
         </button>
       </div>
 
       <div
         id="mobile-navigation"
         className={`md:hidden fixed inset-0 z-70 transition-opacity duration-500 ${
-          isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+          isMenuOpen
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
         }`}>
         <div
           className="absolute inset-0 "
@@ -116,7 +126,10 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
             isMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}>
           <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
+            <Link
+              href="/"
+              className="flex items-center"
+              onClick={() => setIsMenuOpen(false)}>
               <img src={logoSrc} alt="Eduardo Pavani" className="h-8 w-auto" />
             </Link>
 
@@ -136,7 +149,9 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               href="/"
               onClick={() => setIsMenuOpen(false)}
               className={`transition-all duration-500 hover:text-stone-300 ${
-                isMenuOpen ? "translate-y-0 opacity-100 delay-150" : "translate-y-4 opacity-0"
+                isMenuOpen
+                  ? "translate-y-0 opacity-100 delay-150"
+                  : "translate-y-4 opacity-0"
               }`}>
               Home
             </Link>
@@ -144,7 +159,9 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               href="/blog"
               onClick={() => setIsMenuOpen(false)}
               className={`transition-all duration-500 hover:text-stone-300 ${
-                isMenuOpen ? "translate-y-0 opacity-100 delay-200" : "translate-y-4 opacity-0"
+                isMenuOpen
+                  ? "translate-y-0 opacity-100 delay-200"
+                  : "translate-y-4 opacity-0"
               }`}>
               Conteúdo
             </Link>
@@ -152,7 +169,9 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
 
           <div
             className={`mt-auto mb-20 flex items-center justify-center gap-3 text-white transition-all duration-500 ${
-              isMenuOpen ? "translate-y-0 opacity-100 delay-300" : "translate-y-4 opacity-0"
+              isMenuOpen
+                ? "translate-y-0 opacity-100 delay-300"
+                : "translate-y-4 opacity-0"
             }`}>
             <a
               href="https://wa.me/5548991587232"

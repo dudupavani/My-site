@@ -56,8 +56,8 @@ export function FormationSection() {
           {formations.map((item) => (
             <div
               key={item.degree}
-              className="px-6 py-4 sm:py-6 md:py-10 md:px-10 border border-stone-800/60 flex flex-col gap-2 justify-between">
-              <h3 className="text-base sm:text-lg font-medium mb-2 text-stone-300">
+              className="px-6 py-6 md:py-10 md:px-10 border border-stone-800/60 flex flex-col gap-2 justify-between">
+              <h3 className="text-base sm:text-lg mb-2 text-white">
                 {item.degree}
               </h3>
               <div className="opacity-60">
