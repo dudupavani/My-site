@@ -18,18 +18,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/:path*",
-        has: [{ type: "host", value: "eduardopavani.com.br" }],
-        destination: "https://eduardopavani.com/:path*",
-        permanent: true,
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.eduardopavani.com.br" }],
-        destination: "https://eduardopavani.com/:path*",
-        permanent: true,
-      },
-      {
         source: "/wp-sitemap-posts-page-1.xml",
         destination: "/sitemap.xml",
         permanent: true,
