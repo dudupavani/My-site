@@ -9,38 +9,38 @@ export function ExperienceSection() {
             <h2 className="text-3xl lg:text-4xl leading-tight sm:leading-[1.3]">
               Experiência e responsabilidade real
             </h2>
-            <p className="text-stone-400 text-base sm:text-lg md:text-xl leading-[1.6] font-regular lg:font-extralight">
+            <p className="text-white text-base sm:text-lg md:text-xl leading-[1.6] font-regular lg:font-extralight">
               Ao longo de mais de 20 anos, atuei em contextos onde decisões de
               produto eram decisões de negócio
             </p>
           </div>
 
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-            <div className="flex items-start gap-2 md:gap-4 border-b border-stone-700/40 py-4 sm:py-6">
-              <span className="text-yellow-500 mt-1">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-2">
+            <div className="flex items-start gap-2 md:gap-4 py-4">
+              <span className="text-stone-500 mt-1">
                 <CircleArrowRight className="w-4 h-4 md:w-6 md:h-6" />
               </span>
-              <p className="text-base leading-[1.8] text-white font-light">
+              <p className="text-base leading-[1.8] text-white/70 font-light">
                 Fundador de duas empresas, uma de software e sites e outra de
                 propaganda, branding e design, com atuação direta em negócio,
                 gestão de equipe, relacionamento com clientes e entregas.
               </p>
             </div>
-            <div className="flex items-start gap-2 md:gap-4 border-b border-stone-700/40 py-4 sm:py-6">
-              <span className="text-yellow-500 mt-1">
+            <div className="flex items-start gap-2 md:gap-4 py-4">
+              <span className="text-stone-500 mt-1">
                 <CircleArrowRight className="w-4 h-4 md:w-6 md:h-6" />
               </span>
-              <p className="text-base leading-[1.8] text-white font-light">
+              <p className="text-base leading-[1.8] text-white/70 font-light">
                 Liderança de produto em startup alemã de EdTech, estruturando a
                 visão de produto com o founder e estratégias de execução com
                 liderança de engenharia.
               </p>
             </div>
-            <div className="flex items-start gap-2 md:gap-4 border-b border-stone-700/40 py-4 sm:py-6">
-              <span className="text-yellow-500 mt-1">
+            <div className="flex items-start gap-2 md:gap-4 py-4">
+              <span className="text-stone-500 mt-1">
                 <CircleArrowRight className="w-4 h-4 md:w-6 md:h-6" />
               </span>
-              <p className="text-base leading-[1.8] text-white font-light">
+              <p className="text-base leading-[1.8] text-white/70 font-light">
                 Atualmente na{" "}
                 <a
                   href="https://yungas.com.br/"
@@ -53,11 +53,11 @@ export function ExperienceSection() {
                 concepção e direcionamentos estratégicos de execução.
               </p>
             </div>
-            <div className="flex items-start gap-2 md:gap-4 border-b border-stone-700/40 py-4 sm:py-6">
-              <span className="text-yellow-500 mt-1">
+            <div className="flex items-start gap-2 md:gap-4 py-4">
+              <span className="text-stone-500 mt-1">
                 <CircleArrowRight className="w-4 h-4 md:w-6 md:h-6" />
               </span>
-              <p className="text-base leading-[1.8] text-white font-light">
+              <p className="text-base leading-[1.8] text-white/70 font-light">
                 Atualmente meu trabalho impacta operações de grande porte, com
                 marcas como Burger King, Subway, Bob’s, CNA Idiomas, Omie, entre
                 outras.
