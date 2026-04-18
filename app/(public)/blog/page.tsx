@@ -4,6 +4,7 @@ import { BlogListPage } from "@/src/modules/blog/ui/BlogListPage";
 
 export const revalidate = 3600;
 const BASE_URL = "https://eduardopavani.com";
+const DEFAULT_OG_IMAGE = `${BASE_URL}/images/img-profile-2.webp`;
 
 type Props = {
   searchParams: Promise<{ page?: string }>;
@@ -27,6 +28,17 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
       title: "Blog | Eduardo Pavani",
       description:
         "Artigos sobre estratégia de produto, gestão, UX e construção de software.",
+      siteName: "Eduardo Pavani",
+      locale: "pt_BR",
+      images: [DEFAULT_OG_IMAGE],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Blog | Eduardo Pavani",
+      description:
+        "Artigos sobre estratégia de produto, gestão, UX e construção de software.",
+      creator: "@eduardopavanipro",
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }

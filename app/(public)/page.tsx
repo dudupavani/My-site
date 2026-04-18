@@ -6,14 +6,14 @@ import { redirect } from "next/navigation";
 export const metadata: Metadata = {
   title: "Eduardo Pavani | Product Lead",
   description:
-    "Estrategia, clareza e execucao na construcao de produtos digitais por Eduardo Pavani.",
+    "Estratégia, clareza e execução na construção de produtos digitais por Eduardo Pavani.",
   keywords: [
     "Eduardo Pavani",
     "Product Lead",
     "Product Manager",
-    "Estrategia de Produto",
+    "Estratégia de Produto",
     "Produtos Digitais",
-    "Gestao de Produto",
+    "Gestão de Produto",
   ],
   authors: [{ name: "Eduardo Pavani" }],
   alternates: {
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     url: "https://eduardopavani.com/",
     title: "Eduardo Pavani | Product Lead",
     description:
-      "Estrategia, clareza e execucao na construcao de produtos digitais por Eduardo Pavani.",
+      "Estratégia, clareza e execução na construção de produtos digitais por Eduardo Pavani.",
     siteName: "Eduardo Pavani",
     locale: "pt_BR",
     images: ["https://eduardopavani.com/images/img-profile-2.webp"],
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Eduardo Pavani | Product Lead",
     description:
-      "Estrategia, clareza e execucao na construcao de produtos digitais por Eduardo Pavani.",
+      "Estratégia, clareza e execução na construção de produtos digitais por Eduardo Pavani.",
     creator: "@eduardopavanipro",
     images: ["https://eduardopavani.com/images/img-profile-2.webp"],
   },

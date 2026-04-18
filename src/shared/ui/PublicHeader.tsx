@@ -37,7 +37,7 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
     <header
       className={
         isBlog
-          ? "absolute w-full top-0 left-0 z-50 mx-auto px-4 sm:px-6 pt-8 sm:pt-10"
+          ? "absolute w-full top-0 left-0 z-50 mx-auto px-6 sm:px-6 pt-8 sm:pt-10"
           : "absolute flex justify-center w-full top-0 left-0 z-50 mx-auto px-6 sm:px-6 md:px-10 xl:px-16 pt-6 sm:pt-6 md:pt-10"
       }>
       <div className="flex items-center justify-between flex-1 max-w-8xl ">
@@ -170,25 +170,17 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
           </nav>
 
           <div
-            className={`mt-auto mb-20 flex items-center justify-center gap-3 text-white transition-all duration-500 ${
+            className={`mt-auto mb-20 flex items-center justify-center gap-8 text-white transition-all duration-500 ${
               isMenuOpen
                 ? "translate-y-0 opacity-100 delay-300"
                 : "translate-y-4 opacity-0"
             }`}>
             <a
-              href="https://wa.me/5548991587232"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Entre em contato pelo WhatsApp"
-              className="text-white hover:border-stone-400 transition-colors duration-300 p-3 rounded-lg bg-white/5">
-              <WhatsAppIcon className="w-6 h-6" />
-            </a>
-            <a
               href="https://www.linkedin.com/in/eduardopavani/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visite meu perfil no LinkedIn"
-              className="text-white hover:border-stone-400 transition-colors duration-300 p-3 rounded-lg bg-white/5">
+              className="text-white hover:border-stone-400 transition-colors duration-300 p-3 rounded-lg ">
               <LinkedInIcon className="w-6 h-6" />
             </a>
             <a
@@ -196,8 +188,16 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visite meu perfil no Instagram"
-              className="text-white hover:border-stone-400 transition-colors duration-300 p-3 rounded-lg bg-white/5">
+              className="text-white hover:border-stone-400 transition-colors duration-300 p-3 rounded-lg">
               <InstagramIcon className="w-6 h-6" />
+            </a>
+            <a
+              href="https://wa.me/5548991587232"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Entre em contato pelo WhatsApp"
+              className="text-white hover:border-stone-400 transition-colors duration-300 p-3 rounded-lg">
+              <WhatsAppIcon className="w-6 h-6" />
             </a>
           </div>
         </div>

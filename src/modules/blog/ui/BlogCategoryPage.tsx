@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import type {
   BlogCategory,
@@ -20,8 +21,12 @@ export async function BlogCategoryPage({ category, page = 1 }: Props) {
     },
   );
 
+  if (page > 1 && totalPages > 0 && page > totalPages) {
+    notFound();
+  }
+
   return (
-    <div className="min-h-screen bg-stone-900 text-white pb-30 px-4">
+    <div className="min-h-screen bg-stone-900 text-white pb-30 px-6">
       <main className="mx-auto max-w-7xl pt-24 sm:pt-40">
         <div className="mb-12 space-y-2">
           <h1 className="text-2xl md:text-3xl font-medium tracking-tight text-white">
@@ -34,7 +39,7 @@ export async function BlogCategoryPage({ category, page = 1 }: Props) {
             Nenhum post publicado nesta categoria.
           </p>
         ) : (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {posts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
@@ -56,7 +61,7 @@ export async function BlogCategoryPage({ category, page = 1 }: Props) {
 function PostCard({ post }: { post: BlogPostSummary }) {
   return (
     <article className="group flex h-full flex-col rounded-2xl border border-stone-700 bg-stone-800">
-      <div className="flex flex-1 flex-col gap-4 px-6 pb-4 pt-8">
+      <div className="flex flex-1 flex-col gap-4 px-4 sm:px-6 pb-4 pt-6 sm:pt-8">
         <h2 className="text-lg sm:text-xl md:text-2xl text-white line-clamp-2">
           <Link
             href={`/blog/${post.slug}`}

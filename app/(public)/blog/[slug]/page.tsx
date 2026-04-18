@@ -10,7 +10,6 @@ import { BlogPostPage } from "@/src/modules/blog/ui/BlogPostPage";
 
 export const revalidate = 3600;
 const BASE_URL = "https://eduardopavani.com";
-const DEFAULT_OG_IMAGE = `${BASE_URL}/images/img-profile-2.webp`;
 const PUBLISHER_LOGO_URL = `${BASE_URL}/images/favicon.svg`;
 
 function getPostDescription(post: {
@@ -59,7 +58,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const ogImage = post.coverImageUrl
     ? new URL(post.coverImageUrl, BASE_URL).toString()
-    : DEFAULT_OG_IMAGE;
+    : `${BASE_URL}/blog/${post.slug}/opengraph-image`;
   const description = getPostDescription(post);
 
   return {
@@ -73,7 +72,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: `${BASE_URL}/blog/${post.slug}`,
       title: post.seoTitle ?? post.title,
       description,
-      images: [ogImage],
+      siteName: "Eduardo Pavani",
+      locale: "pt_BR",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: post.seoTitle ?? post.title,
+        },
+      ],
       publishedTime: post.publishedAt ?? undefined,
       modifiedTime: post.updatedAt ?? post.publishedAt ?? undefined,
     },
@@ -81,6 +89,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       card: "summary_large_image",
       title: post.seoTitle ?? post.title,
       description,
+      creator: "@eduardopavanipro",
       images: [ogImage],
     },
   };
@@ -103,7 +112,7 @@ export default async function BlogPostRoute({ params }: PageProps) {
   const postUrl = `${BASE_URL}/blog/${post.slug}`;
   const postCoverImage = post.coverImageUrl
     ? new URL(post.coverImageUrl, BASE_URL).toString()
-    : DEFAULT_OG_IMAGE;
+    : `${BASE_URL}/blog/${post.slug}/opengraph-image`;
   const description = getPostDescription(post);
   const wordCount = getWordCountFromHtml(post.contentHtml);
   const jsonLd = {

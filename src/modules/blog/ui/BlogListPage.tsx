@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import type { BlogPostSummary } from "@/src/modules/blog/domain/post";
 import { listPublishedPosts } from "@/src/modules/blog/server/queries";
@@ -11,9 +12,13 @@ type Props = {
 export async function BlogListPage({ page = 1 }: Props) {
   const { posts, totalPages, currentPage } = await listPublishedPosts({ page });
 
+  if (page > 1 && totalPages > 0 && page > totalPages) {
+    notFound();
+  }
+
   return (
     <div className="min-h-screen bg-stone-900 text-white">
-      <main className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-16 xl:px-6 pt-24 sm:pt-30 lg:pt-40 pb-16">
+      <main className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 xl:px-6 pt-24 sm:pt-30 lg:pt-40 pb-16">
         <div className="mb-12">
           <h1 className="text-2xl md:text-3xl font-medium tracking-tight text-white">
             Conteúdos
@@ -23,7 +28,7 @@ export async function BlogListPage({ page = 1 }: Props) {
         {posts.length === 0 ? (
           <p className="text-stone-500">Nenhum post publicado ainda.</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 divide-y divide-stone-800">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {posts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}

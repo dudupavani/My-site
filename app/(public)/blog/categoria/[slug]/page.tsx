@@ -9,6 +9,7 @@ import { BlogCategoryPage } from "@/src/modules/blog/ui/BlogCategoryPage";
 
 export const revalidate = 3600;
 const BASE_URL = "https://eduardopavani.com";
+const DEFAULT_OG_IMAGE = `${BASE_URL}/images/img-profile-2.webp`;
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -53,6 +54,16 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
       url: canonicalUrl,
       title: `Categoria: ${category.name} | Blog | Eduardo Pavani`,
       description: `Posts sobre ${category.name} no blog de Eduardo Pavani.`,
+      siteName: "Eduardo Pavani",
+      locale: "pt_BR",
+      images: [DEFAULT_OG_IMAGE],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Categoria: ${category.name} | Blog | Eduardo Pavani`,
+      description: `Posts sobre ${category.name} no blog de Eduardo Pavani.`,
+      creator: "@eduardopavanipro",
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }

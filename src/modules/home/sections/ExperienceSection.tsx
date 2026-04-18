@@ -9,13 +9,13 @@ export function ExperienceSection() {
             <h2 className="text-3xl lg:text-4xl leading-tight sm:leading-[1.3]">
               Experiência e responsabilidade real
             </h2>
-            <p className="text-stone-400 text-sm sm:text-lg md:text-xl leading-[1.6] font-regular lg:font-extralight">
-              Minha trajetória foi construída em contextos onde produto
-              precisava sair da abstração e avançar no mundo real.
+            <p className="text-stone-400 text-base sm:text-lg md:text-xl leading-[1.6] font-regular lg:font-extralight">
+              Ao longo de mais de 20 anos, atuei em contextos onde decisões de
+              produto eram decisões de negócio
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
             <div className="flex items-start gap-2 md:gap-4 border-b border-stone-700/40 py-4 sm:py-6">
               <span className="text-yellow-500 mt-1">
                 <CircleArrowRight className="w-4 h-4 md:w-6 md:h-6" />
@@ -23,7 +23,7 @@ export function ExperienceSection() {
               <p className="text-base leading-[1.8] text-white font-light">
                 Fundador de duas empresas, uma de software e sites e outra de
                 propaganda, branding e design, com atuação direta em negócio,
-                cliente e entrega.
+                gestão de equipe, relacionamento com clientes e entregas.
               </p>
             </div>
             <div className="flex items-start gap-2 md:gap-4 border-b border-stone-700/40 py-4 sm:py-6">
@@ -31,8 +31,9 @@ export function ExperienceSection() {
                 <CircleArrowRight className="w-4 h-4 md:w-6 md:h-6" />
               </span>
               <p className="text-base leading-[1.8] text-white font-light">
-                Liderança de produto em startup alemã de EdTech, estruturando
-                visão, roadmap, prioridades e execução.
+                Liderança de produto em startup alemã de EdTech, estruturando a
+                visão de produto com o founder e estratégias de execução com
+                liderança de engenharia.
               </p>
             </div>
             <div className="flex items-start gap-2 md:gap-4 border-b border-stone-700/40 py-4 sm:py-6">
@@ -40,8 +41,16 @@ export function ExperienceSection() {
                 <CircleArrowRight className="w-4 h-4 md:w-6 md:h-6" />
               </span>
               <p className="text-base leading-[1.8] text-white font-light">
-                Atuação direta em comitês de produto na Yungas, ao lado de
-                founders e C levels, influenciando decisões estratégicas.
+                Atualmente na{" "}
+                <a
+                  href="https://yungas.com.br/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-yellow-500 transition-colors">
+                  Yungas Tecnologia
+                </a>
+                , faço parte do board de produto com os founders, lidero a
+                concepção e direcionamentos estratégicos de execução.
               </p>
             </div>
             <div className="flex items-start gap-2 md:gap-4 border-b border-stone-700/40 py-4 sm:py-6">
@@ -49,8 +58,9 @@ export function ExperienceSection() {
                 <CircleArrowRight className="w-4 h-4 md:w-6 md:h-6" />
               </span>
               <p className="text-base leading-[1.8] text-white font-light">
-                Concepção de soluções digitais para operações de grande porte,
-                com marcas como Burger King, Subway, Bob’s, CNA e Omie.
+                Atualmente meu trabalho impacta operações de grande porte, com
+                marcas como Burger King, Subway, Bob’s, CNA Idiomas, Omie, entre
+                outras.
               </p>
             </div>
           </div>
