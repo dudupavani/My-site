@@ -6,10 +6,10 @@ export function ExperienceSection() {
       <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-24">
         <div className="flex flex-col gap-10 sm:gap-8 xl:gap-8 items-center basis-0 grow-6">
           <div className="space-y-4 max-w-4xl text-left px-4 sm:px-0">
-            <h2 className="text-3xl lg:text-5xl leading-tight sm:leading-[1.3]">
+            <h2 className="text-3xl lg:text-4xl leading-tight sm:leading-[1.3]">
               Experiência e responsabilidade real
             </h2>
-            <p className="text-stone-300 text-sm sm:text-lg md:text-xl leading-[1.6] font-regular lg:font-extralight">
+            <p className="text-stone-400 text-sm sm:text-lg md:text-xl leading-[1.6] font-regular lg:font-extralight">
               Minha trajetória foi construída em contextos onde produto
               precisava sair da abstração e avançar no mundo real.
             </p>
