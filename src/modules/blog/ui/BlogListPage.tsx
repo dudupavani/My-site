@@ -13,9 +13,9 @@ export async function BlogListPage({ page = 1 }: Props) {
 
   return (
     <div className="min-h-screen bg-stone-900 text-white">
-      <main className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-16 xl:px-6 pt-30 sm:pt-30 lg:pt-40 pb-16">
-        <div className="mb-6">
-          <h1 className="text-2xl sm:text-4xl font-extralight tracking-tight text-stone-500">
+      <main className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-16 xl:px-6 pt-24 sm:pt-30 lg:pt-40 pb-16">
+        <div className="mb-12">
+          <h1 className="text-2xl md:text-3xl font-medium tracking-tight text-white">
             Conteúdos
           </h1>
         </div>
@@ -40,9 +40,9 @@ export async function BlogListPage({ page = 1 }: Props) {
 
 function PostCard({ post }: { post: BlogPostSummary }) {
   return (
-    <article className="group flex h-full flex-col rounded-2xl border border-stone-700/50 bg-stone-800 sm:bg-stone-800/60">
+    <article className="group flex h-full flex-col rounded-2xl border border-stone-700 bg-stone-800">
       <div className="flex flex-1 flex-col gap-4 px-4 sm:px-6 pb-4 pt-6 sm:pt-8">
-        <h2 className="text-lg sm:text-xl md:text-2xl text-stone-300 line-clamp-2 transition-colors group-hover:text-white">
+        <h2 className="text-lg sm:text-xl md:text-2xl text-white line-clamp-2">
           <Link
             href={`/blog/${post.slug}`}
             className="transition-colors hover:text-white">
@@ -50,7 +50,7 @@ function PostCard({ post }: { post: BlogPostSummary }) {
           </Link>
         </h2>
         {post.publishedAt ? (
-          <time dateTime={post.publishedAt} className="text-xs text-stone-500">
+          <time dateTime={post.publishedAt} className="text-xs text-white/60">
             {formatDate(post.publishedAt)}
           </time>
         ) : null}
@@ -61,7 +61,7 @@ function PostCard({ post }: { post: BlogPostSummary }) {
               <Link
                 key={category.id}
                 href={`/blog/categoria/${category.slug}`}
-                className="rounded-full border border-stone-700 px-2.5 py-1 text-xs text-stone-300 transition-colors hover:border-stone-500 hover:text-white">
+                className="rounded-full bg-stone-900 border border-stone-700/70 px-2.5 py-1 text-xs text-stone-300 transition-colors hover:border-stone-500 hover:text-white">
                 {category.name}
               </Link>
             ))}

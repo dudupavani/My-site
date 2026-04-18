@@ -1,6 +1,43 @@
+import type { Metadata } from "next";
 import { HomePage } from "@/src/modules/home/HomePage";
 import { PublicHeader } from "@/src/shared/ui/PublicHeader";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Eduardo Pavani | Product Lead",
+  description:
+    "Estrategia, clareza e execucao na construcao de produtos digitais por Eduardo Pavani.",
+  keywords: [
+    "Eduardo Pavani",
+    "Product Lead",
+    "Product Manager",
+    "Estrategia de Produto",
+    "Produtos Digitais",
+    "Gestao de Produto",
+  ],
+  authors: [{ name: "Eduardo Pavani" }],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "https://eduardopavani.com/",
+    title: "Eduardo Pavani | Product Lead",
+    description:
+      "Estrategia, clareza e execucao na construcao de produtos digitais por Eduardo Pavani.",
+    siteName: "Eduardo Pavani",
+    locale: "pt_BR",
+    images: ["https://eduardopavani.com/images/img-profile-2.webp"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Eduardo Pavani | Product Lead",
+    description:
+      "Estrategia, clareza e execucao na construcao de produtos digitais por Eduardo Pavani.",
+    creator: "@eduardopavanipro",
+    images: ["https://eduardopavani.com/images/img-profile-2.webp"],
+  },
+};
 
 type SearchParams = Record<string, string | string[] | undefined>;
 

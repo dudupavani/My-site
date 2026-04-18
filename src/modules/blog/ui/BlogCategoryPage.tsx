@@ -21,13 +21,10 @@ export async function BlogCategoryPage({ category, page = 1 }: Props) {
   );
 
   return (
-    <div className="min-h-screen bg-stone-800 text-white">
-      <main className="mx-auto max-w-7xl px-6 pt-6 pb-16 sm:pt-10">
-        <div className="mb-12 space-y-3">
-          <p className="text-xs uppercase tracking-[0.16em] text-stone-500">
-            Categoria
-          </p>
-          <h1 className="text-3xl font-medium tracking-tight text-white">
+    <div className="min-h-screen bg-stone-900 text-white pb-30 px-4">
+      <main className="mx-auto max-w-7xl pt-24 sm:pt-40">
+        <div className="mb-12 space-y-2">
+          <h1 className="text-2xl md:text-3xl font-medium tracking-tight text-white">
             {category.name}
           </h1>
         </div>
@@ -58,9 +55,9 @@ export async function BlogCategoryPage({ category, page = 1 }: Props) {
 
 function PostCard({ post }: { post: BlogPostSummary }) {
   return (
-    <article className="group flex h-full flex-col rounded-2xl border border-stone-700/50 bg-stone-900/30">
+    <article className="group flex h-full flex-col rounded-2xl border border-stone-700 bg-stone-800">
       <div className="flex flex-1 flex-col gap-4 px-6 pb-4 pt-8">
-        <h2 className="line-clamp-2 text-2xl text-stone-300 transition-colors group-hover:text-white">
+        <h2 className="text-lg sm:text-xl md:text-2xl text-white line-clamp-2">
           <Link
             href={`/blog/${post.slug}`}
             className="transition-colors hover:text-white">
@@ -68,7 +65,7 @@ function PostCard({ post }: { post: BlogPostSummary }) {
           </Link>
         </h2>
         {post.publishedAt ? (
-          <time dateTime={post.publishedAt} className="text-xs text-stone-500">
+          <time dateTime={post.publishedAt} className="text-xs text-white/60">
             {formatDate(post.publishedAt)}
           </time>
         ) : null}

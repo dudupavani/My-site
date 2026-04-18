@@ -13,63 +13,9 @@ const googleSansFlex = Google_Sans_Flex({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://eduardopavani.com"),
-  title: "Eduardo Pavani - Product Lead",
-  description:
-    "Eduardo Pavani - Product Lead focado em estratégia, clareza e execução na construção de produtos digitais.",
-  keywords: [
-    "Product Manager",
-    "Product Lead",
-    "Gestão de Produtos",
-    "Eduardo Pavani",
-    "Estratégia de Produto",
-    "Produtos Digitais",
-  ],
-  authors: [{ name: "Eduardo Pavani" }],
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    url: "https://eduardopavani.com/",
-    title: "Eduardo Pavani - Product Lead",
-    description:
-      "Eduardo Pavani - Product Lead focado em estratégia, clareza e execução na construção de produtos digitais.",
-    images: ["https://eduardopavani.com/images/img-profile-2.webp"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Eduardo Pavani - Product Lead",
-    description:
-      "Eduardo Pavani - Product Lead focado em estratégia, clareza e execução na construção de produtos digitais.",
-    images: ["https://eduardopavani.com/images/img-profile-2.webp"],
-  },
   icons: {
     icon: "/images/favicon.svg",
   },
-};
-
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Eduardo Pavani",
-  jobTitle: "Product Lead",
-  url: "https://eduardopavani.com",
-  sameAs: [
-    "https://www.linkedin.com/in/eduardopavani/",
-    "https://wa.me/5548991587232",
-    "https://www.instagram.com/eduardopavanipro",
-  ],
-  description:
-    "Product Lead focado em estratégia, clareza e execução na construção de produtos digitais.",
-};
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "Eduardo Pavani",
-  url: "https://eduardopavani.com",
-  description:
-    "Estratégia, clareza e execução na construção de produtos digitais.",
 };
 
 export default function RootLayout({
@@ -79,16 +25,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={googleSansFlex.variable}>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-      </head>
       <body className="bg-white">
         {/* GTM noscript — deve ser o primeiro elemento do body */}
         <noscript>
