@@ -68,7 +68,7 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Entre em contato pelo WhatsApp"
-              className="text-white border border-transparent hover:border-stone-700 transition-colors duration-300 p-2 sm:p-3 rounded-lg bg-transparent">
+              className="text-white border border-transparent hover:bg-stone-900/20 transition-colors duration-300 p-2 rounded-lg bg-transparent">
               <WhatsAppIcon className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
             <a
@@ -76,7 +76,7 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visite meu perfil no LinkedIn"
-              className="text-white border border-transparent hover:border-stone-700 transition-colors duration-300 p-2 sm:p-3 rounded-lg bg-transparent">
+              className="text-white border border-transparent hover:bg-stone-900/20 transition-colors duration-300 p-2 rounded-lg bg-transparent">
               <LinkedInIcon className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
             <a
@@ -84,7 +84,7 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visite meu perfil no Instagram"
-              className="text-white border border-transparent hover:border-stone-700 transition-colors duration-300 p-2 sm:p-3 rounded-lg bg-transparent">
+              className="text-white border border-transparent hover:bg-stone-900/20 transition-colors duration-300 p-2 rounded-lg bg-transparent">
               <InstagramIcon className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
           </div>

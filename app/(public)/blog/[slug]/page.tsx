@@ -9,7 +9,7 @@ import {
 import { BlogPostPage } from "@/src/modules/blog/ui/BlogPostPage";
 
 export const revalidate = 3600;
-const BASE_URL = "https://eduardopavani.com.br";
+const BASE_URL = "https://eduardopavani.com";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/images/img-profile-2.webp`;
 const PUBLISHER_LOGO_URL = `${BASE_URL}/images/favicon.svg`;
 

@@ -20,4 +20,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://eduardopavani.com.br/sitemap.xml
+Sitemap: https://eduardopavani.com/sitemap.xml

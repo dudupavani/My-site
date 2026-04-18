@@ -8,7 +8,7 @@ import {
 import { BlogCategoryPage } from "@/src/modules/blog/ui/BlogCategoryPage";
 
 export const revalidate = 3600;
-const BASE_URL = "https://eduardopavani.com.br";
+const BASE_URL = "https://eduardopavani.com";
 
 type Props = {
   params: Promise<{ slug: string }>;

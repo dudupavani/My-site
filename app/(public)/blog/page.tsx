@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { BlogListPage } from "@/src/modules/blog/ui/BlogListPage";
 
 export const revalidate = 3600;
-const BASE_URL = "https://eduardopavani.com.br";
+const BASE_URL = "https://eduardopavani.com";
 
 type Props = {
   searchParams: Promise<{ page?: string }>;

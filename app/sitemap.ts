@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 import { listPublicCategories } from "@/src/modules/blog/server/queries";
 import { getSupabaseAdminClient } from "@/src/shared/server/supabase";
 
-const BASE_URL = "https://eduardopavani.com.br";
+const BASE_URL = "https://eduardopavani.com";
 
 export const revalidate = 3600;
 

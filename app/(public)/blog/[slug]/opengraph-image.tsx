@@ -107,7 +107,7 @@ export default async function OpenGraphImage({ params }: Props) {
               fontSize: 26,
               color: "#a1a1aa",
             }}>
-            eduardopavani.com.br/blog/{slug}
+            eduardopavani.com/blog/{slug}
           </div>
         </div>
       </div>
