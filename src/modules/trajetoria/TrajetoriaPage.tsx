@@ -43,8 +43,8 @@ const entries = [
   },
   {
     id: "09",
-    title: "IA, automação e projetos próprios",
-    body: "Mais recentemente, passei a desenvolver projetos próprios com automação, agentes e multiagentes de IA, aplicados a curadoria de conteúdo, atendimento via WhatsApp e criação automatizada de artigos.",
+    title: "Multiagentes com IA",
+    body: "Há algum tempo, venho desenvolvendo projetos próprios com automação, agentes e multiagentes de IA aplicados à curadoria de conteúdo, ao atendimento via WhatsApp, à criação automatizada de artigos e também a fluxos de apoio comercial. Entre esses projetos, criei um agente para agilizar o trabalho do setor de pré-vendas, retomando leads antigos a partir da análise do histórico de interações e da geração de resumos estratégicos para orientar a atuação do profissional.",
     current: true,
   },
 ];
