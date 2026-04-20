@@ -2,76 +2,126 @@ import { ContactFooter } from "@/src/modules/home/sections/ContactFooter";
 
 const entries = [
   {
-    id: 1,
-    period: "[período]",
-    role: "[cargo]",
-    company: "[empresa]",
-    description: "[descrição do cargo e responsabilidades — inserir texto final]",
+    id: "01",
+    title: "Início",
+    body: "Comecei a trabalhar aos 14 anos, ajudando minha família em uma gráfica. Foi ali que tive meu primeiro contato com responsabilidade, prazo, entrega e trabalho real.",
   },
   {
-    id: 2,
-    period: "[período]",
-    role: "[cargo]",
-    company: "[empresa]",
-    description: "[descrição do cargo e responsabilidades — inserir texto final]",
+    id: "02",
+    title: "Formação e entrada no digital",
+    body: "Durante a graduação em Desenho Industrial, comecei a migrar para o universo digital e tive meus primeiros trabalhos com criação de sites. Depois, aprofundei essa base com uma pós-graduação em Design de Hipermídia.",
   },
   {
-    id: 3,
-    period: "[período]",
-    role: "[cargo]",
-    company: "[empresa]",
-    description: "[descrição do cargo e responsabilidades — inserir texto final]",
+    id: "03",
+    title: "Projetos web de maior porte",
+    body: "Em Curitiba, entrei no mercado profissional de aplicações web na GoToAndPlay, atuando em projetos para marcas como Mercedes, BMW, grandes shoppings e O Boticário. Foi meu primeiro contato com entregas digitais de maior escala e exigência.",
   },
   {
-    id: 4,
-    period: "[período]",
-    role: "[cargo]",
-    company: "[empresa]",
-    description: "[descrição do cargo e responsabilidades — inserir texto final]",
+    id: "04",
+    title: "Empreendedorismo em software",
+    body: "Na sequência, fundei a MG Interativa, empresa de software e sites. Assumi projetos como os sites da prefeitura de Chapecó e trabalhos para a Unochapecó. Nesse período, também desenvolvi experiências com realidade aumentada em um momento ainda muito inicial dessa tecnologia no mercado.",
   },
   {
-    id: 5,
-    period: "[período]",
-    role: "[cargo]",
-    company: "[empresa]",
-    description: "[descrição do cargo e responsabilidades — inserir texto final]",
+    id: "05",
+    title: "Construção de negócio e liderança",
+    body: "Depois, fui para Florianópolis para cofundar a agência Lump, onde atuei por sete anos como sócio e diretor criativo. Essa fase ampliou minha experiência em cliente, posicionamento, operação, gestão de equipe e direção de projetos.",
+  },
+  {
+    id: "06",
+    title: "Transição para produto em tecnologia",
+    body: "Mais tarde, fiz a migração definitiva para o setor de tecnologia. Entrei na Yungas pela porta de UX e UI, mas ampliei minha atuação até assumir papel relevante na concepção de produto, na definição de caminhos e na participação das discussões estratégicas com o board.",
+  },
+  {
+    id: "07",
+    title: "Atuação em produto com impacto real",
+    body: "Na Yungas, atuei na evolução de soluções para grandes redes e clientes de maior complexidade. Entre os trabalhos mais relevantes, liderei a evolução incremental de um módulo crítico para evitar churn e conduzi a criação de um módulo de edição de artes que ajudou a destravar vendas e teve rápida adoção.",
+  },
+  {
+    id: "08",
+    title: "Estruturação de produto em empresa internacional",
+    body: "Também fui chamado para atuar em uma EdTech da Alemanha em um cenário de desorganização de produto e operação. Entrei para organizar visão, estratégia, prioridades e execução. Em nove meses, o time entregou três plataformas e colocou clientes em operação. Depois, fui convidado novamente para atuar em um novo contexto mais complexo.",
+  },
+  {
+    id: "09",
+    title: "IA, automação e projetos próprios",
+    body: "Mais recentemente, passei a desenvolver projetos próprios com automação, agentes e multiagentes de IA, aplicados a curadoria de conteúdo, atendimento via WhatsApp e criação automatizada de artigos.",
+    current: true,
   },
 ];
 
 export function HistoricoPage() {
   return (
     <div className="min-h-screen bg-stone-900 text-white">
-      <main className="mx-auto max-w-4xl px-6 sm:px-8 pt-28 sm:pt-36 lg:pt-44 pb-24">
-        <div className="mb-16">
-          <p className="text-sm font-bold uppercase tracking-[0.6em] text-stone-500 mb-4">
-            Histórico
-          </p>
-          <h1 className="text-3xl md:text-4xl font-semibold -tracking-[0.02em] leading-[1.3] text-white mb-6">
-            Histórico Profissional
-          </h1>
-          <p className="text-lg text-stone-400 leading-[1.7]">
-            [descrição introdutória — inserir texto final]
-          </p>
-        </div>
+      {/* Header */}
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 pt-28 sm:pt-36 lg:pt-44 pb-16 md:pb-24">
+        <p className="mb-4 text-sm font-bold uppercase tracking-[0.6em] text-stone-500">
+          Histórico
+        </p>
+        <h1 className="-tracking-[0.02em] text-3xl font-semibold leading-[1.3] text-white md:text-4xl lg:text-5xl">
+          Trajetória
+        </h1>
+      </div>
 
-        <ol className="relative border-l border-stone-700 ml-2">
-          {entries.map((entry) => (
-            <li key={entry.id} className="mb-12 pl-8">
-              <span className="absolute -left-[9px] flex h-[18px] w-[18px] items-center justify-center rounded-full bg-stone-600 ring-4 ring-stone-900" />
-              <time className="block mb-1 text-sm text-stone-500 font-medium">
-                {entry.period}
-              </time>
-              <h2 className="text-xl font-semibold text-white mb-1">
-                {entry.role}
-              </h2>
-              <p className="text-sm text-stone-500 mb-3">{entry.company}</p>
-              <p className="text-base text-stone-400 leading-[1.8]">
-                {entry.description}
-              </p>
-            </li>
-          ))}
+      {/* Timeline */}
+      <section className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 pb-24">
+        {/* Vertical line: left on mobile, centered on desktop */}
+        <div className="absolute top-0 bottom-0 left-[30px] w-px bg-stone-800 sm:left-[36px] md:left-1/2" />
+
+        <ol>
+          {entries.map((entry, index) => {
+            const isLeft = index % 2 === 0;
+            return (
+              <li
+                key={entry.id}
+                className={[
+                  "relative pb-16 md:pb-24",
+                  "pl-14 sm:pl-16 md:pl-0",
+                  isLeft
+                    ? "md:pr-[calc(50%+3rem)] md:text-right"
+                    : "md:pl-[calc(50%+3rem)]",
+                ].join(" ")}
+              >
+                {/* Dot */}
+                <span
+                  aria-hidden="true"
+                  className={[
+                    "absolute z-10 block rounded-full",
+                    "h-[14px] w-[14px]",
+                    "left-[23px] top-[50px] sm:left-[29px]",
+                    "md:left-1/2 md:top-[56px] md:-translate-x-1/2",
+                    entry.current ? "bg-white animate-pulse" : "bg-[#998663]",
+                    "shadow-[0_0_0_5px_#1c1917]",
+                  ].join(" ")}
+                />
+
+                {/* Decorative number */}
+                <p
+                  aria-hidden="true"
+                  className="select-none font-extralight leading-none text-[#998663]/[0.12] text-[72px] md:text-[96px] -mb-5 md:-mb-7"
+                >
+                  {entry.id}
+                </p>
+
+                {/* Title */}
+                <h2 className="mb-3 text-xl font-semibold leading-snug text-white md:text-2xl">
+                  {entry.title}
+                  {entry.current && (
+                    <span className="ml-2 align-middle inline-block text-xs font-medium uppercase tracking-widest text-stone-500 md:block md:mt-1 md:ml-0">
+                      agora
+                    </span>
+                  )}
+                </h2>
+
+                {/* Body */}
+                <p className="text-base leading-[1.8] text-stone-400">
+                  {entry.body}
+                </p>
+              </li>
+            );
+          })}
         </ol>
-      </main>
+      </section>
+
       <ContactFooter />
     </div>
   );
