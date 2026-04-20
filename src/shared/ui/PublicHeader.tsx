@@ -56,6 +56,9 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
             <Link href="/" className="transition-colors hover:text-white">
               Home
             </Link>
+            <Link href="/historico" className="transition-colors hover:text-white">
+              Histórico
+            </Link>
             <Link href="/blog" className="transition-colors hover:text-white">
               Conteúdo
             </Link>
@@ -158,11 +161,21 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               Home
             </Link>
             <Link
-              href="/blog"
+              href="/historico"
               onClick={() => setIsMenuOpen(false)}
               className={`transition-all duration-500 hover:text-stone-300 ${
                 isMenuOpen
                   ? "translate-y-0 opacity-100 delay-200"
+                  : "translate-y-4 opacity-0"
+              }`}>
+              Histórico
+            </Link>
+            <Link
+              href="/blog"
+              onClick={() => setIsMenuOpen(false)}
+              className={`transition-all duration-500 hover:text-stone-300 ${
+                isMenuOpen
+                  ? "translate-y-0 opacity-100 delay-250"
                   : "translate-y-4 opacity-0"
               }`}>
               Conteúdo
