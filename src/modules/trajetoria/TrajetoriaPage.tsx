@@ -33,8 +33,8 @@ const entries = [
   },
   {
     id: "07",
-    title: "Atuação em produto com impacto real",
-    body: "Na Yungas, atuei na evolução de soluções para grandes redes e clientes de maior complexidade. Entre os trabalhos mais relevantes, liderei a evolução incremental de um módulo crítico para evitar churn e conduzi a criação de um módulo de edição de artes que ajudou a destravar vendas e teve rápida adoção.",
+    title: "Impacto da minha atuação em grandes marcas",
+    body: "Na Yungas, atuei na evolução de soluções voltadas a grandes redes e operações de alta complexidade. Meu trabalho contribuiu diretamente para produtos utilizados por empresas como Subway, Burger King, CNA Idiomas, Grupo O Boticário, Casa do Pão de Queijo e OdontoCompany, entre outras.",
   },
   {
     id: "08",
