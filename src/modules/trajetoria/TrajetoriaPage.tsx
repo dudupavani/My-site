@@ -49,7 +49,7 @@ const entries = [
   },
 ];
 
-export function HistoricoPage() {
+export function TrajetoriaPage() {
   return (
     <div className="min-h-screen bg-stone-900 text-white">
       {/* Header */}

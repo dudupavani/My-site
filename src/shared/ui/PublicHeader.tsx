@@ -56,8 +56,8 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
             <Link href="/" className="transition-colors hover:text-white">
               Home
             </Link>
-            <Link href="/historico" className="transition-colors hover:text-white">
-              Histórico
+            <Link href="/trajetoria" className="transition-colors hover:text-white">
+              Trajetória
             </Link>
             <Link href="/cases" className="transition-colors hover:text-white">
               Cases
@@ -164,14 +164,14 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               Home
             </Link>
             <Link
-              href="/historico"
+              href="/trajetoria"
               onClick={() => setIsMenuOpen(false)}
               className={`transition-all duration-500 hover:text-stone-300 ${
                 isMenuOpen
                   ? "translate-y-0 opacity-100 delay-200"
                   : "translate-y-4 opacity-0"
               }`}>
-              Histórico
+              Trajetória
             </Link>
             <Link
               href="/cases"
