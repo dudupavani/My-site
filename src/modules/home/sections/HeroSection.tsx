@@ -115,6 +115,9 @@ export function HeroSection() {
             Concepção e estratégia de produtos digitais, integrando visão de negócio, design e tecnologia com experiência de quem já empreendeu.
           </h1>
         </div>
+        <Suspense fallback={null}>
+          <FeaturedPostBanner />
+        </Suspense>
       </div>
     </section>
   );
