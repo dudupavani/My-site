@@ -1,34 +1,3 @@
-import { Suspense } from "react";
-import Link from "next/link";
-
-import { getFeaturedPost } from "@/src/modules/blog/server/queries";
-
-async function FeaturedPostBanner() {
-  const post = await getFeaturedPost();
-  if (!post) return null;
-
-  return (
-    <Link
-      href={`/blog/${post.slug}`}
-      className="group mt-8 md:mt-10 block w-full max-w-sm sm:max-w-md">
-      <div className="flex items-center gap-0 rounded-xl bg-stone-800 overflow-hidden border border-stone-700/50 transition-colors group-hover:border-stone-600">
-        {post.coverImageUrl ? (
-          <img
-            src={post.coverImageUrl}
-            alt={post.title}
-            className="h-16 w-16 sm:h-20 sm:w-20 shrink-0 object-cover"
-          />
-        ) : (
-          <div className="h-16 w-16 sm:h-20 sm:w-20 shrink-0 bg-stone-700" />
-        )}
-        <span className="px-4 text-sm sm:text-base font-light text-stone-300 line-clamp-2 group-hover:text-white transition-colors leading-snug">
-          {post.title}
-        </span>
-      </div>
-    </Link>
-  );
-}
-
 export function HeroSection() {
   return (
     <section className="relative h-dvh md:h-screen min-h-175 bg-stone-900 text-white flex flex-col items-center justify-start md:justify-center overflow-hidden">
@@ -115,9 +84,6 @@ export function HeroSection() {
             Concepção e estratégia de produtos digitais, integrando visão de negócio, design e tecnologia com experiência de quem já empreendeu.
           </h1>
         </div>
-        <Suspense fallback={null}>
-          <FeaturedPostBanner />
-        </Suspense>
       </div>
     </section>
   );
