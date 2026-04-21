@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 
 import { getFeaturedPost } from "@/src/modules/blog/server/queries";

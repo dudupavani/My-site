@@ -125,7 +125,7 @@ export function PostsAdminScreen() {
           <p className="text-sm text-muted-foreground">Carregando posts...</p>
         ) : state.posts.length === 0 ? (
           <p className="text-sm text-muted-foreground">
-            Nenhum post cadastrado ainda. Use "Criar Post" para começar.
+            Nenhum post cadastrado ainda. Use &quot;Criar Post&quot; para começar.
           </p>
         ) : (
           <>

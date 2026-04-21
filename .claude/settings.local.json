@@ -9,7 +9,10 @@
       "Bash(supabase --version)",
       "Bash(pnpm typecheck *)",
       "Bash(git push *)",
-      "Bash(gh --version)"
+      "Bash(gh --version)",
+      "Bash(node *)",
+      "Bash(npx eslint *)",
+      "Bash(pnpm lint *)"
     ]
   }
 }
