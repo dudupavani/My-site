@@ -2,16 +2,16 @@ import { InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/src/modules/home/ic
 
 export function ContactFooter() {
   return (
-    <footer className="bg-stone-900">
+    <footer className="bg-zinc-900">
       <div className="flex flex-col items-center gap-8 pt-12 pb-40 px-6 sm:px-10 max-w-6xl mx-auto">
-        <div className="flex items-center my-10 md:mb-12 md:mt-20">
+        <div className="flex items-center my-10 md:mb-12 md:mt-20 animate-pulse">
           <img
             src="/images/logo-footer.svg"
             alt="eduardopavani"
             className="h-16 sm:h-20 md:h-32 lg:h-40 w-auto"
           />
         </div>
-        <h2 className="text-2xl sm:text-2xl md:text-3xl font-extralight mb-4 sm:mb-2 -tracking-[0.02em] leading-normal text-stone-400">
+        <h2 className="text-2xl sm:text-2xl md:text-3xl mb-4 sm:mb-2 -tracking-[0.02em] leading-normal text-zinc-200">
           Vamos conversar?
         </h2>
         <div className="flex items-center gap-6 md:gap-8">
@@ -20,14 +20,14 @@ export function ContactFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Entre em contato pelo WhatsApp"
-            className="bg-stone-800 text-stone-400 hover:text-white hover:border-stone-700 transition-colors duration-300 px-6 py-3 sm:px-10 sm:py-4 rounded-lg border border-stone-800"
+            className=" text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors duration-300 px-6 py-3 sm:px-10 sm:py-4 rounded-lg border border-zinc-800"
           >
             <WhatsAppIcon className="w-8 h-8" />
           </a>
           <a
             href="https://www.linkedin.com/in/eduardopavani/"
             aria-label="Visite meu perfil no LinkedIn"
-            className="bg-stone-800 text-stone-400 hover:text-white hover:border-stone-700 transition-colors duration-300 px-6 py-3 sm:px-10 sm:py-4 rounded-lg border border-stone-800"
+            className=" text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors duration-300 px-6 py-3 sm:px-10 sm:py-4 rounded-lg border border-zinc-800"
           >
             <LinkedInIcon className="w-8 h-8" />
           </a>
@@ -36,7 +36,7 @@ export function ContactFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Visite meu perfil no Instagram"
-            className="bg-stone-800 text-stone-400 hover:text-white hover:border-stone-700 transition-colors duration-300 px-6 py-3 sm:px-10 sm:py-4 rounded-lg border border-stone-800"
+            className=" text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors duration-300 px-6 py-3 sm:px-10 sm:py-4 rounded-lg border border-zinc-800"
           >
             <InstagramIcon className="w-8 h-8" />
           </a>

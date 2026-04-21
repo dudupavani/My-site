@@ -20,7 +20,7 @@ const cases: Case[] = [
     atuacao:
       "Conduzi pesquisa de mercado, entrevistas com clientes e analisei as lacunas do produto em relação ao que o mercado já tratava como padrão. A partir disso, estruturei um plano de evolução. Como a visão completa não foi aprovada de uma só vez, transformei a estratégia em entregas menores, onde cada avanço pavimentava o próximo.",
     resultado:
-      "Ao longo de seis a oito meses, o módulo evoluiu de forma consistente até atingir um novo patamar. O produto ficou cerca de um ano sem reclamações relevantes e sem pedidos de novas funcionalidades nessa frente, reduzindo um risco que eu já identificava como importante para a retenção.",
+      "Ao longo de poucos meses, o módulo evoluiu de forma consistente até atingir um novo patamar. O produto ficou cerca de um ano sem reclamações relevantes e sem pedidos de novas funcionalidades nessa frente, reduzindo um risco que eu já identificava como importante para a retenção.",
   },
   {
     id: "02",
@@ -50,20 +50,21 @@ const cases: Case[] = [
 
 export function CasesPage() {
   return (
-    <div className="min-h-screen bg-stone-900 text-white">
+    <div className="min-h-screen bg-zinc-900 text-white">
       {/* Header */}
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 pt-28 sm:pt-36 lg:pt-44 pb-16 md:pb-24">
-        <p className="mb-4 text-sm font-bold uppercase tracking-[0.6em] text-stone-500">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 pt-28 sm:pt-36 lg:pt-44 pb-8">
+        <h1 className="-tracking-[0.02em] text-3xl  leading-[1.3] text-white md:text-4xl lg:text-5xl">
           Cases
-        </p>
-        <h1 className="-tracking-[0.02em] text-3xl font-semibold leading-[1.3] text-white md:text-4xl lg:text-5xl">
-          Projetos e resultados reais
         </h1>
+        <p className="mb-4 text-2xl -tracking-[0.02em] text-zinc-500">
+          Projetos e resultados reais
+        </p>
+
       </div>
 
       {/* Cases */}
       <section className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 pb-24">
-        <div className="divide-y divide-stone-800">
+        <div className="divide-y divide-zinc-800">
           {cases.map((c) => (
             <article key={c.id} className="py-16 md:py-24">
               {/* Number + Title */}
@@ -74,42 +75,42 @@ export function CasesPage() {
                 >
                   {c.id}
                 </p>
-                <h2 className="text-2xl md:text-3xl font-semibold text-white leading-snug -tracking-[0.01em]">
+                <h2 className="text-2xl md:text-3xl text-white leading-snug -tracking-[0.01em]">
                   {c.title}
                 </h2>
               </div>
 
               {/* Contexto + Desafio + Atuação — 3 colunas */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-8">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.5em] text-stone-500 mb-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
+                <div className="border border-zinc-800 rounded-xl p-6">
+                  <p className="text-xs font-bold uppercase tracking-[0.5em] text-[#998663] mb-5">
                     Contexto
                   </p>
-                  <p className="text-sm text-stone-400 leading-[1.8]">
+                  <p className="text-sm font-medium text-zinc-300 leading-[1.8]">
                     {c.contexto}
                   </p>
                 </div>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.5em] text-stone-500 mb-3">
+                 <div className="border border-zinc-800 rounded-xl p-6">
+                  <p className="text-xs font-bold uppercase tracking-[0.5em] text-[#998663] mb-5">
                     Desafio
                   </p>
-                  <p className="text-sm text-stone-400 leading-[1.8]">
+                 <p className="text-sm font-medium text-zinc-300 leading-[1.8]">
                     {c.desafio}
                   </p>
                 </div>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.5em] text-stone-500 mb-3">
+                 <div className="border border-zinc-800 rounded-xl p-6">
+                  <p className="text-xs font-bold uppercase tracking-[0.5em] text-[#998663] mb-5">
                     Atuação
                   </p>
-                  <p className="text-sm text-stone-400 leading-[1.8]">
+                  <p className="text-sm font-medium text-zinc-300 leading-[1.8]">
                     {c.atuacao}
                   </p>
                 </div>
               </div>
 
               {/* Resultado — bloco destacado */}
-              <div className="rounded-xl border border-stone-700/50 bg-stone-800/30 px-6 py-6 md:px-8 md:py-7">
-                <p className="text-xs font-bold uppercase tracking-[0.5em] text-[#998663] mb-3">
+              <div className="rounded-xl border border-zinc-700/50 bg-zinc-800/30 px-6 py-6 md:px-9 md:py-9">
+                <p className="text-xs font-bold uppercase tracking-[0.5em] text-[#998663] mb-5">
                   Resultado
                 </p>
                 <p className="text-base text-white/80 leading-[1.8]">

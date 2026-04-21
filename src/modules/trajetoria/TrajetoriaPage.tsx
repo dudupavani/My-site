@@ -51,13 +51,10 @@ const entries = [
 
 export function TrajetoriaPage() {
   return (
-    <div className="min-h-screen bg-stone-900 text-white">
+    <div className="min-h-screen bg-zinc-900 text-white">
       {/* Header */}
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 pt-28 sm:pt-36 lg:pt-44 pb-16 md:pb-24">
-        <p className="mb-4 text-sm font-bold uppercase tracking-[0.6em] text-stone-500">
-          Histórico
-        </p>
-        <h1 className="-tracking-[0.02em] text-3xl font-semibold leading-[1.3] text-white md:text-4xl lg:text-5xl">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 pt-28 sm:pt-36 lg:pt-44 pb-16 md:pb-16">
+        <h1 className="-tracking-[0.02em] text-3xl font-medium text-center leading-[1.3] text-zinc-600 md:text-4xl 2xl:text-5xl">
           Trajetória
         </h1>
       </div>
@@ -65,7 +62,7 @@ export function TrajetoriaPage() {
       {/* Timeline */}
       <section className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 pb-24">
         {/* Vertical line: left on mobile, centered on desktop */}
-        <div className="absolute top-0 bottom-0 left-[30px] w-px bg-stone-800 sm:left-[36px] md:left-1/2" />
+        <div className="absolute top-0 bottom-0 left-7.5 w-px bg-zinc-800 sm:left-9 md:left-1/2" />
 
         <ol>
           {entries.map((entry, index) => {
@@ -74,7 +71,7 @@ export function TrajetoriaPage() {
               <li
                 key={entry.id}
                 className={[
-                  "relative pb-16 md:pb-24",
+                  "relative pb-12 md:pb-20",
                   "pl-14 sm:pl-16 md:pl-0",
                   isLeft
                     ? "md:pr-[calc(50%+3rem)] md:text-right"
@@ -86,9 +83,9 @@ export function TrajetoriaPage() {
                   aria-hidden="true"
                   className={[
                     "absolute z-10 block rounded-full",
-                    "h-[14px] w-[14px]",
-                    "left-[23px] top-[50px] sm:left-[29px]",
-                    "md:left-1/2 md:top-[56px] md:-translate-x-1/2",
+                    "h-3.5 w-3.5",
+                    "left-0 top-12.5 sm:left-0",
+                    "md:left-1/2 md:top-19 md:-translate-x-1/2",
                     entry.current ? "bg-white animate-pulse" : "bg-[#998663]",
                     "shadow-[0_0_0_5px_#1c1917]",
                   ].join(" ")}
@@ -97,23 +94,23 @@ export function TrajetoriaPage() {
                 {/* Decorative number */}
                 <p
                   aria-hidden="true"
-                  className="select-none font-extralight leading-none text-[#998663]/[0.12] text-[72px] md:text-[96px] -mb-5 md:-mb-7"
+                  className="select-none font-extralight leading-none text-[#998663]/12 text-[72px] md:text-[96px] -mb-5 md:-mb-7"
                 >
                   {entry.id}
                 </p>
 
                 {/* Title */}
-                <h2 className="mb-3 text-xl font-semibold leading-snug text-white md:text-2xl">
+                <h2 className="mb-3 text-xl font-medium leading-snug text-white md:text-2xl">
                   {entry.title}
                   {entry.current && (
-                    <span className="ml-2 align-middle inline-block text-xs font-medium uppercase tracking-widest text-stone-500 md:block md:mt-1 md:ml-0">
+                    <span className="ml-2 align-middle inline-block text-xs font-medium uppercase tracking-widest text-zinc-500 md:block md:mt-1 md:ml-0">
                       agora
                     </span>
                   )}
                 </h2>
 
                 {/* Body */}
-                <p className="text-base leading-[1.8] text-stone-400">
+                <p className="text-base md:text-lg leading-[1.8] text-zinc-400">
                   {entry.body}
                 </p>
               </li>

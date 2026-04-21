@@ -76,7 +76,7 @@ export function HeroSection() {
       </div>
 
       {/* Simbolo blur light */}
-      <div className="absolute inset-0 opacity-50 z-20 top-100 2xl:top-130 left-40 2xl:left-80 scale-100  object-contain mix-blend-plus-lighter! blur-3xl">
+      <div className="absolute inset-0 opacity-50 z-20 top-100 2xl:top-130 left-40 2xl:left-80 scale-100  object-contain mix-blend-multiply! blur-3xl">
         <svg
           viewBox="0 0 150 150"
           xmlns="http://www.w3.org/2000/svg"
@@ -112,14 +112,9 @@ export function HeroSection() {
       <div className="relative z-20 flex flex-col items-center text-center px-6 mt-30 sm:mt-28 md:mt-80">
         <div className="mx-auto md:max-w-4xl 2xl:max-w-5xl space-y-4">
           <h1 className="text-lg sm:text-xl md:text-3xl 2xl:text-4xl leading-[1.7] sm:leading-[1.4] 2xl:leading-[1.3] font-light">
-            Concepção e estratégia de produto de software, integrando visão de
-            negócio, design e tecnologia com experiência de quem já empreendeu.
+            Concepção e estratégia de produtos digitais, integrando visão de negócio, design e tecnologia com experiência de quem já empreendeu.
           </h1>
         </div>
-
-        <Suspense fallback={null}>
-          <FeaturedPostBanner />
-        </Suspense>
       </div>
     </section>
   );

@@ -232,7 +232,7 @@ export async function setPostFeatured(postId: string, featured: boolean): Promis
       .update({ is_featured: false })
       .eq("is_featured", true);
     if (clearError) {
-      throw new BlogAdminApiError("Falha ao atualizar destaque.", 500);
+      throw new BlogAdminApiError(`Falha ao limpar destaque: ${clearError.message}`, 500);
     }
   }
 
@@ -241,7 +241,7 @@ export async function setPostFeatured(postId: string, featured: boolean): Promis
     .update({ is_featured: featured })
     .eq("id", postId);
   if (error) {
-    throw new BlogAdminApiError("Falha ao atualizar destaque.", 500);
+    throw new BlogAdminApiError(`Falha ao atualizar destaque: ${error.message}`, 500);
   }
 }
 

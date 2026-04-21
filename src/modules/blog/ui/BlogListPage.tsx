@@ -17,7 +17,7 @@ export async function BlogListPage({ page = 1 }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-stone-900 text-white">
+    <div className="min-h-screen bg-zinc-900 text-white">
       <main className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 xl:px-6 pt-24 sm:pt-30 lg:pt-40 pb-16">
         <div className="mb-12">
           <h1 className="text-2xl md:text-3xl font-medium tracking-tight text-white">
@@ -26,7 +26,7 @@ export async function BlogListPage({ page = 1 }: Props) {
         </div>
 
         {posts.length === 0 ? (
-          <p className="text-stone-500">Nenhum post publicado ainda.</p>
+          <p className="text-zinc-500">Nenhum post publicado ainda.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {posts.map((post) => (
@@ -45,7 +45,7 @@ export async function BlogListPage({ page = 1 }: Props) {
 
 function PostCard({ post }: { post: BlogPostSummary }) {
   return (
-    <article className="group flex h-full flex-col rounded-2xl border border-stone-700 bg-stone-800">
+    <article className="group flex h-full flex-col rounded-2xl border border-zinc-700/50 bg-zinc-800/50">
       <div className="flex flex-1 flex-col gap-4 px-4 sm:px-6 pb-4 pt-6 sm:pt-8">
         <h2 className="text-lg sm:text-xl md:text-2xl text-white line-clamp-2">
           <Link
@@ -66,7 +66,7 @@ function PostCard({ post }: { post: BlogPostSummary }) {
               <Link
                 key={category.id}
                 href={`/blog/categoria/${category.slug}`}
-                className="rounded-full bg-stone-900 border border-stone-700/70 px-2.5 py-1 text-xs text-stone-300 transition-colors hover:border-stone-500 hover:text-white">
+                className="rounded-full bg-zinc-900 border border-zinc-700/70 px-2.5 py-1 text-xs text-zinc-300 transition-colors hover:border-zinc-500 hover:text-white">
                 {category.name}
               </Link>
             ))}
@@ -103,13 +103,13 @@ function Pagination({
 
   return (
     <nav
-      className="mt-12 flex items-center justify-between border-t border-stone-800 pt-8"
+      className="mt-12 flex items-center justify-between border-t border-zinc-800 pt-8"
       aria-label="Paginação">
       <div>
         {prev ? (
           <Link
             href={prev === 1 ? "/blog" : `/blog?page=${prev}`}
-            className="text-sm text-stone-400 transition-colors hover:text-white">
+            className="text-sm text-zinc-400 transition-colors hover:text-white">
             ← Mais recentes
           </Link>
         ) : (
@@ -117,7 +117,7 @@ function Pagination({
         )}
       </div>
 
-      <span className="text-xs text-stone-600">
+      <span className="text-xs text-zinc-600">
         {currentPage} / {totalPages}
       </span>
 
@@ -125,7 +125,7 @@ function Pagination({
         {next ? (
           <Link
             href={`/blog?page=${next}`}
-            className="text-sm text-stone-400 transition-colors hover:text-white">
+            className="text-sm text-zinc-400 transition-colors hover:text-white">
             Mais antigos →
           </Link>
         ) : (

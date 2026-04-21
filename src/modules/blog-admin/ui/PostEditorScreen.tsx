@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
-import { toast } from "sonner";
 
 import {
   BlogAdminHttpError,
@@ -256,15 +255,15 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
       setPostStatus(publishedPost.status);
       setResolvedPostId(publishedPost.id);
       if (publishedPost.status === "published") {
-        toast.success("Post publicado com sucesso.");
+        alert("Post publicado com sucesso.");
       } else {
-        toast.error(
+        alert(
           "Salvo, mas status não alterado para publicado. Verifique os campos obrigatórios.",
         );
       }
     } catch (publishError) {
       const normalized = normalizeError(publishError);
-      toast.error(normalized.message);
+      alert(normalized.message);
       setValidationErrors(normalized.errors ?? {});
     } finally {
       setPublishing(false);

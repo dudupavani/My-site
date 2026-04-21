@@ -1,5 +1,6 @@
 import { BaseSection } from "./sections/BaseSection";
 import { ContactFooter } from "./sections/ContactFooter";
+import { ContentCasesSection } from "./sections/ContentCasesSection";
 import { DecisionSection } from "./sections/DecisionSection";
 import { ExperienceSection } from "./sections/ExperienceSection";
 import { FormationSection } from "./sections/FormationSection";
@@ -13,9 +14,7 @@ export function HomePage() {
       <HeroSection />
       <ProductThinkingSection />
       <DecisionSection />
-      <ExperienceSection />
-      <TodaySection />
-      <BaseSection />
+      <ContentCasesSection />
       <FormationSection />
       <ContactFooter />
     </>

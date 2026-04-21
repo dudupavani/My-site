@@ -2,8 +2,6 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { Button } from "./components/button";
-import { Toaster } from "./components/sonner";
-
 type AdminShellProps = {
   children: ReactNode;
 };
@@ -37,7 +35,6 @@ export function AdminShell({ children }: AdminShellProps) {
       </header>
 
       {children}
-      <Toaster />
     </main>
   );
 }
