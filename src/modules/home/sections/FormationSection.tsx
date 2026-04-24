@@ -44,19 +44,19 @@ const formations = [
 
 export function FormationSection() {
   return (
-    <section className="bg-zinc-900 text-white">
+    <section className="bg-zinc-900 text-white px-6 sm:px-12">
       <div className="flex flex-col items-stretch">
-        <div className="flex justify-start md:justify-center items-center px-6 pt-12 pb-6 sm:py-12">
-          <h2 className="text-sm sm:text-base md:text-lg lg:text-2xl font-medium -tracking-wide text-zinc-500">
+        <div className="flex justify-start items-center pt-12 pb-6 sm:py-12 md:pt-16">
+          <h2 className="text-3xl lg:text-5xl font-extralight -tracking-wide text-gold-600">
             Formação
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex-1 gap-2 px-6 sm:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 flex-1 gap-2">
           {formations.map((item) => (
             <div
               key={item.degree}
-              className="px-6 py-6 md:py-10 md:px-10 border border-zinc-800/60 bg-zinc-950/30 rounded-xl flex flex-col gap-2 justify-between">
+              className="px-6 py-6 md:py-10 md:px-10 border border-zinc-800/60 bg-zinc-950/30 rounded-xl flex flex-col gap-4 sm:gap-2 justify-between">
               <h3 className="text-base sm:text-lg mb-2 text-white">
                 {item.degree}
               </h3>

@@ -1,8 +1,6 @@
 import { ContactFooter } from "@/src/modules/home/sections/ContactFooter";
 import { Badge } from "@/src/shared/ui";
 
-const BRONZE = "#998663";
-
 // ---- Shared primitives ----
 
 function Flare({ bottom }: { bottom?: boolean }) {
