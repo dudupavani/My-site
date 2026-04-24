@@ -9,8 +9,7 @@ import {
   updateCategoryById,
 } from "@/src/shared/api/blogAdmin";
 import type { BlogCategory } from "@/src/shared/types/blogAdmin";
-import { Button } from "./components/button";
-import { Input } from "./components/input";
+import { Button, Input } from "@/src/shared/ui";
 
 type CategoriesState = {
   loading: boolean;

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { Button } from "./components/button";
+import { Button } from "@/src/shared/ui";
 type AdminShellProps = {
   children: ReactNode;
 };

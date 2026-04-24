@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-import "@/src/modules/blog-admin/ui/admin-theme.css";
-
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Admin | Eduardo Pavani",

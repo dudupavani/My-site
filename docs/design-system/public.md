@@ -4,8 +4,7 @@ O sistema público cobre home, trajetória, cases, blog e páginas institucionai
 
 ## Fontes de verdade atuais
 
-- Tokens globais: `app/globals.css`
-- Tema público editorial: `app/(public)/public-theme.css`
+- Tailwind, tokens e tema público editorial: `app/globals.css`
 - Header público: `src/shared/ui/PublicHeader.tsx`
 - Ícones sociais: `src/shared/ui/icons/SocialIcons.tsx`
 - Páginas com padrões visuais fortes:
@@ -24,7 +23,7 @@ Tokens globais já disponíveis:
 | `gold-50` a `gold-950` | Acentos premium, detalhes de timeline, chips, bordas especiais |
 | `zinc-*` | Fundo escuro, texto neutro, divisórias |
 | `stone-*` | Apoio editorial e elementos do header/home |
-| `primary`, `secondary`, `muted`, `accent` | Tokens semânticos herdados do shadcn/admin |
+| `primary`, `secondary`, `muted`, `accent` | Tokens semânticos globais definidos em `app/globals.css` |
 
 Valores recorrentes que devem virar token ou classe utilitária:
 

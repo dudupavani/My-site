@@ -1,7 +1,27 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 
 import { cn } from "@/src/shared/ui/lib/cn";
+
+type ButtonVariant =
+  | "primary"
+  | "default"
+  | "secondary"
+  | "outline"
+  | "ghost"
+  | "destructive"
+  | "link";
+
+type ButtonSize =
+  | "xs"
+  | "sm"
+  | "md"
+  | "default"
+  | "lg"
+  | "icon-xs"
+  | "icon-sm"
+  | "icon"
+  | "icon-lg";
 
 const buttonVariants = cva(
   [
@@ -15,6 +35,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         outline:
@@ -22,73 +43,92 @@ const buttonVariants = cva(
         ghost: "bg-transparent text-foreground hover:bg-muted",
         destructive:
           "border border-destructive/30 bg-destructive/10 text-destructive hover:bg-destructive/20",
+        link: "h-auto p-0 text-primary underline-offset-4 hover:underline",
       },
       size: {
-        sm: "",
-        md: "",
-        lg: "",
-      },
-      iconOnly: {
-        true: "",
-        false: "",
+        xs: "h-7 gap-1 px-2 text-xs [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-8 gap-1.5 px-3 text-sm",
+        md: "h-10 gap-2 px-4 text-sm",
+        default: "h-9 gap-1.5 px-2.5 text-sm",
+        lg: "h-12 gap-2.5 px-5 text-base",
+        "icon-xs": "size-6 p-0 [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm": "size-7 p-0 [&_svg:not([class*='size-'])]:size-4",
+        icon: "size-8 p-0 [&_svg:not([class*='size-'])]:size-4",
+        "icon-lg": "size-9 p-0 [&_svg:not([class*='size-'])]:size-5",
       },
     },
-    compoundVariants: [
-      {
-        size: "sm",
-        iconOnly: false,
-        className: "h-8 gap-1.5 px-3 text-sm",
-      },
-      {
-        size: "md",
-        iconOnly: false,
-        className: "h-10 gap-2 px-4 text-sm",
-      },
-      {
-        size: "lg",
-        iconOnly: false,
-        className: "h-12 gap-2.5 px-5 text-base",
-      },
-      {
-        size: "sm",
-        iconOnly: true,
-        className: "size-8 p-0 [&_svg:not([class*='size-'])]:size-4",
-      },
-      {
-        size: "md",
-        iconOnly: true,
-        className: "size-10 p-0 [&_svg:not([class*='size-'])]:size-5",
-      },
-      {
-        size: "lg",
-        iconOnly: true,
-        className: "size-12 p-0 [&_svg:not([class*='size-'])]:size-6",
-      },
-    ],
     defaultVariants: {
       variant: "primary",
       size: "md",
-      iconOnly: false,
     },
   },
 );
+
+type ButtonProps = Omit<React.ComponentProps<"button">, "size"> & {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  iconOnly?: boolean;
+  asChild?: boolean;
+};
+
+function resolveButtonSize(
+  size: ButtonSize | undefined,
+  iconOnly: boolean | undefined,
+): ButtonSize | undefined {
+  if (!iconOnly) return size;
+  if (size === "xs") return "icon-xs";
+  if (size === "sm") return "icon";
+  if (size === "lg") return "icon-lg";
+  if (size === "default") return "icon";
+  return size ?? "icon";
+}
 
 function Button({
   className,
   variant,
   size,
   iconOnly,
+  asChild = false,
+  children,
   ...props
-}: React.ComponentProps<"button"> & VariantProps<typeof buttonVariants>) {
+}: ButtonProps) {
+  const resolvedSize = resolveButtonSize(size, iconOnly);
+  const buttonClassName = cn(
+    buttonVariants({ variant, size: resolvedSize }),
+    className,
+  );
+
+  if (asChild && React.isValidElement(children)) {
+    const child = children as React.ReactElement<
+      {
+        className?: string;
+      } & Record<string, unknown>
+    >;
+    const childProps: {
+      className?: string;
+    } & Record<string, unknown> = {
+      ...props,
+      "data-slot": "button",
+      "data-variant": variant,
+      "data-size": resolvedSize,
+      "data-icon-only": iconOnly ? "true" : undefined,
+      className: cn(buttonClassName, child.props.className),
+    };
+
+    return React.cloneElement(child, childProps);
+  }
+
   return (
     <button
       data-slot="button"
       data-variant={variant}
-      data-size={size}
+      data-size={resolvedSize}
       data-icon-only={iconOnly ? "true" : undefined}
-      className={cn(buttonVariants({ variant, size, iconOnly }), className)}
+      className={buttonClassName}
       {...props}
-    />
+    >
+      {children}
+    </button>
   );
 }
 

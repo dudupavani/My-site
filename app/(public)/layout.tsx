@@ -1,4 +1,3 @@
-import "./public-theme.css";
 import type { ReactNode } from "react";
 
 const personSchema = {

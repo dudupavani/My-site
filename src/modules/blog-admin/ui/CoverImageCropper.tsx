@@ -3,15 +3,15 @@
 import Cropper, { type Area } from "react-easy-crop";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { Button } from "./components/button";
 import {
+  Button,
   Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "./components/dialog";
+} from "@/src/shared/ui";
 
 type CoverImageCropperProps = {
   currentCoverUrl: string | null;

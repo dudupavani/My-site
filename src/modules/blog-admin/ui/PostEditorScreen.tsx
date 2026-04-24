@@ -24,14 +24,9 @@ import type {
 } from "@/src/shared/types/blogAdmin";
 import { marked } from "marked";
 import { slugify } from "@/src/shared/utils/slug";
+import { Badge, Button, Input, Label, Textarea, Toggle } from "@/src/shared/ui";
 import { CoverImageCropper } from "./CoverImageCropper";
 import { RichTextEditor } from "./RichTextEditor";
-import { Badge } from "./components/badge";
-import { Button } from "./components/button";
-import { Toggle } from "./components/toggle";
-import { Input } from "./components/input";
-import { Label } from "./components/label";
-import { Textarea } from "./components/textarea";
 
 type PostEditorScreenProps = {
   postId?: string;

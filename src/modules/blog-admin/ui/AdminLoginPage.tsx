@@ -3,9 +3,7 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 
-import { Button } from "./components/button";
-import { Input } from "./components/input";
-import { Label } from "./components/label";
+import { Button, Input, Label } from "@/src/shared/ui";
 
 type AdminLoginPageProps = {
   errorCode?: string;

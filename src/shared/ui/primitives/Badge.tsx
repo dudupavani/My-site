@@ -11,18 +11,26 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        "gray-light": "border-transparent bg-zinc-100 text-zinc-700",
-        "gray-dark": "border-transparent bg-zinc-900 text-zinc-100",
+        default: "border-transparent bg-primary/10 text-primary",
+        primary: "border-transparent bg-primary/10 text-primary",
+        secondary: "border-transparent bg-secondary text-secondary-foreground",
+        destructive:
+          "border-destructive/40 bg-destructive/10 text-destructive",
+        outline: "border-border bg-transparent text-foreground",
+        success: "border-green-400 bg-green-100 text-green-900",
+        warning: "border-orange-400 bg-orange-100 text-orange-900",
+        "gray-light": "border-transparent bg-zinc-400 text-zinc-800",
+        "gray-dark": "border-transparent bg-zinc-800 text-zinc-400",
         "gray-outline":
-          "border-zinc-300 bg-transparent text-zinc-700 dark:border-zinc-700 dark:text-zinc-300",
-        "gold-dark": "border-transparent bg-gold-900 text-gold-100",
-        "gold-light": "border-transparent bg-gold-100 text-gold-900",
+          "border-zinc-600 bg-zinc-800/40 text-zinc-400 dark:border-zinc-700 dark:text-zinc-300",
+        "gold-dark": "border-transparent bg-gold-800 text-white/80",
+        "gold-light": "border-transparent bg-gold-400 text-gold-950",
         "gold-outline":
-          "border-gold-500/40 bg-transparent text-gold-600 dark:text-gold-400",
+          "border-gold-600 bg-transparent text-gold-500 dark:text-gold-400",
       },
       size: {
-        sm: "h-6 px-2 text-[10px]",
-        md: "h-7 px-2.5 text-xs",
+        sm: "h-6 px-2 text-xs",
+        md: "h-7 px-2.5 text-sm",
         lg: "h-8 px-3 text-sm",
       },
     },

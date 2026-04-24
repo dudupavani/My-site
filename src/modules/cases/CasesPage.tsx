@@ -1,4 +1,3 @@
-import type { CSSProperties, ReactNode } from "react";
 import { ContactFooter } from "@/src/modules/home/sections/ContactFooter";
 import { Badge } from "@/src/shared/ui";
 
@@ -37,7 +36,7 @@ function MegaNum({ num }: { num: string }) {
   return (
     <p
       aria-hidden="true"
-      className="select-none font-thin -tracking-[0.08em] leading-[0.8] text-[180px] sm:text-[240px] md:text-[280px] lg:text-[340px] -mt-8"
+      className="select-none font-thin -tracking-[0.08em] leading-[0.8] text-[180px] sm:text-[240px] md:text-[280px] lg:text-[300px] -mt-8"
       style={{
         background:
           "linear-gradient(180deg, rgba(153,134,99,0.35) 0%, rgba(153,134,99,0.02) 85%)",
@@ -62,19 +61,16 @@ function TagPills({
         tag.primary ? (
           <Badge
             key={tag.label}
-            size="sm"
-            variant="gold-outline"
-            className="gap-2 tracking-[0.22em] uppercase border-gold-500/30 text-gold-500"
+            size="md"
+            variant="gold-dark"
           >
-            <span className="h-1 w-1 rounded-full bg-gold-500" />
             {tag.label}
           </Badge>
         ) : (
           <Badge
             key={tag.label}
-            size="sm"
+            size="md"
             variant="gray-outline"
-            className="tracking-[0.22em] uppercase border-zinc-800 text-zinc-500"
           >
             {tag.label}
           </Badge>
@@ -99,94 +95,24 @@ function CaseTitle({ line1, line2 }: { line1: string; line2: string }) {
 
 function PhaseLabel({ label, sub }: { label: string; sub?: string }) {
   return (
-    <div className="flex items-center gap-3 mb-8">
+    <div className="flex items-center gap-3 mb-4">
       <span
-        className="text-[11px] tracking-[0.32em] uppercase font-medium"
-        style={{ color: BRONZE }}
+        className="text-lg font-semibold tracking-tight text-gold-500"
       >
         {label}
       </span>
-      {sub && <span className="text-[10px] text-zinc-700">{sub}</span>}
+      {sub && <span className="text-xs text-zinc-500">{sub}</span>}
     </div>
   );
 }
 
-function ResultadoBlock({
-  children,
-  metrics,
-}: {
-  children: ReactNode;
-  metrics: { value: string; accent: string; label: string }[];
-}) {
-  const tickStyle = (
-    top?: number,
-    bottom?: number,
-    left?: number,
-    right?: number
-  ): CSSProperties => ({
-    position: "absolute",
-    width: 14,
-    height: 14,
-    top: top ?? "auto",
-    bottom: bottom ?? "auto",
-    left: left ?? "auto",
-    right: right ?? "auto",
-    borderTop: top !== undefined ? "1px solid rgba(153,134,99,0.4)" : undefined,
-    borderBottom: bottom !== undefined ? "1px solid rgba(153,134,99,0.4)" : undefined,
-    borderLeft: left !== undefined ? "1px solid rgba(153,134,99,0.4)" : undefined,
-    borderRight: right !== undefined ? "1px solid rgba(153,134,99,0.4)" : undefined,
-  });
-
-  return (
-    <div
-      className="relative mt-8 sm:mt-10 p-10 sm:p-14 md:p-20 bg-gradient-to-br from-zinc-900/80 via-zinc-950/80 to-zinc-900/30 backdrop-blur-sm"
-      style={{
-        borderRadius: 28,
-        border: "1px solid rgba(153,134,99,0.3)",
-      }}
-    >
-      <span aria-hidden="true" style={tickStyle(-1, undefined, -1, undefined)} />
-      <span aria-hidden="true" style={tickStyle(-1, undefined, undefined, -1)} />
-      <span aria-hidden="true" style={tickStyle(undefined, -1, -1, undefined)} />
-      <span aria-hidden="true" style={tickStyle(undefined, -1, undefined, -1)} />
-
-      <div className="flex items-center gap-3 mb-8">
-        <span className="w-12 h-px" style={{ background: BRONZE }} />
-        <span
-          className="text-[11px] tracking-[0.35em] uppercase font-medium"
-          style={{ color: BRONZE }}
-        >
-          Resultado
-        </span>
-      </div>
-
-      <blockquote className="font-light text-xl sm:text-2xl md:text-3xl lg:text-[36px] leading-[1.35] -tracking-[0.02em] text-white/95 max-w-5xl">
-        {children}
-      </blockquote>
-
-      <div className="mt-12 pt-8 border-t border-zinc-800/60 grid grid-cols-3 gap-4 sm:gap-8">
-        {metrics.map((m) => (
-          <div key={m.label}>
-            <p className="font-thin text-4xl sm:text-5xl md:text-6xl -tracking-[0.03em] text-white">
-              {m.value}
-              <span style={{ color: BRONZE }}>{m.accent}</span>
-            </p>
-            <p className="text-[11px] tracking-[0.2em] uppercase text-zinc-500 mt-2">
-              {m.label}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 function SectionDivider() {
   return (
     <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 pb-0">
       <div className="flex items-center gap-6">
-        <span className="block flex-1 h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
-        <span className="block flex-1 h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
+        <span className="block flex-1 h-px bg-linear-to-r from-transparent via-zinc-500 to-transparent" />
+        <span className="block flex-1 h-px bg-linear-to-r from-transparent via-zinc-700 to-transparent" />
       </div>
     </div>
   );
@@ -214,10 +140,10 @@ export function CasesPage() {
         <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 py-24 sm:py-36 lg:py-32">
           {/* Header row: numeral esquerda, meta direita */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-16 sm:mb-24">
-            <div className="md:col-span-5">
+            <div className="md:col-span-3">
               <MegaNum num="01" />
             </div>
-            <div className="md:col-span-7 flex flex-col justify-end pb-4">
+            <div className="md:col-span-9 flex flex-col justify-end pb-4">
               <TagPills
                 tags={[
                   { label: "Retenção", primary: true },
@@ -232,52 +158,65 @@ export function CasesPage() {
             </div>
           </div>
 
-          {/* Story grid — cards separados por gap-px */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-px bg-zinc-900/60 border border-zinc-900 rounded-3xl overflow-hidden">
-            {[
-              {
-                label: "Contexto",
-                step: "01 / 03",
-                text: "Na Yungas, o módulo de checklist era mais simples do que o nível de exigência dos clientes que já utilizavam a plataforma. Havia um descompasso claro entre a complexidade da operação dessas redes e a maturidade do produto entregue.",
-              },
-              {
-                label: "Desafio",
-                step: "02 / 03",
-                text: "O risco era continuar operando com um módulo abaixo do esperado para grandes contas, gerando insatisfação e aumentando a chance de churn.",
-              },
-              {
-                label: "Atuação",
-                step: "03 / 03",
-                text: "Conduzi pesquisa de mercado, entrevistas com clientes e analisei as lacunas do produto em relação ao que o mercado já tratava como padrão. A partir disso, estruturei um plano de evolução. Como a visão completa não foi aprovada de uma só vez, transformei a estratégia em entregas menores, onde cada avanço pavimentava o próximo.",
-              },
-            ].map((card) => (
-              <div
-                key={card.label}
-                className="bg-zinc-950 p-8 sm:p-10 md:p-12 lg:col-span-4"
-              >
-                <PhaseLabel label={card.label} sub={card.step} />
-                <p className="font-light text-base sm:text-lg leading-[1.7] -tracking-[0.01em] text-zinc-300">
-                  {card.text}
-                </p>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
+            <div className="lg:col-span-5 bg-linear-to-br from-zinc-700/40 via-zinc-900/50 to-zinc-900/80 border border-zinc-800 rounded-2xl md:rounded-3xl px-6 py-8 sm:p-10 md:p-12">
+              <PhaseLabel label="Contexto" sub="01 / 03" />
+              <p className="font-regular sm:font-light text-sm sm:text-lg leading-[1.7] text-zinc-300">
+                Na Yungas, o módulo de checklist era mais simples do que o nível
+                de exigência dos clientes que já utilizavam a plataforma. Havia
+                um descompasso claro entre a complexidade da operação dessas
+                redes e a maturidade do produto entregue.
+              </p>
+            </div>
+
+            <div className="lg:col-span-7 bg-linear-to-br from-zinc-700/40 via-zinc-900/50 to-zinc-900/80 border border-zinc-800 rounded-2xl md:rounded-3xl px-6 py-8 sm:p-10 md:p-12">
+              <PhaseLabel label="Desafio" sub="02 / 03" />
+              <p className="font-regular sm:font-light text-sm sm:text-lg leading-[1.7] text-zinc-300">
+                O risco era continuar operando com um módulo abaixo do esperado
+                para grandes contas, gerando insatisfação e aumentando a chance
+                de churn.
+              </p>
+            </div>
+
+            <div className="lg:col-span-12 bg-linear-to-br from-zinc-700/40 via-zinc-900/50 to-zinc-900/80 border border-zinc-800 rounded-2xl md:rounded-3xl px-6 py-8 sm:p-10 md:p-14">
+              <PhaseLabel label="Atuação" sub="03 / 03" />
+              <p className="font-regular sm:font-light text-sm sm:text-lg leading-[1.7] text-zinc-300 max-w-4xl">
+                Conduzi pesquisa de mercado, entrevistas com clientes e analisei
+                as lacunas do produto em relação ao que o mercado já tratava
+                como padrão. A partir disso, estruturei um plano de evolução.
+                Como a visão completa não foi aprovada de uma só vez, transformei
+                a estratégia em entregas menores, onde cada avanço pavimentava o
+                próximo.
+              </p>
+            </div>
           </div>
 
-          <ResultadoBlock
-            metrics={[
-              { value: "~12", accent: "mo", label: "sem reclamações" },
-              { value: "↓", accent: " churn", label: "risco reduzido" },
-              { value: "+", accent: "nível", label: "novo patamar de produto" },
-            ]}
-          >
-            Ao longo de poucos meses, o módulo evoluiu de forma consistente até
-            atingir um novo patamar. O produto ficou{" "}
-            <span style={{ color: BRONZE }}>
-              cerca de um ano sem reclamações relevantes
-            </span>{" "}
-            e sem pedidos de novas funcionalidades nessa frente, reduzindo um
-            risco que eu já identificava como importante para a retenção.
-          </ResultadoBlock>
+          <div className="relative mt-8 sm:mt-10 p-10 sm:p-14 md:p-20 border border-gold-800 bg-linear-to-br from-zinc-700/60 via-zinc-950/80 to-zinc-900/30 backdrop-blur-sm rounded-2xl">
+            <span className="block text-4xl font-light tracking-tight text-gold-500 mb-8">Resultado</span>
+            <blockquote className="font-light text-xl sm:text-2xl leading-[1.6] text-white/90 max-w-5xl">
+              Ao longo de poucos meses, o módulo evoluiu de forma consistente até
+              atingir um novo patamar. O produto ficou{" "}
+              <span className="text-gold-400 font-semibold">
+                cerca de um ano sem solicitações de melhorias relevantes
+              </span>{" "}
+              nessa frente, reduzindo um risco que eu já identificava como
+              importante para a retenção.
+            </blockquote>
+            <div className="mt-12 pt-8 border-t border-zinc-800/60 grid grid-cols-3 gap-4 sm:gap-8">
+              <div>
+                <p className="font-thin text-4xl sm:text-5xl md:text-6xl -tracking-[0.03em] text-white">~12<span className="text-gold-500">mo</span></p>
+                <p className="text-sm text-zinc-400 mt-2">sem reclamações</p>
+              </div>
+              <div>
+                <p className="font-thin text-4xl sm:text-5xl md:text-6xl -tracking-[0.03em] text-white">↓<span className="text-gold-500"> churn</span></p>
+                <p className="text-sm text-zinc-400 mt-2">risco reduzido</p>
+              </div>
+              <div>
+                <p className="font-thin text-4xl sm:text-5xl md:text-6xl -tracking-[0.03em] text-white">+<span className="text-gold-500">nível</span></p>
+                <p className="text-sm text-zinc-400 mt-2">novo patamar de produto</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <SectionDivider />
@@ -290,7 +229,7 @@ export function CasesPage() {
         <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 py-24 sm:py-36 lg:py-48">
           {/* Header row: meta esquerda, numeral direita (invertido) */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-16 sm:mb-24">
-            <div className="md:col-span-7 md:order-2 flex flex-col justify-end pb-4 md:text-right md:items-end">
+            <div className="md:col-span-8 flex flex-col justify-end pb-4 md:text-right md:items-end">
               <TagPills
                 tags={[
                   { label: "Receita", primary: true },
@@ -303,47 +242,34 @@ export function CasesPage() {
                 line2="que destravou vendas."
               />
             </div>
-            <div className="md:col-span-5 md:order-1">
+            <div className="md:col-span-4">
               <MegaNum num="02" />
             </div>
           </div>
 
           {/* Asymmetric story grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
-            <div className="lg:col-span-5 bg-zinc-900/40 border border-zinc-900 rounded-3xl p-8 sm:p-10 md:p-12">
+            <div className="lg:col-span-6 bg-linear-to-br from-zinc-700/40 via-zinc-900/50 to-zinc-900/80 border border-zinc-800 rounded-2xl md:rounded-3xl px-6 py-8 sm:p-10 md:p-12">
               <PhaseLabel label="Contexto" />
-              <p className="font-light text-base sm:text-lg leading-[1.7] -tracking-[0.01em] text-zinc-300">
+              <p className="font-regular sm:font-light text-sm sm:text-lg leading-[1.7] text-zinc-300">
                 Na relação com o time comercial da Yungas, percebi que a
                 ausência de um módulo de edição de artes impactava diretamente a
                 capacidade de fechar novas vendas.
               </p>
             </div>
 
-            <div className="lg:col-span-7 bg-zinc-900/40 border border-zinc-900 rounded-3xl p-8 sm:p-10 md:p-12">
+            <div className="lg:col-span-6 bg-linear-to-br from-zinc-700/40 via-zinc-900/50 to-zinc-900/80 border border-zinc-800 rounded-2xl md:rounded-3xl px-6 py-8 sm:p-10 md:p-12">
               <PhaseLabel label="Desafio" />
-              <p className="font-light text-base sm:text-lg leading-[1.7] -tracking-[0.01em] text-zinc-300">
+              <p className="font-regular sm:font-light text-sm sm:text-lg leading-[1.7] text-zinc-300">
                 A empresa perdia competitividade em situações onde o cliente
                 precisava de uma solução que permitisse adaptar materiais com
                 flexibilidade, mantendo consistência visual e operacional.
               </p>
             </div>
 
-            <div className="lg:col-span-12 bg-zinc-900/40 border border-zinc-900 rounded-3xl p-8 sm:p-10 md:p-14">
-              <PhaseLabel label="Atuação — ponta a ponta" />
-              {/* Pipeline chips */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-10">
-                {["Pesquisa", "Solução", "Concepção", "Sprint", "Lançamento"].map(
-                  (step, i) => (
-                    <div key={step} className="border border-zinc-800 rounded-xl p-4">
-                      <span className="text-[10px] tracking-[0.2em] uppercase text-zinc-600">
-                        0{i + 1}
-                      </span>
-                      <p className="text-sm text-zinc-200 mt-1">{step}</p>
-                    </div>
-                  )
-                )}
-              </div>
-              <p className="font-light text-base sm:text-lg leading-[1.7] -tracking-[0.01em] text-zinc-300 max-w-4xl">
+            <div className="lg:col-span-12 bg-linear-to-br from-zinc-700/40 via-zinc-900/50 to-zinc-900/80 border border-zinc-800 rounded-2xl md:rounded-3xl px-6 py-8 sm:p-10 md:p-14">
+              <PhaseLabel label="Atuação ponta a ponta" />
+              <p className="font-regular sm:font-light text-sm sm:text-lg leading-[1.7] text-zinc-300 max-w-4xl">
                 Assumi o projeto de ponta a ponta. Fiz pesquisa de mercado,
                 entrevistas com clientes, definição da solução, concepção do
                 produto, criação das telas, especificação para desenvolvimento,
@@ -351,24 +277,49 @@ export function CasesPage() {
                 lançamento. Também atuei na comunicação com clientes e no
                 suporte à adoção junto ao time de CS.
               </p>
+              
+              {/* Pipeline chips */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mt-10">
+                {["Pesquisa", "Solução", "Concepção", "Delivery", "Lançamento"].map(
+                  (step, i) => (
+                    <div key={step} className="bg-zinc-800 rounded-xl p-4">
+                      <span className="text-sm tracking-[0.2em] text-zinc-500">
+                        0{i + 1}
+                      </span>
+                      <p className="text-base text-zinc-200 mt-1">{step}</p>
+                    </div>
+                  )
+                )}
+              </div>
+
             </div>
           </div>
 
-          <ResultadoBlock
-            metrics={[
-              { value: "↑", accent: " vendas", label: "barreira removida" },
-              { value: "rápida", accent: ".", label: "adoção pelos clientes" },
-              { value: "e2e", accent: ".", label: "pesquisa → lançamento" },
-            ]}
-          >
-            O módulo teve{" "}
-            <span style={{ color: BRONZE }}>adoção rápida</span>, poucos
-            problemas na entrada em operação e boa recepção por parte dos
-            clientes. Além de atender uma demanda real do mercado, o produto
-            ajudou a reduzir uma{" "}
-            <span style={{ color: BRONZE }}>barreira comercial importante</span>
-            .
-          </ResultadoBlock>
+          <div className="relative mt-8 sm:mt-10 p-10 sm:p-14 md:p-20 border border-gold-800 bg-linear-to-br from-zinc-700/60 via-zinc-950/80 to-zinc-900/30 backdrop-blur-sm rounded-2xl">
+            <span className="block text-4xl font-light tracking-tight text-gold-500 mb-8">Resultado</span>
+            <blockquote className="font-light text-xl sm:text-2xl leading-[1.6] text-white/90 max-w-5xl">
+              O módulo teve{" "}
+              <span className="text-gold-500">adoção rápida</span>, poucos
+              problemas na entrada em operação e boa recepção por parte dos
+              clientes. Além de atender uma demanda real do mercado, o produto
+              ajudou a reduzir uma{" "}
+              <span className="text-gold-500">barreira comercial importante</span>.
+            </blockquote>
+            <div className="mt-12 pt-8 border-t border-zinc-800/60 grid grid-cols-3 gap-4 sm:gap-8">
+              <div>
+                <p className="font-thin text-4xl sm:text-5xl md:text-6xl -tracking-[0.03em] text-white">↑<span className="text-gold-500"> vendas</span></p>
+                <p className="text-sm text-zinc-400 mt-2">barreira removida</p>
+              </div>
+              <div>
+                <p className="font-thin text-4xl sm:text-5xl md:text-6xl -tracking-[0.03em] text-white">rápida<span className="text-gold-500">.</span></p>
+                <p className="text-sm text-zinc-400 mt-2">adoção pelos clientes</p>
+              </div>
+              <div>
+                <p className="font-thin text-4xl sm:text-5xl md:text-6xl -tracking-[0.03em] text-white">e2e<span className="text-gold-500">.</span></p>
+                <p className="text-sm text-zinc-400 mt-2">pesquisa → lançamento</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <SectionDivider />
@@ -381,10 +332,10 @@ export function CasesPage() {
         <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 py-24 sm:py-36 lg:py-48">
           {/* Header row */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-16 sm:mb-24">
-            <div className="md:col-span-5">
+            <div className="md:col-span-4">
               <MegaNum num="03" />
             </div>
-            <div className="md:col-span-7 flex flex-col justify-end pb-4">
+            <div className="md:col-span-8 flex flex-col justify-end pb-4">
               <TagPills
                 tags={[
                   { label: "Operação", primary: true },
@@ -393,75 +344,79 @@ export function CasesPage() {
                 ]}
               />
               <CaseTitle
-                line1="Estruturação de produto"
-                line2="e operação em empresa alemã."
+                line1="Estruturação de processos para destravar"
+                line2="operação em EdTech Alemã."
               />
             </div>
           </div>
 
-          {/* Vertical timeline */}
-          <div className="relative border-l border-zinc-800 pl-8 sm:pl-12 space-y-12 sm:space-y-16 mb-10">
-            {[
-              {
-                label: "Contexto",
-                sub: "cenário inicial",
-                text: "Fui chamado para atuar em uma EdTech da Alemanha que enfrentava desorganização entre founders, designers e desenvolvedores. Havia retrabalho, prioridades instáveis e dificuldade para transformar visão em entregas consistentes.",
-              },
-              {
-                label: "Desafio",
-                sub: "o que estava em jogo",
-                text: "O time produzia sem direção clara, o material chegava desorganizado para desenvolvimento e a operação do produto não conseguia sustentar ritmo nem coerência.",
-              },
-              {
-                label: "Atuação",
-                sub: "como destravamos",
-                text: "Comecei ouvindo fundadores, designers e programadores para entender o cenário completo. A partir disso, organizei a visão do produto, defini a estratégia para chegar até ela e criei um plano tático. Também passei a direcionar melhor o trabalho de design e a organizar a sprint por objetivos conectados, e não por tarefas isoladas.",
-              },
-            ].map((item) => (
-              <div key={item.label} className="relative">
-                <span
-                  className="absolute -left-[37px] sm:-left-[49px] top-2 w-3 h-3 rounded-full"
-                  style={{ background: BRONZE }}
-                />
-                <PhaseLabel label={item.label} sub={item.sub} />
-                <p className="font-light text-base sm:text-lg md:text-xl leading-[1.7] -tracking-[0.01em] text-zinc-300 max-w-3xl">
-                  {item.text}
-                </p>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 mb-10">
+            <div className="lg:col-span-6 bg-linear-to-br from-zinc-700/40 via-zinc-900/50 to-zinc-900/80 border border-zinc-800 rounded-2xl md:rounded-3xl px-6 py-8 sm:p-10 md:p-12">
+              <PhaseLabel label="Contexto" sub="01 / 03" />
+              <p className="font-regular sm:font-light text-sm sm:text-lg leading-[1.7] text-zinc-300">
+                Fui chamado para atuar em uma EdTech da Alemanha que enfrentava
+                desorganização entre founders, designers e desenvolvedores.
+                Havia retrabalho, prioridades instáveis e dificuldade para
+                transformar visão em entregas consistentes.
+              </p>
+            </div>
+
+            <div className="lg:col-span-6 bg-linear-to-br from-zinc-700/40 via-zinc-900/50 to-zinc-900/80 border border-zinc-800 rounded-2xl md:rounded-3xl px-6 py-8 sm:p-10 md:p-12">
+              <PhaseLabel label="Desafio" sub="02 / 03" />
+              <p className="font-regular sm:font-light text-sm sm:text-lg leading-[1.7] text-zinc-300">
+                O time produzia sem direção clara, o material chegava
+                desorganizado para desenvolvimento e a operação do produto não
+                conseguia sustentar ritmo nem coerência.
+              </p>
+            </div>
+
+            <div className="lg:col-span-12 bg-linear-to-br from-zinc-700/40 via-zinc-900/50 to-zinc-900/80 border border-zinc-800 rounded-2xl md:rounded-3xl px-6 py-8 sm:p-10 md:p-14">
+              <PhaseLabel label="Atuação" sub="03 / 03" />
+              <p className="font-regular sm:font-light text-sm sm:text-lg leading-[1.7] text-zinc-300 max-w-4xl">
+                Comecei ouvindo fundadores, designers e programadores para
+                entender o cenário completo. A partir disso, organizei a visão
+                do produto, defini a estratégia para chegar até ela e criei um
+                plano tático. Também passei a direcionar melhor o trabalho de
+                design e a organizar a sprint por objetivos conectados, e não
+                por tarefas isoladas.
+              </p>
+            </div>
           </div>
 
-          <ResultadoBlock
-            metrics={[
-              { value: "9", accent: "mo", label: "para reorganizar" },
-              { value: "3", accent: "×", label: "plataformas entregues" },
-              { value: "6", accent: "+", label: "clientes em operação" },
-            ]}
-          >
-            Em poucos meses, a operação começou a ganhar consistência. Em{" "}
-            <span style={{ color: BRONZE }}>nove meses</span>, o time entregou{" "}
-            <span style={{ color: BRONZE }}>três plataformas</span> e colocou{" "}
-            <span style={{ color: BRONZE }}>seis clientes em andamento</span>,
-            em um contexto que antes era marcado por desorganização e baixa
-            capacidade de avanço.
-          </ResultadoBlock>
+          <div className="relative mt-8 sm:mt-10 p-10 sm:p-14 md:p-20 border border-gold-800 bg-linear-to-br from-zinc-700/60 via-zinc-950/80 to-zinc-900/30 backdrop-blur-sm rounded-2xl">
+            <span className="block text-4xl font-light tracking-tight text-gold-500 mb-8">Resultado</span>
+            <blockquote className="font-light text-xl sm:text-2xl leading-[1.6] text-white/90 max-w-5xl">
+              Em poucos meses, a operação começou a ganhar consistência. {" "}
+              <span className="text-gold-500 font-semibold">Em nove meses, o time entregou três plataformas e colocou seis clientes em andamento</span>{" "}
+              em um contexto que antes era marcado por desorganização e baixa
+              capacidade de avanço.
+            </blockquote>
+            <div className="mt-12 pt-8 border-t border-zinc-800/60 grid grid-cols-3 gap-4 sm:gap-8">
+              <div>
+                <p className="font-thin text-4xl sm:text-5xl md:text-6xl -tracking-[0.03em] text-white">9<span className="text-gold-500">mo</span></p>
+                <p className="text-sm text-zinc-400 mt-2">para reorganizar</p>
+              </div>
+              <div>
+                <p className="font-thin text-4xl sm:text-5xl md:text-6xl -tracking-[0.03em] text-white">3<span className="text-gold-500">×</span></p>
+                <p className="text-sm text-zinc-400 mt-2">plataformas entregues</p>
+              </div>
+              <div>
+                <p className="font-thin text-4xl sm:text-5xl md:text-6xl -tracking-[0.03em] text-white">6<span className="text-gold-500">+</span></p>
+                <p className="text-sm text-zinc-400 mt-2">clientes em operação</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ======== CTA FINAL ======== */}
       <section className="relative overflow-hidden border-t border-zinc-900">
         <Flare />
-        <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 py-24 sm:py-32 lg:py-40 text-center">
-          <p
-            className="text-[11px] tracking-[0.35em] uppercase mb-8"
-            style={{ color: BRONZE }}
-          >
-            Fim dos casos selecionados
-          </p>
-          <h3 className="font-thin -tracking-[0.03em] text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] max-w-4xl mx-auto">
-            Todo case começa antes
+        <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 py-24 sm:pt-16 sm:pb-32 text-center">
+          <h3 className="font-thin -tracking-[0.03em] text-4xl sm:text-4xl md:text-5xl text-white leading-[1.05] max-w-4xl mx-auto">
+            Cases contam pedaços da história
             <br />
-            <span className="text-zinc-500">da primeira solução.</span>
+            <span className="text-zinc-500">que continuo construindo</span>
           </h3>
         </div>
       </section>

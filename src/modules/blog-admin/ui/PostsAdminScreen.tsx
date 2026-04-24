@@ -7,9 +7,6 @@ import { useEffect, useState } from "react";
 import { deletePostById, fetchPosts, setPostFeatured } from "@/src/shared/api/blogAdmin";
 import type { PostListItem } from "@/src/shared/types/blogAdmin";
 import { formatDateTime } from "@/src/shared/utils/format";
-import { Badge } from "./components/badge";
-import { Button } from "./components/button";
-import { Switch } from "./components/switch";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,15 +17,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "./components/alert-dialog";
-import {
+  Badge,
+  Button,
+  Switch,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from "./components/table";
+} from "@/src/shared/ui";
 
 type ScreenState = {
   loading: boolean;

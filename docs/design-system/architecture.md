@@ -90,7 +90,7 @@ Não entram no design system:
 Exemplo:
 
 - `PostEditorScreen` continua em `src/modules/blog-admin`.
-- `Button` deve sair de `src/modules/blog-admin/ui/components` e ir para `src/shared/ui/primitives`.
+- `Button` vive em `src/shared/ui/primitives` e deve ser importado pelo barrel `@/src/shared/ui`.
 - Superfícies simples devem usar `div`, `section` ou `header` com classes, não um componente `Card`.
 
 ## Camadas de especificidade
@@ -157,7 +157,7 @@ Se no futuro existir navegação admin reutilizável, ela também entra aqui.
 
 Os tokens globais continuam em `app/globals.css`, porque Tailwind 4 já está configurado ali.
 
-Temas de contexto podem continuar existindo:
+Temas de contexto continuam existindo como classes definidas em `app/globals.css`:
 
 - `.public-theme`
 - `.admin-theme`
@@ -180,19 +180,25 @@ import { cn } from "@/src/shared/ui/lib/cn";
 
 ## Migração do admin
 
-Hoje os componentes legados do admin estão em:
+A biblioteca oficial do admin e do public fica em:
 
 ```txt
-src/modules/blog-admin/ui/components
+src/shared/ui
 ```
 
-Esse local limita reuso fora do admin e mantém a aplicação presa ao modelo shadcn/Radix. A migração ideal é:
+O Tailwind, os tokens e os temas de contexto ficam em:
 
-1. Criar `src/shared/ui/lib/cn.ts`.
-2. Criar componentes próprios em `src/shared/ui`, sem importar de `radix-ui`.
-3. Atualizar imports do admin para `@/src/shared/ui`.
-4. Manter `admin-theme.css` apenas como tema, não como dono dos componentes.
-5. Remover componentes legados quando não houver mais uso.
+```txt
+app/globals.css
+```
+
+O admin nao deve ter CSS de tema proprio fora do global. A regra estrutural agora e:
+
+1. Manter `app/globals.css` como unica fonte de Tailwind, tokens e temas.
+2. Manter imports do admin pelo barrel `@/src/shared/ui`.
+3. Criar lacunas como `Alert` e `Checkbox` em `src/shared/ui` somente quando houver uso real.
+4. Nao recriar CSS de rota para temas; usar classes `.public-theme` e `.admin-theme` no global.
+5. Nao adicionar shadcn/Radix sem excecao documentada.
 
 ## Migração do public
 

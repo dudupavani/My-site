@@ -31,7 +31,7 @@ Ordem sugerida:
 1. Criar `src/shared/ui/lib/cn.ts`.
 2. Criar `src/shared/ui/index.ts`.
 3. Mover ou recriar primitives universais: `Button`, `Badge`, `Input`, `Textarea`, `Label`.
-4. Remover dependências shadcn/Radix dos componentes compartilhados.
+4. Manter `app/globals.css` como fonte unica de Tailwind, tokens e temas.
 
 ## Fase 3 - Primeiros componentes públicos
 

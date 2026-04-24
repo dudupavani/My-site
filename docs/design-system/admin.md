@@ -6,17 +6,16 @@ Aqui a prioridade é clareza operacional: formulários previsíveis, estados de 
 
 ## Fontes de verdade atuais
 
-- Tema admin: `src/modules/blog-admin/ui/admin-theme.css`
-- Componentes legados do admin: `src/modules/blog-admin/ui/components`
-- Utils de classe: `src/modules/blog-admin/ui/lib/utils.ts`
-- Config shadcn: `components.json`
+- Tailwind, tokens e tema admin: `app/globals.css`
+- Componentes oficiais: `src/shared/ui`
+- Utils de classe: `src/shared/ui/lib/cn.ts`
 
 ## Base atual
 
-O admin já tem um começo mais estruturado que o public, mas ainda usa componentes legados baseados no estilo shadcn/Radix:
+O admin usa a biblioteca oficial em `src/shared/ui`. Os componentes legados em `src/modules/blog-admin/ui/components` ja foram removidos:
 
-- tokens CSS semânticos;
-- componentes locais;
+- tokens CSS semanticos;
+- componentes compartilhados;
 - variantes com `class-variance-authority`;
 - suporte a tema escuro em `.admin-theme.dark`.
 
@@ -52,19 +51,20 @@ Tokens específicos atuais:
 
 | Componente | Status |
 | --- | --- |
-| `Button` | Tem variantes e tamanhos |
-| `Input`, `Textarea`, `Label` | Base de formulário |
-| `Switch`, `Toggle`, `Checkbox` | Controles |
-| `Dialog`, `AlertDialog`, `Alert` | Feedback e confirmação |
-| `Table` | Listagem |
-| `Badge` | Rótulos |
+| `Button` | Oficial em `src/shared/ui` |
+| `Input`, `Textarea`, `Label` | Oficiais em `src/shared/ui` |
+| `Switch`, `Toggle` | Oficiais em `src/shared/ui` |
+| `Dialog`, `AlertDialog` | Oficiais em `src/shared/ui` |
+| `Table` | Oficial em `src/shared/ui` |
+| `Badge` | Oficial em `src/shared/ui` |
+| `Checkbox`, `Alert` | Ainda nao migrados; criar em `src/shared/ui` somente quando houver uso real |
 
 ## Próximas melhorias
 
 1. Documentar variantes reais de `Button`, `Badge`, `Input` e `Table`.
 2. Padronizar estados vazios, loading e erro nas telas admin.
 3. Criar padrões de formulário: campo com label, ajuda, erro e ação.
-4. Garantir que rotas admin usem sempre componentes locais do admin.
+4. Verificar visualmente os fluxos admin depois de mudanças de tema ou componentes.
 
 ## Diretriz
 
@@ -72,11 +72,9 @@ No admin, preferir componentes próprios de `src/shared/ui`. Evitar estilos muit
 
 ## Direção de migração
 
-O objetivo é remover a dependência conceitual de shadcn/Radix no design system.
+O objetivo é manter o design system sem dependência conceitual de shadcn/Radix.
 
-- `Button`, `Badge`, `Input`, `Textarea`, `Table` e `Alert` devem ser componentes próprios simples.
-- `Label` pode ser um `label` nativo.
-- `Checkbox` pode usar `input type="checkbox"`.
-- `Switch` pode ser um `button` com `role="switch"` e `aria-checked`.
-- `Toggle` pode ser um `button` com `aria-pressed`.
-- `Dialog` e `AlertDialog` devem ser avaliados com cuidado: usar `<dialog>` nativo se atender bem aos fluxos do admin.
+- `Button`, `Badge`, `Input`, `Textarea`, `Table`, `Label`, `Switch`, `Toggle`, `Dialog` e `AlertDialog` ja estao em `src/shared/ui`.
+- `Checkbox` pode usar `input type="checkbox"` quando for necessario.
+- `Alert` deve ser criado em `src/shared/ui/feedback` quando houver uso real.
+- O admin deve depender apenas de `app/globals.css` para Tailwind/tokens e de `src/shared/ui` para componentes.
