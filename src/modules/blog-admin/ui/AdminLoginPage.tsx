@@ -4,7 +4,6 @@ import type { FormEvent } from "react";
 import { useState } from "react";
 
 import { Button } from "./components/button";
-import { Card, CardContent, CardHeader, CardTitle } from "./components/card";
 import { Input } from "./components/input";
 import { Label } from "./components/label";
 
@@ -82,14 +81,16 @@ export function AdminLoginPage({ errorCode }: AdminLoginPageProps) {
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-md items-center justify-center px-4 py-8">
-      <Card className="w-full">
-        <CardHeader className="space-y-1">
-          <CardTitle>Entrar no admin</CardTitle>
+      <div className="w-full rounded-lg border border-border bg-card">
+        <header className="flex flex-col gap-1.5 space-y-1 p-4 lg:p-5">
+          <h2 className="text-xl font-semibold tracking-[-0.01em] text-foreground">
+            Entrar no admin
+          </h2>
           <p className="text-sm text-muted-foreground">
             Use seu email admin para receber um Magic Link de acesso.
           </p>
-        </CardHeader>
-        <CardContent>
+        </header>
+        <section className="p-4 pt-0 lg:p-5 lg:pt-0">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1.5">
               <Label htmlFor="admin-email">Email admin</Label>
@@ -122,8 +123,8 @@ export function AdminLoginPage({ errorCode }: AdminLoginPageProps) {
               {submitting ? "Enviando..." : "Enviar Magic Link"}
             </Button>
           </form>
-        </CardContent>
-      </Card>
+        </section>
+      </div>
     </main>
   );
 }

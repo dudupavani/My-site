@@ -76,7 +76,6 @@ Prioridade média:
 | Componente | Por que criar |
 | --- | --- |
 | `GoldFlare` | Gradientes radiais gold aparecem em mais de uma página |
-| `PublicCard` | Cards escuros com borda e blur se repetem |
 | `BrandGrid` | Lista de marcas pode ser reaproveitada em cases/trajetória |
 | `TimelineItem` | Só vale extrair se a timeline crescer ou aparecer em outra página |
 

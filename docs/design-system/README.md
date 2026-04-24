@@ -17,7 +17,7 @@ O sistema deve ajudar em três coisas:
 O projeto tem dois ambientes visuais:
 
 - **Public**: site pessoal, blog, trajetória e cases. Mais editorial, escuro, com uso de gold, stone e zinc.
-- **Admin**: CMS interno. Mais operacional, baseado em shadcn/ui, tokens semânticos e componentes de formulário.
+- **Admin**: CMS interno. Mais operacional, com componentes próprios, tokens semânticos e componentes de formulário.
 
 Esses dois ambientes podem compartilhar fundamentos, mas não precisam ter a mesma expressão visual.
 
@@ -43,6 +43,14 @@ Esses dois ambientes podem compartilhar fundamentos, mas não precisam ter a mes
 
 - [Badge](./components/badge.md)
 - [Button](./components/button.md)
+- [Input](./components/input.md)
+- [Label](./components/label.md)
+- [Textarea](./components/textarea.md)
+- `Table`
+- `Switch`
+- `Toggle`
+- `Dialog`
+- `AlertDialog`
 
 ## Regra prática
 

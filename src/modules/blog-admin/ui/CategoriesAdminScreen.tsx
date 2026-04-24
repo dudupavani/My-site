@@ -10,7 +10,6 @@ import {
 } from "@/src/shared/api/blogAdmin";
 import type { BlogCategory } from "@/src/shared/types/blogAdmin";
 import { Button } from "./components/button";
-import { Card, CardContent, CardHeader, CardTitle } from "./components/card";
 import { Input } from "./components/input";
 
 type CategoriesState = {
@@ -148,12 +147,14 @@ export function CategoriesAdminScreen() {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Categorias</CardTitle>
-      </CardHeader>
+    <div className="rounded-lg border border-border bg-card">
+      <header className="flex flex-col gap-1.5 p-4 lg:p-5">
+        <h2 className="text-xl font-semibold tracking-[-0.01em] text-foreground">
+          Categorias
+        </h2>
+      </header>
 
-      <CardContent className="space-y-6">
+      <section className="space-y-6 p-4 pt-0 lg:p-5 lg:pt-0">
         {state.error ? (
           <p className="rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive">
             {state.error}
@@ -219,7 +220,7 @@ export function CategoriesAdminScreen() {
             ))}
           </div>
         )}
-      </CardContent>
-    </Card>
+      </section>
+    </div>
   );
 }

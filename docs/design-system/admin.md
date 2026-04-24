@@ -7,16 +7,16 @@ Aqui a prioridade é clareza operacional: formulários previsíveis, estados de 
 ## Fontes de verdade atuais
 
 - Tema admin: `src/modules/blog-admin/ui/admin-theme.css`
-- Componentes shadcn: `src/modules/blog-admin/ui/components`
+- Componentes legados do admin: `src/modules/blog-admin/ui/components`
 - Utils de classe: `src/modules/blog-admin/ui/lib/utils.ts`
 - Config shadcn: `components.json`
 
 ## Base atual
 
-O admin já tem um começo mais estruturado que o public:
+O admin já tem um começo mais estruturado que o public, mas ainda usa componentes legados baseados no estilo shadcn/Radix:
 
 - tokens CSS semânticos;
-- componentes shadcn locais;
+- componentes locais;
 - variantes com `class-variance-authority`;
 - suporte a tema escuro em `.admin-theme.dark`.
 
@@ -53,7 +53,6 @@ Tokens específicos atuais:
 | Componente | Status |
 | --- | --- |
 | `Button` | Tem variantes e tamanhos |
-| `Card` | Base de superfície |
 | `Input`, `Textarea`, `Label` | Base de formulário |
 | `Switch`, `Toggle`, `Checkbox` | Controles |
 | `Dialog`, `AlertDialog`, `Alert` | Feedback e confirmação |
@@ -62,11 +61,22 @@ Tokens específicos atuais:
 
 ## Próximas melhorias
 
-1. Documentar variantes reais de `Button`, `Badge`, `Card`, `Input` e `Table`.
+1. Documentar variantes reais de `Button`, `Badge`, `Input` e `Table`.
 2. Padronizar estados vazios, loading e erro nas telas admin.
 3. Criar padrões de formulário: campo com label, ajuda, erro e ação.
 4. Garantir que rotas admin usem sempre componentes locais do admin.
 
 ## Diretriz
 
-No admin, preferir componentes shadcn locais. Evitar estilos muito expressivos ou específicos por tela quando o problema for operacional.
+No admin, preferir componentes próprios de `src/shared/ui`. Evitar estilos muito expressivos ou específicos por tela quando o problema for operacional.
+
+## Direção de migração
+
+O objetivo é remover a dependência conceitual de shadcn/Radix no design system.
+
+- `Button`, `Badge`, `Input`, `Textarea`, `Table` e `Alert` devem ser componentes próprios simples.
+- `Label` pode ser um `label` nativo.
+- `Checkbox` pode usar `input type="checkbox"`.
+- `Switch` pode ser um `button` com `role="switch"` e `aria-checked`.
+- `Toggle` pode ser um `button` com `aria-pressed`.
+- `Dialog` e `AlertDialog` devem ser avaliados com cuidado: usar `<dialog>` nativo se atender bem aos fluxos do admin.

@@ -28,7 +28,6 @@ import { CoverImageCropper } from "./CoverImageCropper";
 import { RichTextEditor } from "./RichTextEditor";
 import { Badge } from "./components/badge";
 import { Button } from "./components/button";
-import { Card, CardContent, CardHeader, CardTitle } from "./components/card";
 import { Toggle } from "./components/toggle";
 import { Input } from "./components/input";
 import { Label } from "./components/label";
@@ -299,15 +298,17 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
   }
 
   return (
-    <Card>
-      <CardHeader className="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-2 mb-6">
+    <div className="rounded-lg border border-border bg-card">
+      <header className="mb-6 flex flex-col items-start justify-between gap-4 p-4 sm:flex-row sm:gap-2 lg:p-5">
         <div className="flex items-center gap-3">
           <Button variant="outline" size="icon" asChild>
             <Link href="/admin/posts">
               <ArrowLeft />
             </Link>
           </Button>
-          <CardTitle>{titleLabel}</CardTitle>
+          <h2 className="text-xl font-semibold tracking-[-0.01em] text-foreground">
+            {titleLabel}
+          </h2>
           {postStatus !== null && (
             <Badge
               variant={postStatus === "published" ? "success" : "secondary"}>
@@ -328,9 +329,9 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
             {publishing ? "Publicando..." : "Publicar"}
           </Button>
         </div>
-      </CardHeader>
+      </header>
 
-      <CardContent>
+      <section className="p-4 pt-0 lg:p-5 lg:pt-0">
         {loading ? (
           <p className="text-sm text-muted-foreground">
             Carregando formulário...
@@ -548,7 +549,7 @@ export function PostEditorScreen({ postId }: PostEditorScreenProps) {
             </div>
           </div>
         )}
-      </CardContent>
-    </Card>
+      </section>
+    </div>
   );
 }

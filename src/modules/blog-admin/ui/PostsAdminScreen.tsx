@@ -9,7 +9,6 @@ import type { PostListItem } from "@/src/shared/types/blogAdmin";
 import { formatDateTime } from "@/src/shared/utils/format";
 import { Badge } from "./components/badge";
 import { Button } from "./components/button";
-import { Card, CardContent, CardHeader, CardTitle } from "./components/card";
 import { Switch } from "./components/switch";
 import {
   AlertDialog,
@@ -102,19 +101,21 @@ export function PostsAdminScreen() {
   }
 
   return (
-    <Card>
-      <CardHeader className="flex-row items-center justify-between gap-3">
+    <div className="rounded-lg border border-border bg-card">
+      <header className="flex flex-row items-center justify-between gap-3 p-4 lg:p-5">
         <div>
-          <CardTitle>Posts</CardTitle>
+          <h2 className="text-xl font-semibold tracking-[-0.01em] text-foreground">
+            Posts
+          </h2>
         </div>
         <div className="flex items-center gap-2">
           <Button size="lg" asChild>
             <Link href="/admin/posts/new">Criar Post</Link>
           </Button>
         </div>
-      </CardHeader>
+      </header>
 
-      <CardContent>
+      <section className="p-4 pt-0 lg:p-5 lg:pt-0">
         {state.error ? (
           <p className="mb-4 rounded-lg border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive">
             {state.error}
@@ -296,7 +297,7 @@ export function PostsAdminScreen() {
             </Table>
           </>
         )}
-      </CardContent>
-    </Card>
+      </section>
+    </div>
   );
 }
