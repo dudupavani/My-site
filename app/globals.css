@@ -81,6 +81,17 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-gold-50: #fbf8f2;
+  --color-gold-100: #f7efe2;
+  --color-gold-200: #eedfc3;
+  --color-gold-300: #e3c995;
+  --color-gold-400: #c4af81;
+  --color-gold-500: #9d8964;
+  --color-gold-600: #806d4f;
+  --color-gold-700: #67553e;
+  --color-gold-800: #4f402e;
+  --color-gold-900: #403324;
+  --color-gold-950: #231c12;
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
