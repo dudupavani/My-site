@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { ContactFooter } from "@/src/modules/home/sections/ContactFooter";
+import { Badge } from "@/src/shared/ui";
 
 // ---- Types ----
 
@@ -157,28 +158,6 @@ function Flare({ bottom }: { bottom?: boolean }) {
   );
 }
 
-function PeriodChip({
-  children,
-  gold,
-}: {
-  children: ReactNode;
-  gold?: boolean;
-}) {
-  return (
-    <span
-      className={[
-        "inline-flex items-center gap-2 px-3 py-1.5 rounded-full",
-        "text-[10px] tracking-[0.22em] uppercase",
-        gold
-          ? "border border-gold-500/40 text-gold-500"
-          : "border border-zinc-900 text-zinc-400",
-      ].join(" ")}
-    >
-      {children}
-    </span>
-  );
-}
-
 function ChipList({
   items,
   variant = "default",
@@ -195,7 +174,14 @@ function ChipList({
       ].join(" ")}
     >
       {items.map((item) => (
-        <PeriodChip key={item}>{item}</PeriodChip>
+        <Badge
+          key={item}
+          size="sm"
+          variant="gray-outline"
+          className="tracking-[0.22em] uppercase border-zinc-900 text-zinc-400"
+        >
+          {item}
+        </Badge>
       ))}
     </div>
   );
@@ -358,9 +344,22 @@ export function TrajetoriaPage() {
                                 <span className="relative inline-flex h-2 w-2 rounded-full bg-gold-500" />
                               </span>
                             )}
-                            <PeriodChip gold={tone === "gold"}>
+                            <Badge
+                              size="sm"
+                              variant={
+                                tone === "gold"
+                                  ? "gold-outline"
+                                  : "gray-outline"
+                              }
+                              className={[
+                                "tracking-[0.22em] uppercase",
+                                tone === "gold"
+                                  ? "text-gold-500"
+                                  : "border-zinc-900 text-zinc-400",
+                              ].join(" ")}
+                            >
                               {entry.chip}
-                            </PeriodChip>
+                            </Badge>
                           </div>
                         )}
 

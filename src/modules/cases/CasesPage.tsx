@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { ContactFooter } from "@/src/modules/home/sections/ContactFooter";
+import { Badge } from "@/src/shared/ui";
 
 const BRONZE = "#998663";
 
@@ -59,24 +60,24 @@ function TagPills({
     <div className="flex flex-wrap gap-2 mb-6">
       {tags.map((tag) =>
         tag.primary ? (
-          <span
+          <Badge
             key={tag.label}
-            className="inline-flex items-center gap-2 px-3 py-1.5 text-[10px] tracking-[0.22em] uppercase rounded-full border"
-            style={{ color: BRONZE, borderColor: "rgba(153,134,99,0.3)" }}
+            size="sm"
+            variant="gold-outline"
+            className="gap-2 tracking-[0.22em] uppercase border-gold-500/30 text-gold-500"
           >
-            <span
-              className="w-1 h-1 rounded-full"
-              style={{ background: BRONZE }}
-            />
+            <span className="h-1 w-1 rounded-full bg-gold-500" />
             {tag.label}
-          </span>
+          </Badge>
         ) : (
-          <span
+          <Badge
             key={tag.label}
-            className="inline-flex items-center px-3 py-1.5 text-[10px] tracking-[0.22em] uppercase text-zinc-500 border border-zinc-800 rounded-full"
+            size="sm"
+            variant="gray-outline"
+            className="tracking-[0.22em] uppercase border-zinc-800 text-zinc-500"
           >
             {tag.label}
-          </span>
+          </Badge>
         )
       )}
     </div>

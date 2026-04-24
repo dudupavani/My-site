@@ -39,6 +39,11 @@ Esses dois ambientes podem compartilhar fundamentos, mas não precisam ter a mes
 - [admin.md](./admin.md): fundação do design system do CMS.
 - [roadmap.md](./roadmap.md): ordem sugerida para transformar o visual atual em sistema.
 
+## Componentes
+
+- [Badge](./components/badge.md)
+- [Button](./components/button.md)
+
 ## Regra prática
 
 Antes de criar um novo estilo:
