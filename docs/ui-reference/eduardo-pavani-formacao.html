@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eduardo Pavani — Formação & Conhecimento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:        oklch(10% 0.005 250);
+    --bg-2:      oklch(13% 0.006 250);
+    --bg-3:      oklch(16% 0.007 250);
+    --surface:   oklch(19% 0.008 250);
+    --border:    oklch(28% 0.010 250);
+    --muted:     oklch(45% 0.008 250);
+    --body:      oklch(72% 0.006 250);
+    --heading:   oklch(90% 0.004 250);
+    --white:     oklch(96% 0.003 250);
+    --accent:    oklch(68% 0.12 65);
+    --accent-dim: oklch(55% 0.09 65);
+    --accent-glow: oklch(68% 0.12 65 / 0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--body);
+    font-family: 'Syne', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* ── LAYOUT ── */
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: clamp(4rem, 8vw, 7rem);
+    gap: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .header-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+
+  .header-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .header-meta {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    line-height: 2;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: clamp(5rem, 10vw, 9rem);
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .section.visible {
+    animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .section-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 9vw, 7.5rem);
+    font-weight: 300;
+    line-height: 0.85;
+    color: var(--border);
+    letter-spacing: -0.03em;
+    user-select: none;
+    flex-shrink: 0;
+  }
+
+  .section-title-group {}
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+    font-weight: 700;
+    color: var(--heading);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  /* ── FORMAÇÃO GRID ── */
+  .formation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  @media (max-width: 700px) {
+    .formation-grid { grid-template-columns: 1fr; }
+    .header { grid-template-columns: 1fr; }
+    .header-meta { text-align: left; }
+  }
+
+  .formation-col-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+
+  .formation-col:first-child {
+    padding-right: 3rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .formation-col:last-child {
+    padding-left: 3rem;
+  }
+
+  @media (max-width: 700px) {
+    .formation-col:first-child { padding-right: 0; border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 2.5rem; margin-bottom: 2.5rem; }
+    .formation-col:last-child { padding-left: 0; }
+  }
+
+  .formation-item {
+    padding: 1.6rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .formation-item:last-child {
+    border-bottom: none;
+  }
+
+  .formation-item:hover .formation-degree {
+    color: var(--white);
+  }
+
+  .formation-item:hover::before {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .formation-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: var(--accent);
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: opacity 0.25s, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-left: -1px;
+  }
+
+  .formation-degree {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    font-weight: 600;
+    color: var(--heading);
+    line-height: 1.3;
+    margin-bottom: 0.35rem;
+    transition: color 0.2s;
+  }
+
+  .formation-institution {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── TECH GRID ── */
+  .tech-areas {
+    display: grid;
+    gap: 3px;
+  }
+
+  .tech-area {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    padding: clamp(1.5rem, 3vw, 2.2rem) clamp(1.5rem, 3vw, 2.5rem);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s, border-color 0.3s;
+    cursor: default;
+  }
+
+  .tech-area::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 0; height: 100%;
+    background: var(--accent-glow);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tech-area:hover {
+    background: var(--bg-3);
+    border-color: oklch(38% 0.015 250);
+  }
+
+  .tech-area:hover::after {
+    width: 100%;
+  }
+
+  .tech-area-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 650px) {
+    .tech-area-inner { grid-template-columns: 1fr; gap: 1rem; }
+  }
+
+  .tech-area-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--heading);
+    letter-spacing: -0.01em;
+  }
+
+  .tech-area-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 0.4rem;
+  }
+
+  .tech-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+    list-style: none;
+  }
+
+  .tech-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: var(--body);
+    padding: 0.3rem 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    letter-spacing: 0.02em;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .tech-item.highlight {
+    color: var(--accent);
+    border-color: var(--accent-dim);
+    background: var(--accent-glow);
+  }
+
+  .tech-area:hover .tech-item {
+    border-color: oklch(35% 0.012 250);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+    flex-wrap: wrap;
+  }
+
+  .footer-contact {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .footer-contact a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .footer-contact a:hover { opacity: 0.7; }
+
+  .footer-stamp {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--border);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── ACCENT LINE ── */
+  .accent-rule {
+    width: 3rem;
+    height: 2px;
+    background: var(--accent);
+    margin: 1rem 0 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.6s forwards;
+  }
+
+  /* stagger children */
+  .formation-item:nth-child(1) { animation-delay: 0.05s; }
+  .formation-item:nth-child(2) { animation-delay: 0.1s; }
+  .formation-item:nth-child(3) { animation-delay: 0.15s; }
+  .formation-item:nth-child(4) { animation-delay: 0.2s; }
+  .formation-item:nth-child(5) { animation-delay: 0.25s; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<main class="page">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div>
+      <p class="header-eyebrow">Currículo — Perfil Profissional</p>
+      <h1 class="header-name">Eduardo<br><em>Pavani</em></h1>
+    </div>
+    <div class="header-meta">
+      <span>Product Manager</span><br>
+      <span>Product Designer</span><br>
+      <span>Estratégia · Execução</span>
+    </div>
+  </header>
+
+  <div class="accent-rule"></div>
+
+  <!-- SEÇÃO 1: FORMAÇÃO -->
+  <section class="section" id="formacao">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <div class="section-title-group">
+        <span class="section-label">Background acadêmico</span>
+        <h2 class="section-title">Formação &amp;<br>Certificações</h2>
+      </div>
+    </div>
+
+    <div class="formation-grid">
+
+      <!-- Coluna Graduação -->
+      <div class="formation-col">
+        <p class="formation-col-label">Graduação &amp; Pós-Graduação</p>
+
+        <div class="formation-item">
+          <p class="formation-degree">Bacharel em Desenho Industrial</p>
+          <p class="formation-institution">Programação Visual · Universidade Positivo</p>
+        </div>
+
+        <div class="formation-item">
+          <p class="formation-degree">Pós-Graduação em Design de Hipermídia</p>
+          <p class="formation-institution">Universidade Anhembi Morumbi</p>
+        </div>
+
+        <div class="formation-item">
+          <p class="formation-degree">Digital Product Leadership</p>
+          <p class="formation-institution">Product Manager · Tera</p>
+        </div>
+
+        <div class="formation-item">
+          <p class="formation-degree">Nanodegree — Marketing Digital</p>
+          <p class="formation-institution">Udacity</p>
+        </div>
+
+        <div class="formation-item">
+          <p class="formation-degree">Posicionamento de Marca</p>
+          <p class="formation-institution">Brandster</p>
+        </div>
+      </div>
+
+      <!-- Coluna Certificados -->
+      <div class="formation-col">
+        <p class="formation-col-label">Certificados &amp; Especializações</p>
+
+        <div class="formation-item">
+          <p class="formation-degree">Atendimento em Agências de Comunicação</p>
+          <p class="formation-institution">ESPM — Escola Superior de Propaganda e Marketing</p>
+        </div>
+
+        <div class="formation-item">
+          <p class="formation-degree">Estratégias Digitais de Marketing</p>
+          <p class="formation-institution">ESPM — Escola Superior de Propaganda e Marketing</p>
+        </div>
+
+        <div class="formation-item">
+          <p class="formation-degree">Métricas para Negócios Digitais</p>
+          <p class="formation-institution">PM3</p>
+        </div>
+
+        <div class="formation-item">
+          <p class="formation-degree">User Experience</p>
+          <p class="formation-institution">FIAP ON</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO 2: CONHECIMENTO TÉCNICO -->
+  <section class="section" id="conhecimento">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <div class="section-title-group">
+        <span class="section-label">Stack &amp; ferramentas</span>
+        <h2 class="section-title">Conhecimento<br>Técnico</h2>
+      </div>
+    </div>
+
+    <div class="tech-areas">
+
+      <!-- IA & Agentes -->
+      <div class="tech-area">
+        <div class="tech-area-inner">
+          <div>
+            <p class="tech-area-title">Inteligência Artificial<br>&amp; Agentes</p>
+            <span class="tech-area-tag">AI / LLM</span>
+          </div>
+          <ul class="tech-items">
+            <li class="tech-item highlight">Criação de Agentes com LLM</li>
+            <li class="tech-item highlight">N8N — avançado</li>
+            <li class="tech-item">Automação de workflows</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Design & Prototipagem -->
+      <div class="tech-area">
+        <div class="tech-area-inner">
+          <div>
+            <p class="tech-area-title">Design &amp;<br>Prototipagem</p>
+            <span class="tech-area-tag">Figma</span>
+          </div>
+          <ul class="tech-items">
+            <li class="tech-item highlight">Figma — avançado</li>
+            <li class="tech-item">Protótipos como ferramenta de comunicação</li>
+            <li class="tech-item">Especificação de funcionalidades</li>
+            <li class="tech-item">Fluxo de usabilidade</li>
+            <li class="tech-item">Design System — criação e manutenção</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tech / Code -->
+      <div class="tech-area">
+        <div class="tech-area-inner">
+          <div>
+            <p class="tech-area-title">Tech &amp;<br>Desenvolvimento</p>
+            <span class="tech-area-tag">Front-end</span>
+          </div>
+          <ul class="tech-items">
+            <li class="tech-item highlight">Vibe Coding &amp; Agentes de Código</li>
+            <li class="tech-item highlight">HTML &amp; CSS — vasto</li>
+            <li class="tech-item">JavaScript</li>
+            <li class="tech-item">Vue · React · Angular · Svelte</li>
+            <li class="tech-item">WordPress (PHP, JS, HTML, CSS)</li>
+            <li class="tech-item">Git</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-contact">
+      <a href="https://linkedin.com/in/eduardopavani" target="_blank">linkedin.com/in/eduardopavani</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:eduardopfranc@gmail.com">eduardopfranc@gmail.com</a>
+      &nbsp;·&nbsp;
+      <span>48 991587232</span>
+    </div>
+    <p class="footer-stamp">estratégia, clareza e execução.</p>
+  </footer>
+
+</main>
+
+<script>
+  // Intersection Observer para animar seções ao entrar na viewport
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach((section, i) => {
+    section.style.animationDelay = `${0.2 + i * 0.15}s`;
+    observer.observe(section);
+  });
+</script>
+
+</body>
+</html>

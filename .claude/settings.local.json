@@ -16,7 +16,8 @@
       "Read(//c/Users/enzos/**)",
       "PowerShell($PROFILE)",
       "PowerShell(New-Item *)",
-      "PowerShell(Get-ExecutionPolicy *)"
+      "PowerShell(Get-ExecutionPolicy *)",
+      "WebFetch(domain:arches-template.framer.website)"
     ]
   }
 }

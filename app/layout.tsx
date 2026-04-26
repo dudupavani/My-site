@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Google_Sans_Flex } from "next/font/google";
+import { Google_Sans_Flex, Space_Mono } from "next/font/google";
 import Script from "next/script";
 
 import "./globals.css";
@@ -10,6 +10,13 @@ const googleSansFlex = Google_Sans_Flex({
   variable: "--font-google-sans-flex",
   display: "swap",
   adjustFontFallback: false,
+});
+
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-space-mono-family",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={googleSansFlex.variable}>
+    <html lang="pt-BR" className={`${googleSansFlex.variable} ${spaceMono.variable}`}>
       <body className="bg-white">
         {/* GTM noscript — deve ser o primeiro elemento do body */}
         <noscript>
