@@ -30,7 +30,7 @@ export function ContentCasesSection() {
   return (
     <section className="bg-zinc-950 text-white py-16 sm:py-24 md:py-32 px-6">
       <div className="max-w-6xl 2xl:max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 h-auto lg:h-100">
-        <div className="md:col-span-2 flex flex-col gap-8 rounded-3xl border border-zinc-800/60 bg-zinc-900/60 px-6 pt-10 pb-6 sm:p-8 lg:p-10 h-full">
+        <div className="md:col-span-2 flex flex-col gap-8 rounded-3xl border border-zinc-800 px-6 pt-10 pb-6 sm:p-8 lg:p-10 h-full">
           <Link href="/blog" className="group flex items-start justify-between">
             <div>
               <h2 className="text-2xl lg:text-3xl font-medium">Conteúdos</h2>
@@ -48,7 +48,7 @@ export function ContentCasesSection() {
 
         <Link
           href="/cases"
-          className="group flex flex-col justify-between rounded-3xl gap-10 border border-zinc-800/60 bg-zinc-900/60 px-6 py-8 sm:p-8 lg:p-10 h-full hover:border-zinc-700 transition-colors"
+          className="group flex flex-col justify-between rounded-3xl gap-10 border border-zinc-800 px-6 py-12 sm:p-8 lg:p-10 h-full hover:border-zinc-700 transition-colors"
         >
           <div className="flex items-start justify-between">
             <h2 className="text-2xl lg:text-3xl font-medium">Cases</h2>
