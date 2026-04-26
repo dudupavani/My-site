@@ -22,11 +22,11 @@ const badgeVariants = cva(
         "gray-light": "border-transparent bg-zinc-400 text-zinc-800",
         "gray-dark": "border-transparent bg-zinc-800 text-zinc-400",
         "gray-outline":
-          "border-zinc-600 bg-zinc-800/40 text-zinc-400 dark:border-zinc-700 dark:text-zinc-300",
+          "border-zinc-700 text-zinc-500 dark:border-zinc-700",
         "gold-dark": "border-transparent bg-gold-800 text-white/80",
         "gold-light": "border-transparent bg-gold-400 text-gold-950",
         "gold-outline":
-          "border-gold-600 bg-transparent text-gold-500 dark:text-gold-400",
+          "border-gold-700/50 bg-transparent text-gold-500",
       },
       size: {
         sm: "h-6 px-2 text-xs",
