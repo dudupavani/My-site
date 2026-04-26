@@ -31,15 +31,7 @@ function Flare({ bottom }: { bottom?: boolean }) {
   );
 }
 
-function NodeDot({ current }: { current?: boolean }) {
-  if (current) {
-    return (
-      <span className="relative flex w-3 h-3">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold-500 opacity-75" />
-        <span className="relative inline-flex h-3 w-3 rounded-full bg-gold-500 ring-4 ring-zinc-950" />
-      </span>
-    );
-  }
+function NodeDot() {
   return (
     <span className="block w-3 h-3 rounded-full bg-gold-500 ring-4 ring-zinc-950" />
   );
@@ -68,23 +60,20 @@ function TimelineEntry({
   index,
   dateLabel,
   chip,
-  tone = "default",
   children,
 }: {
   id: string;
   index: number;
   dateLabel: string;
   chip?: string;
-  tone?: "default" | "gold" | "current";
   children: ReactNode;
 }) {
   const isOdd = index % 2 === 0;
-  const isCurrent = tone === "current";
 
   return (
     <li className="relative pl-12 md:pl-0 md:grid md:grid-cols-2 md:gap-16 lg:gap-24 pb-20 sm:pb-28 md:pb-32">
       <span className="absolute left-5.5 top-2 md:left-1/2 md:-translate-x-1/2 md:top-3 z-10">
-        <NodeDot current={isCurrent} />
+        <NodeDot />
       </span>
 
       <div
@@ -93,12 +82,7 @@ function TimelineEntry({
         ].join(" ")}
       >
         <MegaNum num={id} />
-        <p
-          className={[
-            "text-xs font-mono tracking-[0.28em] uppercase",
-            isCurrent ? "text-gold-500" : "text-zinc-600",
-          ].join(" ")}
-        >
+        <p className="text-xs font-mono tracking-[0.28em] uppercase text-zinc-600">
           {dateLabel}
         </p>
       </div>
@@ -107,13 +91,7 @@ function TimelineEntry({
         <div className="relative rounded-2xl border border-zinc-900 bg-zinc-950/60 p-6 backdrop-blur-sm sm:p-8 md:p-10">
           {chip && (
             <div className="flex items-center gap-2 mb-5">
-              {isCurrent && (
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold-500 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-gold-500" />
-                </span>
-              )}
-              <Badge size="sm" variant="gold-outline">
+              <Badge size="sm" variant="gray-outline">
                 {chip}
               </Badge>
             </div>
