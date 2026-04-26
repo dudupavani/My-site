@@ -209,7 +209,7 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
           </nav>
 
           <div
-            className={`mt-auto mb-20 flex items-center justify-center gap-8 text-white transition-all duration-500 ${
+            className={`mt-auto mb-8 flex items-center justify-center gap-8 text-white transition-all duration-500 ${
               isMenuOpen
                 ? "translate-y-0 opacity-100 delay-300"
                 : "translate-y-4 opacity-0"
