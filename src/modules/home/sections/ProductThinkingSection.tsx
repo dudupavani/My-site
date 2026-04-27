@@ -10,7 +10,7 @@ export function ProductThinkingSection() {
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-12 sm:gap-16">
         <div className="max-w-4xl space-y-4 sm:space-y-2">
         <h2 className="text-4xl sm:text-5xl 2xl:text-6xl font-extralight tracking-tight leading-[1.2] ">
-          Produto não avança só com ideia boa, discovery ou backlog cheio.{" "}
+          Produto não avança só com ideia boa, discovery ou backlog cheio.
         </h2>
         <p className="font-medium text-3xl sm:text-4xl text-gold-500 tracking-tight ">
             Avança quando existe clareza de direção.
