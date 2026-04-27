@@ -22,11 +22,11 @@ export function DecisionSection() {
       
 
       <div className="relative z-10 mx-auto grid w-full max-w-5xl 2xl:max-w-7xl lg:grid-cols-[443px_minmax(0,1fr)] 2xl:grid-cols-[580px_minmax(0,1fr)] lg:items-end gap-8 sm:gap-12 lg:gap-20 2xl:gap-40 pb-20">
-        <div className="flex min-w-0 flex-col items-start overflow-hidden rounded-2xl border-0 sm:border border-gold-800/30 bg-[linear-gradient(119deg,rgba(9,9,11,0.62)_4%,rgba(9,9,11,0.08)_93%)] backdrop-blur-md px-6 py-8 sm:px-10 sm:py-10 gap-8 lg:gap-16">
-          <h2 className="w-full font-extralight leading-[1.2] tracking-[-1.4px] text-white text-3xl md:text-5xl">
+        <div className="flex min-w-0 flex-col items-start overflow-hidden rounded-2xl border-0 sm:border border-gold-800/30 bg-[linear-gradient(119deg,rgba(9,9,11,0.62)_4%,rgba(9,9,11,0.08)_93%)] backdrop-blur-md px-6 py-8 sm:px-10 sm:py-10 gap-4 lg:gap-16">
+          <h2 className="w-full font-extralight leading-[1.2] tracking-[-1.4px] text-white text-4xl md:text-5xl">
             Experiência e responsabilidade
           </h2>
-          <p className="w-full leading-[1.4] text-gold-600 text-base lg:text-lg lg:leading-[1.4]">
+          <p className="w-full leading-[1.4] text-gold-600 text-lg lg:leading-[1.4]">
             Ao longo de mais de 20 anos atuei em múltiplos contextos
           </p>
         </div>

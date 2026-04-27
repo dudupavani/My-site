@@ -16,8 +16,8 @@ export function ProductThinkingSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-[400px_minmax(0,1fr)] 2xl:grid-cols-[500px_minmax(0,1fr)] shadow-2xl gap-8 sm:gap-12 md:gap-20 2xl:gap-32 border-t border-zinc-800 bg-linear-to-br from-zinc-950/40 via-zinc-950/80 to-zinc-90 pt-16">
           <div>
-            <h2 className="text-xl lg:text-3xl font-medium md:font-extralight tracking-tight leading-[1.6] text-white">
-            Decisões de produto precisam partir de uma <span className="text-gold-600 font-medium">leitura clara do contexto, </span> dos clientes e do negócio
+            <h2 className="text-2xl lg:text-3xl font-medium md:font-extralight tracking-tight leading-[1.6] text-white">
+              Decisões de produto precisam partir de uma <span className="text-gold-600 font-medium">leitura clara do contexto, </span> dos clientes e do negócio
             </h2>
           </div>
           
