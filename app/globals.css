@@ -310,8 +310,23 @@
   .ck.ck-content.ck-editor__editable.ck-editor__editable_inline.ck-blurred,
 .admin-theme
   .ck.ck-content.ck-editor__editable.ck-editor__editable_inline.ck-focused {
+  background-color: oklch(1 0 0);
+  color: oklch(0.21 0.006 285.885);
   min-height: var(--editor-min-height) !important;
   height: auto !important;
   max-height: none !important;
   overflow-y: auto;
+}
+
+.admin-theme .ck.ck-content.ck-editor__editable.ck-editor__editable_inline * {
+  color: inherit;
+}
+
+.admin-theme .ck.ck-content.ck-editor__editable.ck-editor__editable_inline a {
+  color: oklch(0.488 0.243 264.376);
+}
+
+.admin-theme
+  .ck.ck-content.ck-editor__editable.ck-editor__editable_inline blockquote {
+  color: oklch(0.37 0.013 285.805);
 }

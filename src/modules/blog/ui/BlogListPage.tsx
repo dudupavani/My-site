@@ -17,7 +17,7 @@ export async function BlogListPage({ page = 1 }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-900 text-white">
+    <div className="min-h-screen bg-zinc-950 text-white">
       <main className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 xl:px-6 pt-24 sm:pt-30 lg:pt-40 pb-16">
         <div className="flex items-center justify-between mb-20">
           <h1 className="text-2xl md:text-4xl font-medium tracking-tight text-white">
@@ -49,8 +49,9 @@ export async function BlogListPage({ page = 1 }: Props) {
 function PostCard({ post }: { post: BlogPostSummary }) {
   return (
     <article className="group flex h-full flex-col rounded-2xl border border-zinc-700/50 bg-zinc-800/50">
-      <div className="flex flex-1 flex-col gap-4 px-4 sm:px-6 pb-4 pt-6 sm:pt-8">
-        <h2 className="text-lg sm:text-xl md:text-2xl text-white line-clamp-2">
+      <div className="flex flex-1 flex-col justify-between gap-4 px-4 sm:px-6 pb-4 pt-6 sm:pt-8">
+      <div className="flex flex-col gap-4">
+          <h2 className="text-lg sm:text-xl md:text-2xl text-white line-clamp-2">
           <Link
             href={`/blog/${post.slug}`}
             className="transition-colors hover:text-white">
@@ -62,6 +63,7 @@ function PostCard({ post }: { post: BlogPostSummary }) {
             {formatDate(post.publishedAt)}
           </time>
         ) : null}
+</div>
 
         {post.categories.length > 0 ? (
           <div className="flex flex-wrap gap-2">
