@@ -8,8 +8,8 @@ export function DecisionSection() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-[#030305] px-6 sm:px-10 pt-60">
-      <div className="absolute z-0 w-full opacity-60 left-2/4 -translate-x-8/12 2xl:-translate-x-5/12 top-0 bottom-auto  sm:top-auto sm:bottom-0">
+    <section className="relative overflow-hidden bg-[#030305] px-6 sm:px-10 pt-70 sm:pt-60">
+      <div className="absolute z-0 w-[110%] sm:w-full opacity-60 left-2/4 -translate-x-7/12 2xl:-translate-x-5/12 top-0 bottom-auto sm:top-auto sm:bottom-0">
         <img
           src="/images/bg-front-02.webp"
           alt=""

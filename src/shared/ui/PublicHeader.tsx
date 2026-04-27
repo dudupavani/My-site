@@ -155,7 +155,7 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
 
           <nav
             aria-label="Navegação principal mobile"
-            className="mt-24 flex flex-col items-center gap-8 text-stone-100 text-4xl sm:text-5xl font-light">
+            className="mt-20 flex flex-col items-start gap-8 pl-10 text-stone-100 text-3xl font-light">
             <Link
               href="/"
               onClick={() => setIsMenuOpen(false)}
@@ -209,7 +209,7 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
           </nav>
 
           <div
-            className={`mt-auto mb-8 flex items-center justify-center gap-8 text-white transition-all duration-500 ${
+            className={`mt-auto mb-8 pl-8 flex items-center justify-start sm:justify-center gap-8 text-white transition-all duration-500 ${
               isMenuOpen
                 ? "translate-y-0 opacity-100 delay-300"
                 : "translate-y-4 opacity-0"
