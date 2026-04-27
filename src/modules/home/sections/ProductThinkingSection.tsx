@@ -1,5 +1,3 @@
-import { ArrowRight } from "lucide-react";
-
 export function ProductThinkingSection() {
   return (
     <section className="relative overflow-hidden bg-zinc-950 text-white py-20 lg:py-32 px-6 sm:px-12 lg:px-24">
