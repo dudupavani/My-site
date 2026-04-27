@@ -4,11 +4,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import {
-  InstagramIcon,
-  LinkedInIcon,
-  WhatsAppIcon,
-} from "@/src/shared/ui/icons/SocialIcons";
+import { InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/src/shared/ui/icons/SocialIcons";
 
 type PublicHeaderProps = {
   variant: "home" | "blog";
@@ -16,9 +12,7 @@ type PublicHeaderProps = {
 
 export function PublicHeader({ variant }: PublicHeaderProps) {
   const isBlog = variant === "blog";
-  const logoSrc = isBlog
-    ? "/images/symbol-white.svg"
-    : "/images/symbol-white.svg";
+  const logoSrc = isBlog ? "/images/symbol-white.svg" : "/images/symbol-white.svg";
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -39,41 +33,34 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
         isBlog
           ? "absolute w-full top-0 left-0 z-50 mx-auto px-6 sm:px-6 pt-8 sm:pt-10"
           : "absolute flex justify-center w-full top-0 left-0 z-50 mx-auto px-6 sm:px-6 md:px-10 xl:px-16 pt-6 sm:pt-6 md:pt-10"
-      }>
+      }
+    >
       <div className="flex items-center justify-between flex-1 max-w-8xl ">
-
         <Link href="/" className="flex items-center md:hidden">
-          <img
-            src={logoSrc}
-            alt="Eduardo Pavani"
-            className="h-9 w-auto"
-          />
+          <img src={logoSrc} alt="Eduardo Pavani" className="h-9 w-auto" />
         </Link>
 
         <div className="hidden md:flex justify-between w-full items-center gap-3 sm:gap-12">
           <Link href="/" className="flex items-center">
-            <img
-              src={logoSrc}
-              alt="Eduardo Pavani"
-              className="h-9 sm:h-12 w-auto"
-            />
+            <img src={logoSrc} alt="Eduardo Pavani" className="h-9 sm:h-12 w-auto" />
           </Link>
           <nav
             aria-label="Navegação principal"
-            className="flex items-center gap-6 sm:gap-8 text-stone-200">
-            <Link href="/" className="transition-colors hover:text-white">
+            className="flex items-center gap-6 sm:gap-8 text-zinc-200"
+          >
+            <Link href="/" className="public-header-link">
               Home
             </Link>
-            <Link href="/trajetoria" className="transition-colors hover:text-white">
+            <Link href="/trajetoria" className="public-header-link">
               Trajetória
             </Link>
-            <Link href="/cases" className="transition-colors hover:text-white">
+            <Link href="/cases" className="public-header-link">
               Cases
             </Link>
-            <Link href="/formacao" className="transition-colors hover:text-white">
+            <Link href="/formacao" className="public-header-link">
               Formação
             </Link>
-            <Link href="/blog" className="transition-colors hover:text-white">
+            <Link href="/blog" className="public-header-link">
               Conteúdo
             </Link>
           </nav>
@@ -85,7 +72,8 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Entre em contato pelo WhatsApp"
-              className="text-white border border-transparent hover:bg-stone-900/20 transition-colors duration-300 p-2 rounded-lg bg-transparent">
+              className="text-white border border-transparent hover:bg-stone-900/20 transition-colors duration-300 p-2 rounded-lg bg-transparent"
+            >
               <WhatsAppIcon className="w-5 h-5" />
             </a>
             <a
@@ -93,7 +81,8 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visite meu perfil no LinkedIn"
-              className="text-white border border-transparent hover:bg-stone-900/20 transition-colors duration-300 p-2 rounded-lg bg-transparent">
+              className="text-white border border-transparent hover:bg-stone-900/20 transition-colors duration-300 p-2 rounded-lg bg-transparent"
+            >
               <LinkedInIcon className="w-5 h-5" />
             </a>
             <a
@@ -101,7 +90,8 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visite meu perfil no Instagram"
-              className="text-white border border-transparent hover:bg-stone-900/20 transition-colors duration-300 p-2 rounded-lg bg-transparent">
+              className="text-white border border-transparent hover:bg-stone-900/20 transition-colors duration-300 p-2 rounded-lg bg-transparent"
+            >
               <InstagramIcon className="w-5 h-5" />
             </a>
           </div>
@@ -113,26 +103,19 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden inline-flex items-center justify-center rounded-sm text-stone-100 p-2  backdrop-blur-sm transition-colors hover:bg-black/40">
-          {isMenuOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
+          className="md:hidden inline-flex items-center justify-center rounded-sm text-stone-100 p-2  backdrop-blur-sm transition-colors hover:bg-black/40"
+        >
+          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       <div
         id="mobile-navigation"
         className={`md:hidden fixed inset-0 z-70 transition-opacity duration-500 ${
-          isMenuOpen
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
-        }`}>
-        <div
-          className="absolute inset-0 "
-          onClick={() => setIsMenuOpen(false)}
-        />
+          isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      >
+        <div className="absolute inset-0 " onClick={() => setIsMenuOpen(false)} />
 
         <div
           className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-transform duration-700 ${
@@ -143,12 +126,10 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
         <div
           className={`relative z-10 flex h-full flex-col px-6 pt-6 pb-10 transition-all duration-500 ${
             isMenuOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}>
+          }`}
+        >
           <div className="flex items-center justify-between">
-            <Link
-              href="/"
-              className="flex items-center"
-              onClick={() => setIsMenuOpen(false)}>
+            <Link href="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
               <img src={logoSrc} alt="Eduardo Pavani" className="h-8 w-auto" />
             </Link>
 
@@ -156,78 +137,75 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               type="button"
               aria-label="Fechar menu"
               onClick={() => setIsMenuOpen(false)}
-              className="inline-flex items-center justify-center text-stone-100 p-2 backdrop-blur-sm transition-colors hover:bg-black/40">
+              className="inline-flex items-center justify-center text-stone-100 p-2 backdrop-blur-sm transition-colors hover:bg-black/40"
+            >
               <X className="h-6 w-6" />
             </button>
           </div>
 
           <nav
             aria-label="Navegação principal mobile"
-            className="mt-20 flex flex-col items-start gap-8 pl-10 text-stone-100 text-3xl font-light">
+            className="mt-20 flex flex-col items-start gap-8 pl-10 text-stone-100 text-3xl font-light"
+          >
             <Link
               href="/"
               onClick={() => setIsMenuOpen(false)}
               className={`transition-all duration-500 hover:text-stone-300 ${
-                isMenuOpen
-                  ? "translate-y-0 opacity-100 delay-150"
-                  : "translate-y-4 opacity-0"
-              }`}>
+                isMenuOpen ? "translate-y-0 opacity-100 delay-150" : "translate-y-4 opacity-0"
+              }`}
+            >
               Home
             </Link>
             <Link
               href="/trajetoria"
               onClick={() => setIsMenuOpen(false)}
               className={`transition-all duration-500 hover:text-stone-300 ${
-                isMenuOpen
-                  ? "translate-y-0 opacity-100 delay-200"
-                  : "translate-y-4 opacity-0"
-              }`}>
+                isMenuOpen ? "translate-y-0 opacity-100 delay-200" : "translate-y-4 opacity-0"
+              }`}
+            >
               Trajetória
             </Link>
             <Link
               href="/cases"
               onClick={() => setIsMenuOpen(false)}
               className={`transition-all duration-500 hover:text-stone-300 ${
-                isMenuOpen
-                  ? "translate-y-0 opacity-100 delay-250"
-                  : "translate-y-4 opacity-0"
-              }`}>
+                isMenuOpen ? "translate-y-0 opacity-100 delay-250" : "translate-y-4 opacity-0"
+              }`}
+            >
               Cases
             </Link>
             <Link
               href="/formacao"
               onClick={() => setIsMenuOpen(false)}
               className={`transition-all duration-500 hover:text-stone-300 ${
-                isMenuOpen
-                  ? "translate-y-0 opacity-100 delay-300"
-                  : "translate-y-4 opacity-0"
-              }`}>
+                isMenuOpen ? "translate-y-0 opacity-100 delay-300" : "translate-y-4 opacity-0"
+              }`}
+            >
               Formação
             </Link>
             <Link
               href="/blog"
               onClick={() => setIsMenuOpen(false)}
               className={`transition-all duration-500 hover:text-stone-300 ${
-                isMenuOpen
-                  ? "translate-y-0 opacity-100 delay-350"
-                  : "translate-y-4 opacity-0"
-              }`}>
+                isMenuOpen ? "translate-y-0 opacity-100 delay-350" : "translate-y-4 opacity-0"
+              }`}
+            >
               Conteúdo
             </Link>
           </nav>
 
           <div
             className={`mt-auto mb-8 pl-8 flex items-center justify-start sm:justify-center gap-8 text-white transition-all duration-500 ${
-              isMenuOpen
-                ? "translate-y-0 opacity-100 delay-300"
-                : "translate-y-4 opacity-0"
-            }`}>
+              isMenuOpen ? "translate-y-0 opacity-100 delay-300" : "translate-y-4 opacity-0"
+            }`}
+          >
             <a
               href="https://www.linkedin.com/in/eduardopavani/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visite meu perfil no LinkedIn"
-              className="text-white hover:border-stone-400 transition-colors duration-300 p-3 rounded-lg ">
+              className="text-white hover:border-stone-400 transition-colors duration-300 p-3 rounded-lg "
+            >
               <LinkedInIcon className="w-6 h-6" />
             </a>
             <a
@@ -235,7 +213,8 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visite meu perfil no Instagram"
-              className="text-white hover:border-stone-400 transition-colors duration-300 p-3 rounded-lg">
+              className="text-white hover:border-stone-400 transition-colors duration-300 p-3 rounded-lg"
+            >
               <InstagramIcon className="w-6 h-6" />
             </a>
             <a
@@ -243,7 +222,8 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Entre em contato pelo WhatsApp"
-              className="text-white hover:border-stone-400 transition-colors duration-300 p-3 rounded-lg">
+              className="text-white hover:border-stone-400 transition-colors duration-300 p-3 rounded-lg"
+            >
               <WhatsAppIcon className="w-6 h-6" />
             </a>
           </div>

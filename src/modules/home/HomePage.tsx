@@ -12,6 +12,7 @@ export function HomePage() {
       <DecisionSection />
       <ContentCasesSection />
       <ContactFooter />
+      <div className="fixed z-20 w-full h-24 bottom-0 left-0 progressive-blur"></div>
     </>
   );
 }

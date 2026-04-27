@@ -1,6 +1,6 @@
 export function HeroSection() {
   return (
-    <section className="relative h-dvh md:h-screen min-h-175 bg-stone-900 text-white flex flex-col items-center justify-start md:justify-center overflow-hidden">
+    <section className="relative h-dvh md:h-screen min-h-175 bg-stone-950 text-white flex flex-col items-center justify-start md:justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img
           src="/images/hero-bg-blur.png"

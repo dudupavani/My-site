@@ -8,7 +8,9 @@
     "build": "next build",
     "start": "next start --hostname 0.0.0.0 --port 3003",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint app src"
+    "lint": "eslint app src",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^43.1.0",
@@ -39,6 +41,7 @@
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.4",
     "postcss": "^8.5.9",
+    "prettier": "^3.8.3",
     "typescript": "^5.6.2"
   },
   "packageManager": "pnpm@8.6.12+sha512.1336b80b948efd7979218a33ba96d9e4d380e6578144f6319979977deec6e3fe2e0a444b864b3ce2b077dda8adc4d654fee32b9c31868f0acb92da0abcf8ea1c"
