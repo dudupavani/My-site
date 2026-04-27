@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { Button } from "@/src/shared/ui";
+import { Button, ThemeToggle } from "@/src/shared/ui";
 type AdminShellProps = {
   children: ReactNode;
 };
@@ -16,7 +16,7 @@ export function AdminShell({ children }: AdminShellProps) {
               Blog Admin Panel
             </h1>
           </div>
-          <div className="flex w-full justify-between">
+          <div className="flex w-full justify-between gap-3">
             <nav className="flex justify-start flex-wrap items-center gap-2">
               <Button variant="secondary" size="default" asChild>
                 <Link href="/admin/posts">Posts</Link>
@@ -25,11 +25,14 @@ export function AdminShell({ children }: AdminShellProps) {
                 <Link href="/admin/categories">Categorias</Link>
               </Button>
             </nav>
-            <form action="/api/admin/auth/logout" method="post">
-              <Button variant="outline" size="default" type="submit">
-                Sair
-              </Button>
-            </form>
+            <div className="flex shrink-0 items-center gap-2">
+              <ThemeToggle />
+              <form action="/api/admin/auth/logout" method="post">
+                <Button variant="outline" size="default" type="submit">
+                  Sair
+                </Button>
+              </form>
+            </div>
           </div>
         </div>
       </header>

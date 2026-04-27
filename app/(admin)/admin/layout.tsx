@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+import { AdminThemeProvider } from "@/src/shared/ui";
+
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Admin | Eduardo Pavani",
@@ -20,5 +22,9 @@ export const metadata: Metadata = {
 };
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
-  return <div className="admin-theme">{children}</div>;
+  return (
+    <AdminThemeProvider>
+      <div className="admin-theme">{children}</div>
+    </AdminThemeProvider>
+  );
 }

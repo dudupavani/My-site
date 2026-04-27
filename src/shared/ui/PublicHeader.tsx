@@ -41,15 +41,15 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
           : "absolute flex justify-center w-full top-0 left-0 z-50 mx-auto px-6 sm:px-6 md:px-10 xl:px-16 pt-6 sm:pt-6 md:pt-10"
       }>
       <div className="flex items-center justify-between flex-1 max-w-8xl ">
-        <Link href="/" className="flex items-center">
+
+        <div className="hidden md:flex justify-between w-full items-center gap-3 sm:gap-12">
+         <Link href="/" className="flex items-center">
           <img
             src={logoSrc}
             alt="Eduardo Pavani"
             className="h-9 sm:h-12 w-auto"
           />
         </Link>
-
-        <div className="hidden md:flex items-center gap-3 sm:gap-12">
           <nav
             aria-label="Navegação principal"
             className="flex items-center gap-6 sm:gap-8 text-stone-200">
@@ -71,14 +71,14 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
           </nav>
 
           {/* redes sociais */}
-          <div className="flex items-center gap-2 sm:gap-2 text-white">
+          <div className="flex items-center gap-2 sm:gap-6 text-white">
             <a
               href="https://wa.me/5548991587232"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Entre em contato pelo WhatsApp"
               className="text-white border border-transparent hover:bg-stone-900/20 transition-colors duration-300 p-2 rounded-lg bg-transparent">
-              <WhatsAppIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+              <WhatsAppIcon className="w-5 h-5" />
             </a>
             <a
               href="https://www.linkedin.com/in/eduardopavani/"
@@ -86,7 +86,7 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               rel="noopener noreferrer"
               aria-label="Visite meu perfil no LinkedIn"
               className="text-white border border-transparent hover:bg-stone-900/20 transition-colors duration-300 p-2 rounded-lg bg-transparent">
-              <LinkedInIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+              <LinkedInIcon className="w-5 h-5" />
             </a>
             <a
               href="https://www.instagram.com/eduardopavanipro"
@@ -94,7 +94,7 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
               rel="noopener noreferrer"
               aria-label="Visite meu perfil no Instagram"
               className="text-white border border-transparent hover:bg-stone-900/20 transition-colors duration-300 p-2 rounded-lg bg-transparent">
-              <InstagramIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+              <InstagramIcon className="w-5 h-5" />
             </a>
           </div>
         </div>

@@ -1,10 +1,10 @@
 export function DecisionSection() {
   const decisions = [
     "Fundei e liderei duas empresas, uma de software e sites e outra de propaganda, branding e design, conectando visão de negócio, relacionamento com clientes, gestão de equipe e entregas de alto nível.",
-    "Liderei produto em startup e em uma EdTech, estruturando a visão com os founders e a execução com a liderança de engenharia.",
+    "Liderei produto em uma startup EdTech alemã, estruturando a visão com os founders, a estratégia de execução com a liderança de engenharia e o treinamento dos designers para otimizar o fluxo de entregas.",
     "Hoje, na Yungas Tecnologia, faço parte do comitê de produto com os founders e conduzo a concepção e os direcionamentos estratégicos de execução.",
     "Meu trabalho impacta operações de grande porte, com marcas como Burger King, Subway, Bob's, CNA Idiomas, Omie, entre outras.",
-    "Minha experiência foi construída entre empreendedorismo, liderança criativa e direção de produto, em empresas de software com desafios reais de operação e crescimento.",
+    "Minha experiência foi construída entre empreendedorismo, liderança criativa e direção de produto, em empresas com desafios reais de operação e crescimento.",
   ];
 
   return (
@@ -21,7 +21,7 @@ export function DecisionSection() {
       <div className="pointer-events-none absolute -bottom-20 left-1/2 z-2 h-120 w-200 max-w-[90vw] -translate-x-1/2 rounded-full bg-gold-500 opacity-10 blur-3xl mix-blend-screen" />
       
 
-      <div className="relative z-10 mx-auto grid w-full max-w-5xl  lg:grid-cols-[443px_minmax(0,1fr)] lg:items-end gap-8 sm:gap-12 lg:gap-20 pb-20">
+      <div className="relative z-10 mx-auto grid w-full max-w-5xl 2xl:max-w-7xl lg:grid-cols-[443px_minmax(0,1fr)] 2xl:grid-cols-[580px_minmax(0,1fr)] lg:items-end gap-8 sm:gap-12 lg:gap-20 2xl:gap-40 pb-20">
         <div className="flex min-w-0 flex-col items-start overflow-hidden rounded-2xl border-0 sm:border border-gold-800/30 bg-[linear-gradient(119deg,rgba(9,9,11,0.62)_4%,rgba(9,9,11,0.08)_93%)] backdrop-blur-md px-6 py-8 sm:px-10 sm:py-10 gap-8 lg:gap-16">
           <h2 className="w-full font-extralight leading-[1.2] tracking-[-1.4px] text-white text-3xl md:text-5xl">
             Experiência e responsabilidade

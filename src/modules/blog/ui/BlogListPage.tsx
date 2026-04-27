@@ -19,10 +19,13 @@ export async function BlogListPage({ page = 1 }: Props) {
   return (
     <div className="min-h-screen bg-zinc-900 text-white">
       <main className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-16 xl:px-6 pt-24 sm:pt-30 lg:pt-40 pb-16">
-        <div className="mb-12">
-          <h1 className="text-2xl md:text-3xl font-medium tracking-tight text-white">
+        <div className="flex items-center justify-between mb-20">
+          <h1 className="text-2xl md:text-4xl font-medium tracking-tight text-white">
             Conteúdos
           </h1>
+          <p className=" text-zinc-400 text-lg font-medium max-w-xl">
+            Conhecimento, ideias e reflexóes sobre produto, tecnologia, inteligência artificial e negócios.
+          </p>
         </div>
 
         {posts.length === 0 ? (

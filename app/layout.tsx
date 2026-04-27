@@ -32,7 +32,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${googleSansFlex.variable} ${spaceMono.variable}`}>
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+      className={`${googleSansFlex.variable} ${spaceMono.variable}`}
+    >
       <body className="bg-white">
         {/* GTM noscript — deve ser o primeiro elemento do body */}
         <noscript>

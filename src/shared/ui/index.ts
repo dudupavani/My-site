@@ -36,6 +36,8 @@ export {
   AlertDialogAction,
 } from "./feedback/AlertDialog";
 export { cn } from "./lib/cn";
+export { AdminThemeProvider } from "./theme/AdminThemeProvider";
+export { ThemeToggle } from "./theme/ThemeToggle";
 export {
   InstagramIcon,
   LinkedInIcon,
