@@ -42,14 +42,22 @@ export function PublicHeader({ variant }: PublicHeaderProps) {
       }>
       <div className="flex items-center justify-between flex-1 max-w-8xl ">
 
-        <div className="hidden md:flex justify-between w-full items-center gap-3 sm:gap-12">
-         <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center md:hidden">
           <img
             src={logoSrc}
             alt="Eduardo Pavani"
-            className="h-9 sm:h-12 w-auto"
+            className="h-9 w-auto"
           />
         </Link>
+
+        <div className="hidden md:flex justify-between w-full items-center gap-3 sm:gap-12">
+          <Link href="/" className="flex items-center">
+            <img
+              src={logoSrc}
+              alt="Eduardo Pavani"
+              className="h-9 sm:h-12 w-auto"
+            />
+          </Link>
           <nav
             aria-label="Navegação principal"
             className="flex items-center gap-6 sm:gap-8 text-stone-200">
