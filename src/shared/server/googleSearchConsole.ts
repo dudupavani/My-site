@@ -32,16 +32,6 @@ export type SearchAnalyticsRow = {
   position: number;
 };
 
-export type GoogleSearchConsoleSitemap = {
-  path: string;
-  lastSubmitted?: string;
-  isPending?: boolean;
-  isSitemapsIndex?: boolean;
-  errors?: number;
-  warnings?: number;
-  contents?: Array<{ type?: string; submitted?: string; indexed?: string }>;
-};
-
 export type GoogleSearchConsoleDashboard = {
   siteUrl: string;
   startDate: string;
@@ -50,7 +40,6 @@ export type GoogleSearchConsoleDashboard = {
   daily: SearchAnalyticsRow[];
   queries: SearchAnalyticsRow[];
   pages: SearchAnalyticsRow[];
-  sitemaps: GoogleSearchConsoleSitemap[];
 };
 
 function requiredEnv(name: string): string {
@@ -189,12 +178,6 @@ async function querySearchAnalytics(
   return payload.rows ?? [];
 }
 
-async function listSitemaps(accessToken: string, siteUrl: string): Promise<GoogleSearchConsoleSitemap[]> {
-  const url = `${SEARCH_CONSOLE_API}/sites/${encodeURIComponent(siteUrl)}/sitemaps`;
-  const payload = await searchConsoleRequest<{ sitemap?: GoogleSearchConsoleSitemap[] }>(url, accessToken);
-  return payload.sitemap ?? [];
-}
-
 export async function getGoogleSearchConsoleDashboard(
   requestedSiteUrl?: string,
 ): Promise<{ properties: GoogleSearchConsoleProperty[]; dashboard: GoogleSearchConsoleDashboard | null }> {
@@ -217,12 +200,11 @@ export async function getGoogleSearchConsoleDashboard(
   const startDate = toIsoDate(start);
   const endDate = toIsoDate(end);
 
-  const [totalsRows, daily, queries, pages, sitemaps] = await Promise.all([
+  const [totalsRows, daily, queries, pages] = await Promise.all([
     querySearchAnalytics(accessToken, selectedSite.siteUrl, startDate, endDate),
     querySearchAnalytics(accessToken, selectedSite.siteUrl, startDate, endDate, ["date"]),
     querySearchAnalytics(accessToken, selectedSite.siteUrl, startDate, endDate, ["query"]),
     querySearchAnalytics(accessToken, selectedSite.siteUrl, startDate, endDate, ["page"]),
-    listSitemaps(accessToken, selectedSite.siteUrl),
   ]);
 
   return {
@@ -235,7 +217,6 @@ export async function getGoogleSearchConsoleDashboard(
       daily,
       queries,
       pages,
-      sitemaps,
     },
   };
 }

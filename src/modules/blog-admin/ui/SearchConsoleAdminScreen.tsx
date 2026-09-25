@@ -41,15 +41,6 @@ function formatDate(value: string): string {
   }).format(new Date(`${value}T00:00:00Z`));
 }
 
-function safeSitemapUrl(value: string): string | undefined {
-  try {
-    const url = new URL(value);
-    return url.protocol === "https:" || url.protocol === "http:" ? url.toString() : undefined;
-  } catch {
-    return undefined;
-  }
-}
-
 function MetricCard({ label, value, hint }: { label: string; value: string; hint: string }) {
   return (
     <article className="rounded-lg border border-border bg-card p-5">
@@ -110,72 +101,6 @@ function ResultTable({
         </div>
       ) : (
         <p className="px-5 py-8 text-sm text-muted-foreground">Sem dados neste período.</p>
-      )}
-    </section>
-  );
-}
-
-function SitemapsTable({ dashboard }: { dashboard: GoogleSearchConsoleDashboard }) {
-  return (
-    <section className="rounded-lg border border-border bg-card">
-      <header className="border-b border-border px-5 py-4">
-        <h3 className="font-semibold text-foreground">Sitemaps enviados</h3>
-      </header>
-      {dashboard.sitemaps.length ? (
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="text-xs text-muted-foreground">
-              <tr>
-                <th className="px-5 py-3 font-medium">Arquivo</th>
-                <th className="px-3 py-3 font-medium">Enviado em</th>
-                <th className="px-3 py-3 text-right font-medium">Erros</th>
-                <th className="px-5 py-3 text-right font-medium">Avisos</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dashboard.sitemaps.map((sitemap) => {
-                const sitemapHref = safeSitemapUrl(sitemap.path);
-                return (
-                  <tr key={sitemap.path} className="border-t border-border/70">
-                    <td
-                      className="max-w-72 truncate px-5 py-3 text-foreground"
-                      title={sitemap.path}
-                    >
-                      {sitemapHref ? (
-                        <a
-                          href={sitemapHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="hover:underline"
-                        >
-                          {sitemap.path}
-                        </a>
-                      ) : (
-                        sitemap.path
-                      )}
-                      {sitemap.isPending ? (
-                        <span className="ml-2 text-xs text-muted-foreground">Processando</span>
-                      ) : null}
-                    </td>
-                    <td className="px-3 py-3 text-muted-foreground">
-                      {sitemap.lastSubmitted ? formatDate(sitemap.lastSubmitted.slice(0, 10)) : "—"}
-                    </td>
-                    <td className="px-3 py-3 text-right tabular-nums">
-                      {numberFormat.format(sitemap.errors ?? 0)}
-                    </td>
-                    <td className="px-5 py-3 text-right tabular-nums">
-                      {numberFormat.format(sitemap.warnings ?? 0)}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <p className="px-5 py-8 text-sm text-muted-foreground">
-          Nenhum sitemap consta como enviado nesta propriedade.
-        </p>
       )}
     </section>
   );
@@ -321,8 +246,6 @@ export function SearchConsoleAdminScreen({
             <ResultTable title="Principais páginas" label="Página" rows={dashboard.pages} />
             <ResultTable title="Principais consultas" label="Consulta" rows={dashboard.queries} />
           </div>
-
-          <SitemapsTable dashboard={dashboard} />
         </>
       ) : null}
 
