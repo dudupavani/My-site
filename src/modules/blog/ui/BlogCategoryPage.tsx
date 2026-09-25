@@ -1,10 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import type {
-  BlogCategory,
-  BlogPostSummary,
-} from "@/src/modules/blog/domain/post";
+import type { BlogCategory, BlogPostSummary } from "@/src/modules/blog/domain/post";
 import { listPublishedPostsByCategory } from "@/src/modules/blog/server/queries";
 import { formatDate } from "@/src/shared/utils/format";
 
@@ -14,12 +11,10 @@ type Props = {
 };
 
 export async function BlogCategoryPage({ category, page = 1 }: Props) {
-  const { posts, totalPages, currentPage } = await listPublishedPostsByCategory(
-    {
-      categoryId: category.id,
-      page,
-    },
-  );
+  const { posts, totalPages, currentPage } = await listPublishedPostsByCategory({
+    categoryId: category.id,
+    page,
+  });
 
   if (page > 1 && totalPages > 0 && page > totalPages) {
     notFound();
@@ -35,9 +30,7 @@ export async function BlogCategoryPage({ category, page = 1 }: Props) {
         </div>
 
         {posts.length === 0 ? (
-          <p className="text-zinc-500">
-            Nenhum post publicado nesta categoria.
-          </p>
+          <p className="text-zinc-500">Nenhum post publicado nesta categoria.</p>
         ) : (
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {posts.map((post) => (
@@ -63,9 +56,7 @@ function PostCard({ post }: { post: BlogPostSummary }) {
     <article className="group flex h-full flex-col rounded-2xl border border-zinc-700/50 bg-zinc-800/50">
       <div className="flex flex-1 flex-col gap-4 px-4 sm:px-6 pb-4 pt-6 sm:pt-8">
         <h2 className="text-lg sm:text-xl md:text-2xl text-white line-clamp-2">
-          <Link
-            href={`/blog/${post.slug}`}
-            className="transition-colors hover:text-white">
+          <Link href={`/blog/${post.slug}`} className="transition-colors hover:text-white">
             {post.title}
           </Link>
         </h2>
@@ -78,9 +69,7 @@ function PostCard({ post }: { post: BlogPostSummary }) {
 
       {post.coverImageUrl ? (
         <div className="p-4">
-          <Link
-            href={`/blog/${post.slug}`}
-            className="block overflow-hidden rounded-xl">
+          <Link href={`/blog/${post.slug}`} className="block overflow-hidden rounded-xl">
             <img
               src={post.coverImageUrl}
               alt={post.title}
@@ -109,12 +98,14 @@ function Pagination({
   return (
     <nav
       className="mt-12 flex items-center justify-between border-t border-zinc-800 pt-8"
-      aria-label="Paginação da categoria">
+      aria-label="Paginação da categoria"
+    >
       <div>
         {prev ? (
           <Link
             href={prev === 1 ? basePath : `${basePath}?page=${prev}`}
-            className="text-sm text-zinc-400 transition-colors hover:text-white">
+            className="text-sm text-zinc-400 transition-colors hover:text-white"
+          >
             ← Mais recentes
           </Link>
         ) : (
@@ -130,7 +121,8 @@ function Pagination({
         {next ? (
           <Link
             href={`${basePath}?page=${next}`}
-            className="text-sm text-zinc-400 transition-colors hover:text-white">
+            className="text-sm text-zinc-400 transition-colors hover:text-white"
+          >
             Mais antigos →
           </Link>
         ) : (

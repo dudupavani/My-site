@@ -9,7 +9,10 @@ async function FeaturedPostCard() {
   if (!post) return null;
 
   return (
-    <Link href={`/blog/${post.slug}`} className="mt-auto grid grid-cols-1 sm:grid-cols-12 items-center gap-4 rounded-2xl max-w-2xl p-4 border bg-zinc-950/40 border-zinc-700/40 hover:bg-zinc-800/60 transition-colors">
+    <Link
+      href={`/blog/${post.slug}`}
+      className="mt-auto grid grid-cols-1 sm:grid-cols-12 items-center gap-4 rounded-2xl p-4 border bg-zinc-800/20 border-zinc-700 hover:bg-zinc-800/60 transition-colors"
+    >
       {post.coverImageUrl ? (
         <img
           src={post.coverImageUrl}
@@ -19,9 +22,9 @@ async function FeaturedPostCard() {
       ) : (
         <div className="h-24 w-24 shrink-0 bg-zinc-700" />
       )}
-      <p className="col-span-12 sm:col-span-7 px-2 sm:px-4 pr-0 sm:pr-2 text-base lg:text-lg 2xl:text-xl font-light leading-[1.7] line-clamp-3 sm:line-clamp-2">
+      <h2 className="col-span-12 sm:col-span-7 px-2 sm:px-4 pr-0 sm:pr-2 text-base lg:text-lg 2xl:text-2xl leading-[1.6] line-clamp-3">
         {post.title}
-      </p>
+      </h2>
     </Link>
   );
 }
@@ -34,8 +37,9 @@ export function ContentCasesSection() {
           <Link href="/blog" className="group flex items-start justify-between">
             <div>
               <h2 className="text-2xl lg:text-3xl 2xl:text-4xl font-medium">Conteúdos</h2>
-              <p className="mt-2 max-w-lg text-base sm:text-lg text-zinc-400">
-                Conhecimento, ideias e reflexóes sobre produto, tecnologia, inteligência artificial e negócios.
+              <p className="mt-2 max-w-lg text-base sm:text-lg text-zinc-500">
+                Conhecimento, ideias e reflexóes sobre produto, tecnologia, inteligência artificial
+                e negócios.
               </p>
             </div>
             <ArrowUpRight className="w-7 h-7 text-zinc-600 group-hover:text-gold-400 group-hover:animate-pulse transition-colors shrink-0" />
