@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { InstagramIcon, LinkedInIcon, WhatsAppIcon } from "@/src/modules/home/icons";
 
 export function ContactFooter() {
@@ -39,6 +41,14 @@ export function ContactFooter() {
             <InstagramIcon className="w-6 h-6 sm:w-7 sm:h-7" />
           </a>
         </div>
+        <nav aria-label="Informações legais" className="flex items-center gap-5 text-sm text-zinc-500">
+          <Link href="/privacidade" className="transition-colors hover:text-zinc-200">
+            Privacidade
+          </Link>
+          <Link href="/termos" className="transition-colors hover:text-zinc-200">
+            Termos
+          </Link>
+        </nav>
       </div>
     </footer>
   );

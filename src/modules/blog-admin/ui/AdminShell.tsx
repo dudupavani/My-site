@@ -16,16 +16,19 @@ export function AdminShell({ children }: AdminShellProps) {
               Blog Admin Panel
             </h1>
           </div>
-          <div className="flex w-full justify-between gap-3">
-            <nav className="flex justify-start flex-wrap items-center gap-2">
+          <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <nav aria-label="Navegação do admin" className="flex flex-wrap items-center gap-2">
               <Button variant="secondary" size="default" asChild>
                 <Link href="/admin/posts">Posts</Link>
               </Button>
               <Button variant="secondary" size="default" asChild>
                 <Link href="/admin/categories">Categorias</Link>
               </Button>
+              <Button variant="secondary" size="default" asChild>
+                <Link href="/admin/search-console">Search Console</Link>
+              </Button>
             </nav>
-            <div className="flex shrink-0 items-center gap-2">
+            <div className="flex shrink-0 items-center justify-end gap-2">
               <ThemeToggle />
               <form action="/api/admin/auth/logout" method="post">
                 <Button variant="outline" size="default" type="submit">
