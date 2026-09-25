@@ -31,6 +31,8 @@ function sanitizeBlogHtml(html: string): string {
     transformTags: {
       a: sanitizeHtml.simpleTransform("a", { rel: "noopener noreferrer" }),
     },
+    // Parágrafos vazios (<p>&nbsp;</p>) eram usados como espaçador; o espaçamento agora vem do CSS.
+    exclusiveFilter: (frame) => frame.tag === "p" && !frame.text.trim() && !frame.mediaChildren.length,
   });
 }
 
