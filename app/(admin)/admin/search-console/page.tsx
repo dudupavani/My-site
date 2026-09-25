@@ -6,7 +6,7 @@ import {
   isGoogleSearchConsoleConnected,
 } from "@/src/shared/server/googleSearchConsole";
 
-type SearchParams = { status?: string | string[]; property?: string | string[] };
+type SearchParams = { status?: string | string[] };
 
 function getDashboardError(error: unknown): string {
   const message = error instanceof Error ? error.message : "";
@@ -30,10 +30,8 @@ export default async function AdminSearchConsolePage({
   await requireAdminPageAccess();
   const params = await searchParams;
   const status = typeof params.status === "string" ? params.status : undefined;
-  const property = typeof params.property === "string" ? params.property : undefined;
 
   let connected = false;
-  let properties: Awaited<ReturnType<typeof getGoogleSearchConsoleDashboard>>["properties"] = [];
   let dashboard: Awaited<ReturnType<typeof getGoogleSearchConsoleDashboard>>["dashboard"] = null;
   let error: string | undefined;
 
@@ -45,8 +43,7 @@ export default async function AdminSearchConsolePage({
 
   if (connected) {
     try {
-      const result = await getGoogleSearchConsoleDashboard(property);
-      properties = result.properties;
+      const result = await getGoogleSearchConsoleDashboard();
       dashboard = result.dashboard;
     } catch (dashboardError) {
       error = getDashboardError(dashboardError);
@@ -58,7 +55,6 @@ export default async function AdminSearchConsolePage({
       <SearchConsoleAdminScreen
         status={status}
         connected={connected}
-        properties={properties}
         dashboard={dashboard}
         error={error}
       />
